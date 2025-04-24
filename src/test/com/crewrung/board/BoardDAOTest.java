@@ -53,7 +53,6 @@ public class BoardDAOTest {
             dao.insertComment(comment);
             fail("Expected an exception on invalid commenter");
         } catch (Exception e) {
-            // ���� �߻� ���
         }
     }
 
@@ -89,7 +88,7 @@ public class BoardDAOTest {
     // 6) 게시글 삭제
     @Test
     public void testDeleteBoard() {
-        BoardVO vo = new BoardVO(40L, "gimsubin94", "dsgfsaergedf");
+        BoardVO vo = new BoardVO(131L, "hyunmin84", "삭제 내용");
         int result = dao.deleteBoard(vo);
         assertEquals(1, result);
     }

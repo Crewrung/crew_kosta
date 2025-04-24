@@ -70,13 +70,15 @@ public class BoardDAO {
         }
     }
 
-    // from BoardViewIncrementDAO 12 vo¾ø¾îµµ‰Î
-
-        public int incrementView() {
+        // ì¡°íšŒìˆ˜ ì¦ê°€
+        public int incrementView(int boardNumber) {
             try (SqlSession session = sqlSessionFactory.openSession()) {
-                int result = session.update("boardMapper.incrementView");
+                int result = session.update(
+                    "boardMapper.incrementView",
+                   boardNumber
+                );
+                session.commit();
                 return result;
             }
         }
-
 }

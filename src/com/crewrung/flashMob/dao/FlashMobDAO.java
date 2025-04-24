@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.crewrung.account.vo.UserInfoVO;
 import com.crewrung.flashMob.vo.FlashMobCommentVO;
 import com.crewrung.flashMob.vo.FlashMobMainViewVO;
 import com.crewrung.flashMob.vo.FlashMobParticipantVO;
@@ -55,7 +56,23 @@ public class FlashMobDAO {
 		con.close();
 		return result;
 	}
-
+	
+	//번개모임 주최자(host) 조회
+	public UserInfoVO getFlashMobHost(int flashMobNumber) {
+		UserInfoVO result = null;
+		result = con.selectOne("flashMobMapper.getFlashMobHost", flashMobNumber);
+		con.close();
+		return result;
+	}
+	
+	//번개모임 신청자 조회
+	public List<UserInfoVO> getFlashMobParticipants(int flashMobNumber) {
+		List<UserInfoVO> result = new ArrayList<>();
+		result = con.selectList("flashMobMapper.getFlashMobParticipants", flashMobNumber);
+		con.close();
+		return result;
+	}
+	
 	//번개 모임 수정하기 set
 	public int setFlashMobDetail(FlashMobVO flashMobVO) {
 		int result = 0;
@@ -78,5 +95,4 @@ public class FlashMobDAO {
 		con.close();
 		return result;
 	}
-
 }
