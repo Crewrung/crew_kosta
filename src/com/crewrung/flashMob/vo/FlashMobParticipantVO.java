@@ -11,10 +11,9 @@ public class FlashMobParticipantVO {
     	
     }
     
-	public FlashMobParticipantVO(String userId, int flashMobNumber, Date applyDate) {
+	public FlashMobParticipantVO(String userId, int flashMobNumber) {
 		this.userId = userId;
 		this.flashMobNumber = flashMobNumber;
-		this.applyDate = applyDate;
 	}
 
 	public String getUserId() {
