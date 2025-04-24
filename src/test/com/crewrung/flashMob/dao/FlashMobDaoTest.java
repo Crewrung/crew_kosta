@@ -35,7 +35,7 @@ public class FlashMobDaoTest {
 	 @After
 	 public void tearDown() throws Exception {
 		 if (session != null) {
-	        session.rollback(); // �뀒�뒪�듃 �걹�굹硫� 濡ㅻ갚
+	        session.rollback();
 	        session.close();
 	       }
 	 }
@@ -46,14 +46,6 @@ public class FlashMobDaoTest {
 	   assertTrue(result.size() == 30);
 	 }
 	 
-	@After
-	public void tearDown1() throws Exception {
-		if (session != null) {
-			session.rollback(); // 테스트 끝나면 롤백
-			session.close();
-		}
-	}
-
 	@Test
 	public void successGetAllFlashMobs() {
 		List<FlashMobMainViewVO> result = dao.getAllFlashMobs();
@@ -99,6 +91,7 @@ public class FlashMobDaoTest {
 		flashMobVO.setAgeRange("20대");
 		flashMobVO.setMaxMember(10);
 		flashMobVO.setGuNumber(1144000000);
+		flashMobVO.setMeetingDate(new Date(new java.util.Date().getTime()));
 
 		int result = dao.addFlashMob(flashMobVO);
 		assertTrue(result == 1);
@@ -114,6 +107,7 @@ public class FlashMobDaoTest {
 		flashMobVO.setAgeRange("20대");
 		flashMobVO.setMaxMember(10);
 		flashMobVO.setGuNumber(1144000000);
+		flashMobVO.setMeetingDate(new Date(new java.util.Date().getTime()));
 
 		try {
 			dao.addFlashMob(flashMobVO);
@@ -208,7 +202,6 @@ public class FlashMobDaoTest {
 		flashMobCommentVO.setFlashMobComment("테스트 내용");
 		flashMobCommentVO.setUserId("donggyu042");
 		flashMobCommentVO.setFlashMobNumber(2);
-		flashMobCommentVO.setCommentDate(new Date(new java.util.Date().getTime()));
 
 		
 		int result = dao.addFlashMobComment(flashMobCommentVO);
@@ -221,7 +214,6 @@ public class FlashMobDaoTest {
 		flashMobCommentVO.setFlashMobComment("테스트 내용");
 		flashMobCommentVO.setUserId("hyunjoo482");
 		flashMobCommentVO.setFlashMobNumber(2);
-		flashMobCommentVO.setCommentDate(new Date(new java.util.Date().getTime()));
 
 		
 		try {
