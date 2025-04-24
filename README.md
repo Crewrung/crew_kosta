@@ -74,12 +74,6 @@ git merge 내 브랜치
 git push origin main
 ```
 
-7. 내 브랜치도 최신화<br>
-```bash
-git checkout 내 브랜치
-git pull origin main
-```
-
 <br>
 
 ## add와 implemnt의 차이점
