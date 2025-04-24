@@ -4,6 +4,9 @@ public class LoginVO {
 	
 	private String userId;
 	private String userPw;
+	private String nickname;
+	
+	public LoginVO(){}
 	
 	
 	public LoginVO(String userId, String userPw) {
@@ -11,8 +14,16 @@ public class LoginVO {
 		this.userId = userId;
 		this.userPw = userPw;
 	}
-
-
+	
+	
+	public String getNickname() {
+		return nickname;
+	}
+	
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+	
 	public String getUserId() {
 		return userId;
 	}
@@ -30,11 +41,5 @@ public class LoginVO {
 
 	public void setUserPw(String userPw) {
 		this.userPw = userPw;
-	}
-
-
-	@Override
-	public String toString() {
-		return "LoginVO [userId=" + userId + ", userPw=" + userPw + "]";
 	}
 }
