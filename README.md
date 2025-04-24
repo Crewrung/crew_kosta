@@ -41,7 +41,7 @@
 ## git 전략
 1. 클론<br>
 ```bash
-git clone https://github.com/Crewrung/crewrung.git
+git clone https://github.com/Crewrung/crew_kosta.git
 ```
 &nbsp;&nbsp;&nbsp;&nbsp;1-1.브랜치가 master로 되어있다면
 ```bash
@@ -65,21 +65,12 @@ git checkout main
 ```bash
 git pull origin main
 ```
-5. feature/board 브랜치에 메인 머지 (메인과 바로 머지하기 전 충돌방지)<br>
+
+5. 내 브랜치 작업내역 머지<br>
 ```bash
-git checkout 작업브랜치
+git merge 내 브랜치
 ```
-```bash
-git merge main
-```
-6. 메인으로 머지<br>
-```bash
-git checkout main
-```
-```bash
-git merge 작업브랜치
-```
-7. 푸시<br>
+6. 푸시<br>
 ```bash
 git push origin main
 ```
