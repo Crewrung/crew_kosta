@@ -5,39 +5,89 @@ import java.time.LocalDate;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
+import com.crewrung.account.service.FindUserIdService;
+import com.crewrung.account.service.FindUserPwService;
+import com.crewrung.account.service.JoinService;
+import com.crewrung.account.service.LoginService;
 import com.crewrung.account.vo.JoinVO;
 import com.crewrung.account.vo.LoginVO;
 import com.crewrung.account.vo.MypageVO;
-import com.crewrung.account.vo.UserIdFindVO;
+import com.crewrung.account.vo.FindUserIdVO;
 import com.crewrung.account.vo.UserInfoVO;
-import com.crewrung.account.vo.UserPwFindVO;
+import com.crewrung.account.vo.FindUserPwVO;
 import com.crewrung.db.DBCP;
 
-public class loginTestmain {
+public class TestMain {
 	public static void main(String[] args) {
 
 		SqlSessionFactory sqlfactory = DBCP.getSqlSessionFactory();
-		SqlSession session = sqlfactory.openSession();
+		SqlSession session = sqlfactory.openSession(false);
 
 		AccountDAO dao = new AccountDAO(session);
-		// ·Î±×ÀÎ
+		
+		
+//		JoinService service = new JoinService(dao);
+//		JoinVO joinVO = new JoinVO("gimsubin94","1234","ê¹€ì†Œìœ ","kik@gmail.com","010-1234-1234","ì†Œìœ ì•¼","ì—¬ì„±",
+//		5,"ë‹¹ì‹ ì˜ ì´ˆë“±í•™êµ ì´ë¦„ì€?","ì´ˆì´ˆì´ˆ","2025-04-12",null,null);
+//		
+//		int result = service.JoinUser(joinVO);
+//		if(result == 1){
+//			System.out.println("íšŒì›ê°€ìž… ì„±ê³µ!");
+//		}else{
+//			System.out.println("íšŒì›ê°€ìž… ì‹¤íŒ¨");
+//		}
+		
+//		LoginService service = new LoginService(dao);
+//		
+//		LoginVO loginVO = new LoginVO("user01","1234");
+//		
+//		int result = service.Login(loginVO);
+//		if (result ==1){
+//			System.out.println(loginVO.getNickname());
+//			System.out.println("ë¡œê·¸ì¸ ì„±ê³µ!");
+//		}else{
+//			System.out.println("ë¡œê·¸ì¸ ì‹¤íŒ¨!");
+//		}
+		
+//		FindUserIdService service = new FindUserIdService(dao);
+//		
+//		FindUserIdVO findUserIdVO = new FindUserIdVO("test@email.com","ì¡¸ì—…í•œ ì´ˆë“±í•™êµëŠ”?","ë³„ë¹›ì´ˆë“±í•™êµ");
+//		
+//		String result = service.getUserId(findUserIdVO);
+//		
+//		if(result != null){
+//			System.out.println("ì•„ì´ë”” :" + result);
+//		}else{
+//			System.out.println("ì¼ì¹˜í•˜ëŠ” ì •ë³´ê°€ ì—†ìŠµë‹ˆë‹¤.");
+//		}
+		
+//		FindUserPwService service = new FindUserPwService(dao);
+//		FindUserPwVO findUserPwVO = new FindUserPwVO("gimsubin94","test@email.com");
+//		String result = service.getUserPw(findUserPwVO);
+//		if(result != null){
+//			System.out.println("ë¹„ë°€ë²ˆí˜¸ : " + result);
+//		}else{
+//			System.out.println("ì¼ì¹˜í•˜ëŠ” ì •ë³´ê°€ ì—†ìŠµë‹ˆë‹¤.");
+//		}
+	
+		// ë¡œê·¸ì¸
 //		LoginVO loginVO = new LoginVO("donghyeok981", "FUtDrL6Cv8mZdZ5");
 //
 //		boolean result = dao.login(loginVO);
 //
 //		if(result == true){
-//			System.out.println("·Î±×ÀÎ ¼º°ø: " + result);
+//			System.out.println("ë¡œê·¸ì¸ ì„±ê³µ: " + result);
 //		}else{
-//			System.out.println("·Î±×ÀÎ ½ÇÆÐ");
+//			System.out.println("ë¡œê·¸ì¸ ì‹¤íŒ¨");
 //		}
-//	¸¶ÀÌÆäÀÌÁö Á¶È¸
-//		MypageVO mypageVO = new MypageVO("donghyeok981");
+//	ë§ˆì´íŽ˜ì´ì§€ ì¡°íšŒ
+//		MypageVO mypageVO = new MypageVO("kyeongmin56");
 //		MypageVO mypage = dao.getMypage(mypageVO.getUserId());
 //		if(mypage != null){
 //			if(mypage.getProfileImage() != null){
 //				System.out.println(mypage.getProfileImage());
 //			}else{
-//				System.out.println("ÀÌ¹ÌÁö°¡ ¾ø½À´Ï´Ù.");
+//				System.out.println("ì´ë¯¸ì§€ê°€ ì—†ìŠµë‹ˆë‹¤.");
 //			}
 //			if(mypage != null){
 //				System.out.println(mypage.getNickname());
@@ -47,7 +97,7 @@ public class loginTestmain {
 //			if(mypage.getIntroduction() != null){
 //				System.out.println(mypage.getIntroduction());
 //			}else{
-//				System.out.println("ÀÚ±â¼Ò°³¸¦ ÀÛ¼ºÇÏ¼¼¿ä");
+//				System.out.println("ìžê¸°ì†Œê°œë¥¼ ìž‘ì„±í•˜ì„¸ìš”");
 //			}
 //			if(mypage.getCrewNames() != null){
 //				System.out.println(mypage.getCrewNames());
@@ -56,69 +106,62 @@ public class loginTestmain {
 //				System.out.println(mypage.getFlashMobTitles());
 //			}
 //		}
-//		È¸¿ø°¡ÀÔ
-//		JoinVO joinVO = new JoinVO("user12","1234","±è¼ÒÀ¯","kik@gmail.com","010-1234-1234","¼ÒÀ¯¾ß","¿©¼º",
-//				1144000000,"´ç½ÅÀÇ ÃÊµîÇÐ±³ ÀÌ¸§Àº?","ÃÊÃÊÃÊ","2025-04-12",null,null);
-//		
-//		int joinResult = dao.join(joinVO);
-//		if(joinResult>0){
-//			System.out.println("È¸¿ø°¡ÀÔ¼º°ø");
-//		}else{
-//			System.out.println("È¸¿ø°¡ÀÔ½ÇÆÐ");
-//		}
+//		íšŒì›ê°€ìž…
+//		JoinVO joinVO = new JoinVO("user12","1234","ê¹€ì†Œìœ ","kik@gmail.com","010-1234-1234","ì†Œìœ ì•¼","ì—¬ì„±",
+//				1144000000,"ë‹¹ì‹ ì˜ ì´ˆë“±í•™êµ ì´ë¦„ì€?","ì´ˆì´ˆì´ˆ","2025-04-12",null,null);
 		
-		// ¾ÆÀÌµð »èÁ¦ ¿Ü·¡Å° Á¦¾àÁ¶°Ç È®ÀÎ ÇÊ¿ä 
-//		UserInfoVO userinfoVO = new UserInfoVO("donghyeok981");
-//		int removeResult = dao.removeUser(userinfoVO);
+		// ì•„ì´ë”” ì‚­ì œ ì™¸ëž˜í‚¤ ì œì•½ì¡°ê±´ í™•ì¸ í•„ìš” 
+//		MypageVO mypageVO = new MypageVO("gimsubin94");
+//		int removeResult = dao.removeUser(mypageVO);
 //		if(removeResult > 0){
-//			System.out.println("È¸¿ø Å»Åð ¼º°ø");
+//			System.out.println("íšŒì› íƒˆí‡´ ì„±ê³µ");
 //		}else{
-//			System.out.println("È¸¿ø Å»Åð ½ÇÆÐ");
+//			System.out.println("íšŒì› íƒˆí‡´ ì‹¤íŒ¨");
 //		}
 
-// ¸¶ÀÌÆäÀÌÁö ÀÌ¹ÌÁö, ÀÚ±â¼Ò°³ º¯°æ		
+// ë§ˆì´íŽ˜ì´ì§€ ì´ë¯¸ì§€, ìžê¸°ì†Œê°œ ë³€ê²½		
 //		MypageVO setMypage = new MypageVO();
 //		setMypage.setUserId("gyeonghyii18");
 //		setMypage.setProfileImage("newimage");
 //		int setMypageResult = dao.setMypage(setMypage);
 //		if(setMypageResult > 0){
-//			System.out.println("º¯°æ¿Ï·á");
+//			System.out.println("ë³€ê²½ì™„ë£Œ");
 //		}else{
-//			System.out.println("º¯°æ½ÇÆÐ");
+//			System.out.println("ë³€ê²½ì‹¤íŒ¨");
 //		}
-//	¾ÆÀÌµð Ã£±â	
+//	ì•„ì´ë”” ì°¾ê¸°	
 //		UserIdFindVO userIdFindVO = new UserIdFindVO();
 //		userIdFindVO.setEmail("yeongilgim@gmail.com");
-//		userIdFindVO.setQuestion("Á¹¾÷ÇÑ ÃÊµîÇÐ±³´Â?");
-//		userIdFindVO.setAnswer("º°ºûÃÊµîÇÐ±³");
+//		userIdFindVO.setQuestion("ì¡¸ì—…í•œ ì´ˆë“±í•™êµëŠ”?");
+//		userIdFindVO.setAnswer("ë³„ë¹›ì´ˆë“±í•™êµ");
 //		
 //		String userId = dao.getUserId(userIdFindVO);
 //		if(userId != null){
-//			System.out.println("¾ÆÀÌµð : " + userId);
+//			System.out.println("ì•„ì´ë”” : " + userId);
 //		}else{
-//			System.out.println("ÀÏÄ¡ÇÏ´Â Á¤º¸°¡ ¾ø½À´Ï´Ù.");
+//			System.out.println("ì¼ì¹˜í•˜ëŠ” ì •ë³´ê°€ ì—†ìŠµë‹ˆë‹¤.");
 //		}
-// ºñ¹Ð¹øÈ£ Ã£±â
+// ë¹„ë°€ë²ˆí˜¸ ì°¾ê¸°
 //		UserPwFindVO userPwFindVO = new UserPwFindVO();
 //		userPwFindVO.setUserId("gimsubin94");
 //		userPwFindVO.setEmail("yeongilgim@gmail.com");
 //		
 //		String userPw = dao.getUserPw(userPwFindVO);
 //		if(userPw != null){
-//			System.out.println("ºñ¹Ð¹øÈ£ : " + userPw);
+//			System.out.println("ë¹„ë°€ë²ˆí˜¸ : " + userPw);
 //		}else{
-//			System.out.println("ÀÏÄ¡ÇÏ´Â ¾ÆÀÌµð³ª ÀÌ¸ÞÀÏÀÌ ¾ø½À´Ï´Ù.");
+//			System.out.println("ì¼ì¹˜í•˜ëŠ” ì•„ì´ë””ë‚˜ ì´ë©”ì¼ì´ ì—†ìŠµë‹ˆë‹¤.");
 //		}
-		// ±¸³Ñ¹ö È®ÀÎÇÊ¿ä
-		UserInfoVO userInfo = new UserInfoVO();
-		userInfo.setUserId("gyeonghyii18");
-		userInfo.setEmail("update@naver.com");
-		userInfo.setGuNumber(1154500000);
-		int setuserInfoResult = dao.setUserInfo(userInfo);
-		if(setuserInfoResult > 0){
-			System.out.println("º¯°æ ¿Ï·á");
-		}else{
-			System.out.println("º¯°æ ½ÇÆÐ");
-		}
+		// êµ¬ë„˜ë²„ í™•ì¸í•„ìš”
+//		UserInfoVO userInfo = new UserInfoVO();
+//		userInfo.setUserId("gyeonghyii18");
+//		userInfo.setEmail("update@naver.com");
+//		userInfo.setGuNumber(1154500000);
+//		int setuserInfoResult = dao.setUserInfo(userInfo);
+//		if(setuserInfoResult > 0){
+//			System.out.println("ë³€ê²½ ì™„ë£Œ");
+//		}else{
+//			System.out.println("ë³€ê²½ ì‹¤íŒ¨");
+//		}
 	}
 }
