@@ -15,8 +15,10 @@ public class JoinVO {
 	private String question;
 	private String answer;
 	private String birthDate;
-	private String introduction = "자기소개";
-	private String profileImage = "default.jpg";
+	private String introduction;
+	private String profileImage;
+	
+	public JoinVO(){}
 	
 	
 	

@@ -7,9 +7,9 @@ import org.apache.ibatis.session.SqlSession;
 import com.crewrung.account.vo.JoinVO;
 import com.crewrung.account.vo.LoginVO;
 import com.crewrung.account.vo.MypageVO;
-import com.crewrung.account.vo.UserIdFindVO;
+import com.crewrung.account.vo.FindUserIdVO;
 import com.crewrung.account.vo.UserInfoVO;
-import com.crewrung.account.vo.UserPwFindVO;
+import com.crewrung.account.vo.FindUserPwVO;
 import com.crewrung.account.vo.UserSetVO;
 
 public class AccountDAO {
@@ -20,12 +20,12 @@ public class AccountDAO {
 		this.con = sqlsession;
 	}
 
-	// ·Î±×ÀÎ
-	public boolean login(LoginVO loginVO){
-		return con.selectOne("accountMapper.Login",loginVO) != null ? true : false;
+	// ë¡œê·¸ì¸ O
+	public LoginVO login(LoginVO loginVO){
+		return con.selectOne("accountMapper.Login",loginVO);
 	}
 
-	// ¸¶ÀÌÆäÀÌÁö
+	// ë§ˆì´í˜ì´ì§€ O
 	public MypageVO getMypage(String userId){
 		MypageVO mypage = con.selectOne("accountMapper.getMypageInfo", userId);
 
@@ -39,45 +39,45 @@ public class AccountDAO {
 		return mypage;
 	}
 	
-	// ¸¶ÀÌÆäÀÌÁö  ¼öÁ¤
+	// ë§ˆì´í˜ì´ì§€  ìˆ˜ì • O
 	public int setMypage(MypageVO mypageVO){
 		return con.update("accountMapper.setMypage", mypageVO);
 	}
 	
-	// È¸¿ø°¡ÀÔ
+	// íšŒì›ê°€ì…  O
 	public int join(JoinVO joinVO){
 		return con.insert("accountMapper.Join", joinVO);
 	}
 	
-	// È¸¿øÅ»Åğ
-	public int removeUser(UserInfoVO userInfoVO){
-		return con.delete("accountMapper.removeUser", userInfoVO);
+	// íšŒì›íƒˆí‡´ O
+	public int removeUser(MypageVO vo){
+		return con.delete("accountMapper.removeUser", vo);
 	}
 	
-	// ¾ÆÀÌµğ Ã£±â
-	public String getUserId(UserIdFindVO useridFindVO){
+	// ì•„ì´ë”” ì°¾ê¸° O
+	public String getUserId(FindUserIdVO useridFindVO){
 		return con.selectOne("accountMapper.getUserId", useridFindVO);
 	}
 	
-	// ºñ¹Ğ¹øÈ£ Ã£±â
-	public String getUserPw(UserPwFindVO userPwFindVO){
+	// ë¹„ë°€ë²ˆí˜¸ ì°¾ê¸° O
+	public String getUserPw(FindUserPwVO userPwFindVO){
 		return con.selectOne("accountMapper.getUserPw", userPwFindVO);
 	}
 	
-	// °³ÀÎÁ¤º¸ ¼öÁ¤
+	// ê°œì¸ì •ë³´ ìˆ˜ì •
 	public int setUserInfo(UserInfoVO userInfoVO){
 		return con.update("accountMapper.setUserInfo", userInfoVO);
 	}
 	
-	// ¾ÆÀÌµğ Áßº¹ Ã¼Å©
+	// ì•„ì´ë”” ì¤‘ë³µ ì²´í¬ O
 	public int isUserIdExist(JoinVO joinVO){
 		return con.selectOne("accountMapper.isUserIdExist", joinVO);
 	}
-	// ÀÌ¸ŞÀÏ Áßº¹ Ã¼Å©
+	// ì´ë©”ì¼ ì¤‘ë³µ ì²´í¬ O
 	public int isEmailExist(JoinVO joinVO){
 		return con.selectOne("accountMapper.isEmailExist", joinVO);
 	}
-	// ´Ğ³×ÀÓ Áßº¹ Ã¼Å©
+	// ë‹‰ë„¤ì„ ì¤‘ë³µ ì²´í¬ O
 	public int isNickNameExist(JoinVO joinVO){
 		return con.selectOne("accountMapper.isNickNameExist", joinVO);
 	}

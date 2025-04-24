@@ -6,8 +6,8 @@
 <mapper namespace="accountMapper">
 
 	<select id="Login" parameterType="com.crewrung.account.vo.LoginVO"
-		resultType="java.lang.String">
-		SELECT user_id
+		resultType="com.crewrung.account.vo.LoginVO">
+		SELECT user_id, nickname
 		FROM users
 		WHERE user_id = #{userId} AND
 		user_pw = #{userPw}
@@ -40,7 +40,7 @@
 		#{userId}
 	</select>
 
-	<select id="getUserId" parameterType="com.crewrung.account.vo.UserIdFindVO"
+	<select id="getUserId" parameterType="com.crewrung.account.vo.FindUserIdVO"
 		resultType="java.lang.String">
 		SELECT user_id
 		FROM users
@@ -48,13 +48,34 @@
 		security_question =#{question} AND security_answer = #{answer}
 	</select>
 
-	<select id="getUserPw" parameterType="com.crewrung.account.vo.UserPwFindVO"
+	<select id="getUserPw" parameterType="com.crewrung.account.vo.FindUserPwVO"
 		resultType="java.lang.String">
 		SELECT user_pw
 		FROM users
 		WHERE user_id = #{userId} AND email
 		= #{email}
 	</select>
+	
+	
+    <select id="isUserIdExist" resultType="int">
+        SELECT COUNT(*)
+        FROM users
+        WHERE user_id = #{userId}
+    </select>
+
+    
+    <select id="isEmailExist" resultType="int">
+        SELECT COUNT(*)
+        FROM users
+        WHERE email = #{email}
+    </select>
+
+    
+    <select id="isNickNameExist" resultType="int">
+        SELECT COUNT(*)
+        FROM users
+        WHERE nickname = #{nickname}
+    </select>
 
 	<insert id="Join" parameterType="com.crewrung.account.vo.JoinVO">
 		INSERT INTO users (
@@ -90,9 +111,8 @@
 		)
 	</insert>
 
-	<delete id="removeUser" parameterType="com.crewrung.account.vo.UserInfoVO">
-		DELETE FROM users WHERE
-		user_id=#{userId}
+	<delete id="removeUser" parameterType="com.crewrung.account.vo.MypageVO">
+		DELETE FROM users WHERE user_id=#{userId}
 	</delete>
 
 	<update id="setMypage" parameterType="com.crewrung.account.vo.MypageVO">
@@ -106,6 +126,7 @@
 	<update id="setUserInfo" parameterType="com.crewrung.account.vo.UserInfoVO">
 		UPDATE users
 		SET
+		user_pw = COALESCE(#{userPw, jdbcType=VARCHAR}, user_pw),
 		email = COALESCE(#{email, jdbcType=VARCHAR}, email),
 		phone_number = COALESCE(#{phoneNumber, jdbcType=VARCHAR}, phone_number),
 		nickname = COALESCE(#{nickname, jdbcType=VARCHAR}, nickname),

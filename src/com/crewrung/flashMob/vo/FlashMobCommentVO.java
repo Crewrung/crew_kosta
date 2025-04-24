@@ -13,11 +13,10 @@ public class FlashMobCommentVO {
     	
     }
     
-	public FlashMobCommentVO(int flashMobCommentId, String flashMobComment, Date commentDate, String userId,
+	public FlashMobCommentVO(int flashMobCommentId, String flashMobComment, String userId,
 			int flashMobNumber) {
 		this.flashMobCommentId = flashMobCommentId;
 		this.flashMobComment = flashMobComment;
-		this.commentDate = commentDate;
 		this.userId = userId;
 		this.flashMobNumber = flashMobNumber;
 	}
