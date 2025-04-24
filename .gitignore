@@ -1,0 +1,27 @@
+# === Build Folders ===
+/bin/
+/build/
+/target/
+
+# === Eclipse Workspace Metadata ===
+.metadata/
+
+# === OS/Editor Temp Files ===
+*.swp
+*.tmp
+*.log
+
+# === Compiled Class Files ===
+*.class
+
+# === Java Archives ===
+*.war
+*.ear
+*.zip
+
+# === JVM Crash Logs ===
+hs_err_pid*
+replay_pid*
+
+# === 기타 ===
+*.iml  # IntelliJ에서 열었을 경우 생성되는 파일

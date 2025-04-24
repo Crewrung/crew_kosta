@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="boardMapper">
+
+  <insert id="insertBoardComment" parameterType="com.crewrung.board.vo.BoardCommentVO">
+    INSERT INTO board_comments
+      (board_comment_number, board_number, board_commenter_id, board_comment, comment_date)
+    VALUES
+      (board_comments_seq.nextval, #{boardNumber}, #{boardCommenterId}, #{boardComment}, SYSDATE)
+  </insert>
+
+  <delete id="deleteComment" parameterType="com.crewrung.board.vo.BoardCommentVO">
+    DELETE FROM board_comments
+     WHERE board_comment_number = #{boardCommentNumber}
+       AND board_commenter_id = #{boardCommenterId}
+  </delete>
+
+  <select id="getAllComments" resultType="com.crewrung.board.vo.BoardCommentListVO">
+    SELECT board_comment_number AS boardCommentNumber,
+           board_comment        AS boardComment,
+           comment_date         AS commentDate,
+           board_commenter_id   AS commenter
+      FROM board_comments
+     ORDER BY comment_date DESC
+  </select>
+
+  <insert id="insertBoard" parameterType="com.crewrung.board.vo.BoardDetailVO">
+    INSERT INTO boards
+      (board_number, writer_id, title, content, writing_date, view_count)
+    VALUES
+      (BOARDS_SEQ.nextval, #{writerId}, #{title}, #{content}, SYSDATE, #{viewCount})
+  </insert>
+
+  <delete id="deleteBoard" parameterType="com.crewrung.board.vo.BoardVO">
+    DELETE FROM boards
+     WHERE board_number = #{boardNumber}
+       AND writer_id    = #{writerId}
+  </delete>
+
+  <select id="getBoardDetail" parameterType="long" resultType="com.crewrung.board.vo.BoardDetailVO">
+    SELECT board_number AS boardNumber,
+           writer_id    AS writerId,
+           title,
+           content,
+           writing_date AS writingDate,
+           view_count   AS viewCount
+      FROM boards
+     WHERE board_number = #{boardNumber}
+  </select>
+
+  <select id="getAllBoards" resultType="com.crewrung.board.vo.BoardVO">
+    SELECT board_number AS boardNumber,
+           writer_id    AS writerId,
+           title,
+           content,
+           writing_date AS writingDate,
+           view_count   AS viewCount
+      FROM boards
+     ORDER BY writing_date DESC
+  </select>
+
+  <update id="updateBoard" parameterType="com.crewrung.board.vo.BoardVO">
+    UPDATE boards
+       SET title   = #{title},
+           content = #{content}
+     WHERE board_number = #{boardNumber}
+       AND writer_id    = #{writerId}
+  </update>
+
+	<!-- From BoardMapperViewIncrement.xml -->
+	<update id="incrementView" parameterType="int">
+		UPDATE BOARDS
+		SET view_count = view_count + 1
+		WHERE board_number = #{boardNumber}
+	</update>
+
+
+</mapper>

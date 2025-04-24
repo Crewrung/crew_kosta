@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="flashMobMapper">
+
+	<select id="getAllFlashMobs" resultType="com.crewrung.flashMob.vo.FlashMobMainViewVO">
+		SELECT
+		f.flashMob_number, f.title, f.content, f.interest_category,
+		g.gu_name,
+		f_count.participant_count, f.max_member, f.meeting_date
+		FROM flashMobs
+		f
+		JOIN gues g ON f.gu_number = g.gu_number
+		JOIN (
+		SELECT
+		f.flashMob_number, COUNT(f.flashMob_number) + 1 AS participant_count
+		FROM flashMobs f
+		LEFT JOIN flashMob_participants fp ON
+		f.flashMob_number =
+		fp.flashMob_number
+		GROUP BY f.flashMob_number
+		)
+		f_count ON f.flashMob_number = f_count.flashMob_number
+		ORDER BY
+		f.meeting_date DESC
+	</select>
+
+	<select id="getAllFlashMobsByFilter" parameterType="java.util.HashMap"
+		resultType="com.crewrung.flashMob.vo.FlashMobMainViewVO">
+		select
+		f.flashMob_number, f.title, f.content, f.interest_category,
+		g.gu_name, f_count.participant_count, f.max_member, f.meeting_date
+		from flashMobs f
+		join gues g on f.gu_number = g.gu_number
+		join(
+		select
+		f.flashMob_number, count(f.flashMob_number) + 1 as participant_count
+		from flashMobs f
+		left join flashMob_participants fp on
+		f.flashMob_number =
+		fp.flashMob_number
+		group by f.flashMob_number
+		)
+		f_count on f.flashMob_number = f_count.flashMob_number
+		WHERE 1=1
+		<if test="interestCategory != null">
+			AND f.interest_category = #{interestCategory}
+		</if>
+		<if test="guName != null">
+			AND g.gu_name = #{guName}
+		</if>
+		<if test="ageRange != null">
+			AND f.age_range = #{ageRange}
+		</if>
+		<if test="maxMember != null">
+			AND f.max_member &lt;= #{maxMember}
+		</if>
+		<if test="minMember != null">
+			AND f.max_member &gt;= #{minMember}
+		</if>
+	</select>
+
+	<insert id="addFlashMob" parameterType="com.crewrung.flashMob.vo.FlashMobVO">
+		INSERT INTO flashMobs (
+		flashMob_number, flashMob_host_id, title, content,
+		interest_category,
+		age_range, max_member,
+		meeting_date, image, gu_number
+		)
+		VALUES (
+		flashMobs_seq.nextval,
+		#{flashMobHostId}, #{title}, #{content},
+		#{interestCategory}, #{ageRange}, #{maxMember},
+		SYSDATE, #{image,
+		jdbcType=VARCHAR}, #{guNumber}
+		)
+	</insert>
+
+	<select id="getFlashMobDetail" parameterType="int"
+		resultType="com.crewrung.flashMob.vo.FlashMobVO">
+		SELECT image, title, content
+		FROM flashMobs
+		WHERE flashMob_number = #{flashMobNumber}
+	</select>
+	
+	<insert id="addFlashMobParticipant" parameterType="com.crewrung.flashMob.vo.FlashMobParticipantVO">
+		INSERT INTO flashMob_participants (user_id, flashMob_number, apply_date)
+		VALUES (#{userId} ,#{flashMobNumber}, #{applyDate})
+	</insert>
+	
+	<update id="setFlashMobDetail" parameterType="com.crewrung.flashMob.vo.FlashMobVO">
+		UPDATE flashMobs SET title = #{title},
+		content = #{content},
+		interest_category = #{interestCategory},
+		age_range = #{ageRange},
+		max_member = #{maxMember},
+		meeting_date = #{meetingDate},
+		image = #{image},
+		gu_number = #{guNumber}
+		WHERE flashMob_number = #{flashMobNumber}
+	</update>
+	
+	<select id="getAllFlashMobComments" parameterType="int"
+		resultType="com.crewrung.flashMob.vo.FlashMobCommentVO">
+		SELECT user_id, flashMob_comment, comment_date 
+		FROM flashMob_comments 
+		WHERE flashMob_number=#{flashMobNumber}
+	</select>
+	
+	<insert id="addFlashMobComment" parameterType="com.crewrung.flashMob.vo.FlashMobCommentVO">
+		INSERT INTO FLASHmOB_COMMENTS (flashMob_comment_id, flashMob_comment, comment_date, user_id, flashMob_number)
+		VALUES (CREW_COMMENTS_SEQ.nextval, #{flashMobComment}, #{commentDate}, #{userId}, #{flashMobNumber})
+	</insert>
+	
+</mapper>

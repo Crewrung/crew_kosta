@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="crewMapper">
+
+	<select id="getAllPromotionCrew" resultType="com.crewrung.crew.vo.PromotionVO">
+		SELECT
+		promotion_message, introduction FROM crews WHERE is_promotion = 'Y'
+	</select>
+
+	<select id="getAllCrew" resultType="com.crewrung.crew.vo.AllCrewVO">
+		select c.crew_number,
+		c.crew_name, c.introduction, c.INTEREST_CATEGORY,
+		c.image, g.gu_name,
+		cm_count.crew_members_count
+		from crews c
+		join gues g on c.gu_number =
+		g.gu_number
+		join (
+		select c.crew_number, count(c.crew_number) + 1 as
+		crew_members_count
+		from crews c
+		left join crew_members cm on
+		c.crew_number = cm.crew_number
+		group by c.crew_number
+		) cm_count on
+		c.crew_number = cm_count.crew_number
+		ORDER BY c.crew_number desc
+	</select>
+
+	<select id="getAllCrewByFilter" parameterType="java.util.HashMap"
+		resultType="com.crewrung.crew.vo.AllCrewVO">
+		select c.crew_number,
+		c.crew_name, c.introduction,
+		c.INTEREST_CATEGORY,
+		c.image, g.gu_name,
+		cm_count.crew_members_count
+		from crews c
+		join gues g
+		on c.gu_number = g.gu_number
+		join (
+		select
+		c.crew_number,
+		count(c.crew_number) + 1 as crew_members_count
+		from
+		crews c
+		left join
+		crew_members cm on c.crew_number = cm.crew_number
+		group by
+		c.crew_number
+		) cm_count on c.crew_number =
+		cm_count.crew_number
+		WHERE
+		1=1
+		<if test="interestCategory != null">
+			AND c.interest_category = #{interestCategory}
+		</if>
+		<if test="guName != null">
+			AND g.gu_name = #{guName}
+		</if>
+		<if test="ageRange != null">
+			AND c.age_range = #{ageRange}
+		</if>
+	</select>
+
+	<select id="getCrewDetail" parameterType="int"
+		resultType="com.crewrung.crew.vo.AllCrewVO">
+		select c.crew_number,
+		c.crew_name, c.introduction,
+		c.INTEREST_CATEGORY, c.image, g.gu_name,
+		cm_count.crew_members_count
+		from crews c
+		join gues g on c.gu_number =
+		g.gu_number
+		join (
+		select c.crew_number, count(c.crew_number) + 1 as
+		crew_members_count
+		from crews c
+		left join crew_members cm on
+		c.crew_number = cm.crew_number
+		group by c.crew_number
+		) cm_count on
+		c.crew_number = cm_count.crew_number
+		where c.crew_number =
+		#{crewNumber}
+	</select>
+
+	<select id="getCrewLeader" parameterType="int"
+		resultType="com.crewrung.crew.vo.CrewLeaderVO">
+		SELECT u.name, u.nickname FROM crews c
+		JOIN users u ON
+		c.crew_leader_id = u.user_id
+		WHERE c.crew_number = #{crewNumber}
+	</select>
+
+	<insert id="addCrew" parameterType="com.crewrung.crew.vo.CrewVO">
+		INSERT INTO crews
+		(crew_number, crew_name, crew_leader_id, introduction,
+		interest_category, age_range, image, promotion_message, is_promotion,
+		gu_number)
+		VALUES (
+		crews_seq.nextval,
+		#{crewName}, #{crewLeaderId},
+		#{introduction},
+		#{interestCategory}, #{ageRange}, #{image,
+		jdbcType=VARCHAR}, #{promotionMessage},
+		#{isPromotion},
+		#{guNumber}
+		)
+	</insert>
+
+	<update id="updateCrew" parameterType="com.crewrung.crew.vo.CrewVO">
+		UPDATE crews
+		SET
+		crew_name =
+		#{crewName},
+		crew_leader_id = #{crewLeaderId},
+		introduction =
+		#{introduction},
+		interest_category = #{interestCategory},
+		age_range =
+		#{ageRange},
+		image = #{image,
+		jdbcType=VARCHAR},
+		promotion_message =
+		#{promotionMessage},
+		is_promotion = #{isPromotion},
+		gu_number =
+		#{guNumber}
+		WHERE crew_number = #{crewNumber}
+	</update>
+
+	<select id="getCommentCount" parameterType="int" resultType="int">
+		SELECT count(crew_number) as comment_count
+		FROM crew_comments
+		WHERE
+		crew_number = #{crewNumber}
+	</select>
+
+	<select id="getCrewCommentDetail" parameterType="int"
+		resultType="com.crewrung.crew.vo.CrewCommentVO">
+		SELECT u.nickname, cc.crew_comment FROM crew_comments cc
+		JOIN crew_members cm ON cc.crew_member_number = cm.crew_member_number
+		JOIN users u ON cm.crew_member_id = u.user_id
+		WHERE cc.crew_number =
+		#{crewNumber}
+	</select>
+
+	<insert id="applyToCrew" parameterType="com.crewrung.crew.vo.CrewApplicationVO">
+		INSERT INTO crew_applies (crew_apply_number, crew_number, user_id,
+		introduction)
+		VALUES (CREW_APPLIES_SEQ.nextval, #{crewNumber}, #{userId}, #{introduction})
+	</insert>
+
+	<select id="getCrewApplicants" parameterType="int"
+		resultType="com.crewrung.crew.vo.CrewManagePageVO">
+		select au.profile_image, au.nickname,
+		TRUNC(MONTHS_BETWEEN(SYSDATE,
+		au.birthdate) / 12) as age, au.gender,
+		SUBSTR(c.city_name,1,2) as
+		city, ca.introduction
+		from crew_applies ca
+		join users au on au.USER_ID = ca.USER_ID
+		join gues g on g.GU_NUMBER =
+		au.GU_NUMBER
+		join cities c on c.city_number = g.city_number
+		where
+		ca.crew_number = #{crewNumber}
+	</select>
+
+	<select id="getCrewMember" parameterType="int"
+		resultType="com.crewrung.crew.vo.CrewManagePageVO">
+		select au.profile_image, au.nickname,
+		TRUNC(MONTHS_BETWEEN(SYSDATE,
+		au.birthdate) / 12) as age, au.gender,
+		SUBSTR(c.city_name,1,2) as
+		city
+		from crews c join crew_members cmm on
+		c.crew_number = cmm.crew_number
+		join users au on au.user_id =
+		cmm.CREW_MEMBER_ID
+		join gues g on g.GU_NUMBER = au.GU_NUMBER
+		join cities
+		c on c.CITY_NUMBER = g.CITY_NUMBER
+		where c.crew_number = #{crewNumber}
+	</select>
+	
+	<!-- 여기까지 정능혁 작성 -->
+	
+	<update id="setCrewMeeting" parameterType="com.crewrung.crew.vo.CrewMeetingVO">
+		UPDATE crew_meetings
+		SET title = #{title}, content = #{content}, image = #{image},
+		meeting_date = #{meetingDate},
+		max_member = #{maxMember}, gu_number =
+		#{guNumber}
+		WHERE crew_meeting_number = #{crewMeetingNumber}
+	</update>
+
+	<insert id="applyCrewMeeting" parameterType="com.crewrung.crew.vo.ApplyCrewMeetingVO">
+		INSERT INTO
+		crew_meeting_participants (crew_participant_number,
+		crew_meeting_number, crew_member_number, apply_date)
+		VALUES
+		(CREW_MEETING_PARTICIPANTS_SEQ.nextval, #{crewMeetingNumber},
+		#{crewMemberNumber}, SYSDATE)
+	</insert>
+
+	<select id="getCrewMeetingParticipants" parameterType="int"
+		resultType="com.crewrung.crew.vo.CrewMeetingParticipantVO">
+		select u.profile_image, u.name, u.nickname
+		from users u,
+		crew_meeting_participants cmp, crew_members cmb
+		where
+		cmp.crew_meeting_number= #{crewMeetingNumber} and
+		cmp.crew_member_number=cmb.crew_member_number and
+		u.user_id =
+		cmb.crew_member_id
+	</select>
+
+	<select id="getCrewMeetingHost" parameterType="int"
+		resultType="com.crewrung.crew.vo.CrewMeetingParticipantVO">
+		select u.profile_image, u.name, u.nickname
+		from users u,
+		crew_meetings cmt, crew_members cmb
+		where
+		cmt.crew_meeting_number=#{crewMeetingNumber} and
+		cmt.crew_meeting_host_number=cmb.crew_member_number and u.user_id =
+		cmb.crew_member_id
+	</select>
+
+	<insert id="addCrewMeeting" parameterType="com.crewrung.crew.vo.CrewMeetingVO">
+		insert into
+		crew_meetings(crew_meeting_number, title, content, meeting_date,
+		max_member, crew_number,
+		crew_meeting_host_number, gu_number)
+		values(crew_meetings_seq.nextval, #{title}, #{content} ,
+		#{meetingDate},
+		#{maxMember}, #{crewNumber}, #{crewMeetingHostNumber},
+		#{guNumber})
+	</insert>
+
+	<select id="getCrewMeeting" parameterType="int"
+		resultType="com.crewrung.crew.vo.CrewMeetingVO">
+		select image, title, content
+		from crew_meetings
+		where
+		crew_meeting_number = #{crewMeetingNumber}
+	</select>
+
+	<select id="getCrewMeetingsInfo" parameterType="int"
+		resultType="com.crewrung.crew.vo.CrewMeetingVO">
+		SELECT m.title, m.meeting_date, g.gu_name, u.name AS
+		host_name
+		FROM crew_meetings m
+		JOIN gues g ON m.gu_number = g.gu_number
+		JOIN crew_members mb ON m.crew_meeting_host_number =
+		mb.crew_member_number
+		JOIN users u ON mb.crew_member_id = u.user_id
+		WHERE m.crew_number = #{crewNumber}
+	</select>
+
+	<delete id="removeCrewApplies" parameterType="com.crewrung.crew.vo.CrewAppliesVO">
+		delete crew_applies
+		where crew_apply_number = #{crewApplyNumber} and crew_number=
+		#{crewNumber}
+	</delete>
+
+	<insert id="addCrewMember" parameterType="com.crewrung.crew.vo.CrewMemberVO">
+		insert into
+		crew_members(crew_member_number, crew_number, crew_member_id,
+		join_date)
+		values(crew_members_seq.nextval, #{crewNumber},
+		#{crewMemberId}, SYSDATE)
+	</insert>
+
+	<delete id="removeCrewMember" parameterType="com.crewrung.crew.vo.CrewMemberVO">
+		delete crew_members
+		where crew_member_number = #{crewMemberNumber} and crew_number = #{crewNumber}
+	</delete>
+	<!-- 여기까지 이상혁 작성 -->
+</mapper>
