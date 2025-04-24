@@ -29,7 +29,7 @@ public class PromotionVO {
 
 	@Override
 	public String toString() {
-		return "PromotionVO [promotionMessage=" + promotionMessage + ", introduction=" + introduction + "]";
+		return "PromotionVO [promotionMessage=" + promotionMessage + ", introduction=" + introduction + "]\n";
 	}
 
 }

@@ -2,6 +2,7 @@ package com.crewrung.crew.dao;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,6 +23,8 @@ import com.crewrung.crew.vo.PromotionVO;
 
 public class CrewDAO {
 	SqlSession con;
+	
+	public CrewDAO(){}
 	
 	public CrewDAO(SqlSession sqlSession){
 		this.con = sqlSession;
@@ -110,6 +113,16 @@ public class CrewDAO {
 		con.close();
 		return result;
 	}
+	
+	public boolean isMemberOfCrew(int crewNumber, String userId) {
+	    Map<String, Object> param = new HashMap<>();
+	    param.put("crewNumber", crewNumber);
+	    param.put("userId", userId);
+	    boolean result = con.selectOne("crewMapper.isMemberOfCrew", param);
+	    con.close();
+	    return result;
+	}
+	
 	//여기까지 정능혁 작성
 	
 	public boolean setCrewMeeting(CrewMeetingVO cm) {

@@ -75,15 +75,19 @@
 		join gues g on c.gu_number =
 		g.gu_number
 		join (
-		select c.crew_number, count(c.crew_number) + 1 as
+		select
+		c.crew_number, count(c.crew_number) + 1 as
 		crew_members_count
-		from crews c
+		from crews
+		c
 		left join crew_members cm on
 		c.crew_number = cm.crew_number
-		group by c.crew_number
+		group by
+		c.crew_number
 		) cm_count on
 		c.crew_number = cm_count.crew_number
-		where c.crew_number =
+		where
+		c.crew_number =
 		#{crewNumber}
 	</select>
 
@@ -149,9 +153,11 @@
 	</select>
 
 	<insert id="applyToCrew" parameterType="com.crewrung.crew.vo.CrewApplicationVO">
-		INSERT INTO crew_applies (crew_apply_number, crew_number, user_id,
+		INSERT INTO crew_applies
+		(crew_apply_number, crew_number, user_id,
 		introduction)
-		VALUES (CREW_APPLIES_SEQ.nextval, #{crewNumber}, #{userId}, #{introduction})
+		VALUES
+		(CREW_APPLIES_SEQ.nextval, #{crewNumber}, #{userId}, #{introduction})
 	</insert>
 
 	<select id="getCrewApplicants" parameterType="int"
@@ -186,9 +192,17 @@
 		c on c.CITY_NUMBER = g.CITY_NUMBER
 		where c.crew_number = #{crewNumber}
 	</select>
-	
+
+	<select id="isMemberOfCrew" parameterType="map" resultType="boolean">
+		SELECT CASE WHEN COUNT(crew_member_number) > 0 THEN 1 ELSE 0 END
+		FROM crew_members
+		WHERE crew_number = #{crewNumber}
+		AND crew_member_id = #{userId}
+
+	</select>
+
 	<!-- 여기까지 정능혁 작성 -->
-	
+
 	<update id="setCrewMeeting" parameterType="com.crewrung.crew.vo.CrewMeetingVO">
 		UPDATE crew_meetings
 		SET title = #{title}, content = #{content}, image = #{image},
@@ -277,7 +291,8 @@
 
 	<delete id="removeCrewMember" parameterType="com.crewrung.crew.vo.CrewMemberVO">
 		delete crew_members
-		where crew_member_number = #{crewMemberNumber} and crew_number = #{crewNumber}
+		where crew_member_number = #{crewMemberNumber} and crew_number =
+		#{crewNumber}
 	</delete>
 	<!-- 여기까지 이상혁 작성 -->
 </mapper>

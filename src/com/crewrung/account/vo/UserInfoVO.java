@@ -19,7 +19,6 @@ public class UserInfoVO {
 		this.userId = userId;
 	}
 
-
 	public UserInfoVO(String userId, String email, String phoneNumber, String nickname, String gender, int guNumber,
 			LocalDate birthDate) {
 		super();
