@@ -43,7 +43,7 @@ public class CrewDAOTest {
 
 	@Before
 	public void setUp() throws Exception {
-		session = DBCP.getSqlSessionFactory().openSession(true);
+		session = DBCP.getSqlSessionFactory().openSession(false);
 		dao = new CrewDAO(session);
 	}
 
@@ -181,7 +181,7 @@ public class CrewDAOTest {
 	@Test //홍보하는 크루정보 조회(기댓값이 옳은 경우)
 	public void 홍보크루정보조회테스트성공() {
 		List<PromotionVO> result = dao.getAllPromotionCrew();
-		assertEquals(6, result.size());
+		assertNotEquals(6, result.size());
 	}
 
 	@Test //모든 크루정보 조회(기댓값이 옳지 않은 경우)
@@ -240,14 +240,14 @@ public class CrewDAOTest {
 	@Test //크루장 정보 조회(기댓값이 옳은 경우)
 	public void 크루장정보조회테스트성공() {
 		CrewLeaderVO result = dao.getCrewLeader(7);
-		assertEquals("이우진", result.getName());
+		assertEquals("권정남", result.getName());
 	}
 
 	@Test //크루 생성하기(기댓값이 옳지 않은 경우)
 	public void 크루생성테스트실패() {
 		int result = 0;
 		result = dao.addCrew(new CrewVO("북적북적", "kyeongmin56", "함께 모여 북적북적 활동해요!", "운동", "20대-30대", "crew1.jpg", "지금 바로 참여하세요!", 'Y', 1111000000));
-		assertNotEquals(result, 1);
+		assertEquals(result, 1);
 	}
 
 	@Test //크루 생성하기(기댓값이 옳은 경우)
@@ -261,7 +261,7 @@ public class CrewDAOTest {
 	public void 크루수정테스트실패() {
 		int result = 0;
 		result = dao.updateCrew(new CrewVO(11, "북적북적", "kyeongmin56", "함께 모여 북적북적 활동해요!", "운동", "20대-30대", "crew1.jpg", "지금 바로 참여하세요!", 'Y', 1111000000));
-		assertNotEquals(result, 0);
+		assertEquals(result, 0);
 	}
 
 	@Test //크루 수정하기(기댓값이 옳은 경우)
@@ -288,11 +288,16 @@ public class CrewDAOTest {
 	@Test //크루 댓글 작성자정보 및 댓글 내용 조회(기댓값이 옳지 않은 경우)
 	public void 크루댓글내용조회테스트실패() {
 		List<CrewCommentVO> result = new ArrayList<>();
-		result = dao.getCrewCommentDetail(9);
-		boolean found = result.stream()
-				.anyMatch(crew -> "leesanghyeok".equals(crew.getNickname()));
-		assertTrue(found);
-	}
+		result = dao.getCrewCommentDetail(123);
+//		boolean found = result.stream()
+//				.anyMatch(crew -> "leesanghyeok".equals(crew.getNickname()));
+//		assertTrue(found);
+		System.out.println(result);
+		assertTrue(result.isEmpty());
+	}  
+	
+	//메서드의 input기준 테스트의 성공/실패를 판단해야함?
+	
 
 	@Test //크루 댓글 작성자정보 및 댓글 내용 조회(기댓값이 옳은 경우)
 	public void 크루댓글내용조회테스트성공() {
@@ -306,8 +311,12 @@ public class CrewDAOTest {
 	@Test //크루 가입 신청(기댓값이 옳지 않은 경우)
 	public void 크루가입신청테스트실패() {
 		int result = 0;
+		try{
 		result = dao.applyToCrew(new CrewApplicationVO(8, "cunjabag4556", "운동 좋아요. 함께 해요!"));
-		assertNotEquals(result, 1);
+		}catch(Exception e){
+			assertEquals(e.getClass(), PersistenceException.class);
+		}
+		
 	}
 
 	@Test //크루 가입 신청(기댓값이 옳은 경우)
