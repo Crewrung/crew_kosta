@@ -1,12 +1,21 @@
 package com.crewrung.account.vo;
 
-public class UserPwFindVO {
-	private String userPw;
+public class FindUserPwVO {
 	private String userId;
 	private String email;
 	
-	public UserPwFindVO(){}
+	public FindUserPwVO(){}
 	
+	
+	
+	public FindUserPwVO(String userId, String email) {
+		super();
+		this.userId = userId;
+		this.email = email;
+	}
+
+
+
 	public String getUserId() {
 		return userId;
 	}
