@@ -70,13 +70,15 @@ public class BoardDAO {
         }
     }
 
-    // from BoardViewIncrementDAO 12
-
-        public int incrementView() {
+        // 조회수 증가
+        public int incrementView(int boardNumber) {
             try (SqlSession session = sqlSessionFactory.openSession()) {
-                int result = session.update("boardMapper.incrementView");
+                int result = session.update(
+                    "boardMapper.incrementView",
+                   boardNumber
+                );
+                session.commit();
                 return result;
             }
         }
-
 }
