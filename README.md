@@ -58,14 +58,15 @@ git add .
 ```bash
 git commit -m "feat: 작업내용"
 ```
-4. *** 내 브랜치 pull ***<br>
+4. 내 브랜치에서 main pull<br>
 
 ```bash
 git pull origin main
 ```
 
-5. 내 브랜치 작업내역 머지<br>
+5. main에 가서 내 브랜치 작업내역 머지<br>
 ```bash
+git checkout main
 git merge 내 브랜치
 ```
 6. 푸시<br>
