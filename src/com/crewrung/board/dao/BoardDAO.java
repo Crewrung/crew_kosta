@@ -70,7 +70,7 @@ public class BoardDAO {
         }
     }
 
-    // from BoardViewIncrementDAO 12 vo¾ø¾îµµ‰Î
+    // from BoardViewIncrementDAO 12
 
         public int incrementView() {
             try (SqlSession session = sqlSessionFactory.openSession()) {

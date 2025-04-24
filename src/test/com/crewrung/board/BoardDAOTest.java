@@ -53,7 +53,6 @@ public class BoardDAOTest {
             dao.insertComment(comment);
             fail("Expected an exception on invalid commenter");
         } catch (Exception e) {
-            // ���� �߻� ���
         }
     }
 
