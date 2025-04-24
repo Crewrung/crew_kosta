@@ -58,10 +58,8 @@ git add .
 ```bash
 git commit -m "feat: 작업내용"
 ```
-4. *** 메인 브랜치 pull (가능하면 메인을 자주 업데이트 해줘야함) ***<br>
-```bash
-git checkout main
-```
+4. *** 내 브랜치 pull ***<br>
+
 ```bash
 git pull origin main
 ```
@@ -74,6 +72,13 @@ git merge 내 브랜치
 ```bash
 git push origin main
 ```
+
+7. 내 브랜치도 최신화<br>
+```bash
+git checkout 내 브랜치
+git pull origin main
+```
+
 <br>
 
 ## add와 implemnt의 차이점
