@@ -48,6 +48,10 @@ public class CrewMeetingVO {
 		this(null, title, null, meetingDate, 0, 0, 0, 0,0,guName,hostName);
 	}
 	
+	public CrewMeetingVO(int crewMeetingNumber, int crewNumber, int crewMeetingHostNumber){
+		this(null, null, null, null, 0, 0, crewMeetingNumber, crewNumber,crewMeetingHostNumber,null,null);
+	}
+	
 	public String getGuName() {
 		return guName;
 	}

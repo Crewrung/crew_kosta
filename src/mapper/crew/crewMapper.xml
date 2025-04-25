@@ -294,5 +294,17 @@
 		where crew_member_number = #{crewMemberNumber} and crew_number =
 		#{crewNumber}
 	</delete>
+	
+	<select id="isCrewLeader"  parameterType="Object" resultType="boolean">
+		select crew_number, CREW_LEADER_ID from crews where crew_number = #{crewNumber} and CREW_LEADER_ID= #{crewLeaderId}
+	</select>
+	
+	<select id="isCrewMeetingHost" parameterType="com.crewrung.crew.vo.CrewMeetingVO"
+		resultType="boolean">
+		select crew_meeting_number, crew_number, CREW_MEETING_HOST_NUMBER from CREW_MEETINGS where
+		  CREW_MEETING_NUMBER=#{crewMeetingNumber} and
+		  CREW_NUMBER= #{crewNumber} and 
+		  CREW_MEETING_HOST_NUMBER = #{crewMeetingHostNumber}
+	</select>
 	<!-- 여기까지 이상혁 작성 -->
 </mapper>
