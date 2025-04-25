@@ -46,27 +46,27 @@ public class AccountServiceTest {
 	}
 	
 	// 회원가입 성공 테스트
-//	@Test
-//	public void testSuccussJoin(){
-//		JoinService service = new JoinService(accountDAO);
-//		JoinVO joinVO = new JoinVO();
-//		joinVO.setUserId("testId");
-//		joinVO.setUserPw("Ek9EfRyM2G");
-//		joinVO.setName("김상목");
-//		joinVO.setEmail("gkskekfk@email.com");
-//		joinVO.setPhoneNumber("010-1234-1234");
-//		joinVO.setNickname("상목일");
-//		joinVO.setGender("남성");
-//		joinVO.setGuNumber(1144000000);
-//		joinVO.setQuestion("졸업한 초등학교는?");
-//		joinVO.setAnswer("진명초등학교");
-//		joinVO.setBirthDate("1998-09-15");
-//		joinVO.setIntroduction(null);
-//		joinVO.setProfileImage(null);
-//		
-//		int result = service.JoinUser(joinVO);
-//		assertEquals(1, result);
-//	}
+	@Test
+	public void testSuccussJoin(){
+		JoinService service = new JoinService(accountDAO);
+		JoinVO joinVO = new JoinVO();
+		joinVO.setUserId("testId");
+		joinVO.setUserPw("Ek9EfRyM2G");
+		joinVO.setName("김상목");
+		joinVO.setEmail("gkskekfk@email.com");
+		joinVO.setPhoneNumber("010-1234-1234");
+		joinVO.setNickname("상목일");
+		joinVO.setGender("남성");
+		joinVO.setGuName("금천구");
+		joinVO.setQuestion("졸업한 초등학교는?");
+		joinVO.setAnswer("진명초등학교");
+		joinVO.setBirthDate("1998-09-15");
+		joinVO.setIntroduction(null);
+		joinVO.setProfileImage(null);
+		
+		int result = service.joinUser(joinVO);
+		assertEquals(1, result);
+	}
 	
 	// 회원가입 아이디 중복 테스트 (아이디, 이메일, 닉네임 셋중 하나라도 중복이라면 0을 리턴 셋다 중복이 아니라면 1리턴
 //	@Test
@@ -87,7 +87,7 @@ public class AccountServiceTest {
 //		joinVO.setIntroduction(null);
 //		joinVO.setProfileImage(null);
 //		
-//		int result = service.JoinUser(joinVO);
+//		int result = service.joinUser(joinVO);
 //		assertEquals(1, result);
 //	}
 	

@@ -10,13 +10,14 @@ public class FlashMobMainViewVO {
     private String guName;
     private int participantCount;
     private int maxMember;
+    private String image;
     private Date meetingDate;
     
     public FlashMobMainViewVO(){
     }
     
 	public FlashMobMainViewVO(int flashMobNumber, String title, String content, String interestCategory, String guName,
-			int participantCount, int maxMember, Date meetingDate) {
+			int participantCount, int maxMember, Date meetingDate, String image) {
 		this.flashMobNumber = flashMobNumber;
 		this.title = title;
 		this.content = content;
@@ -25,6 +26,15 @@ public class FlashMobMainViewVO {
 		this.participantCount = participantCount;
 		this.maxMember = maxMember;
 		this.meetingDate = meetingDate;
+		this.image = image;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 
 	public int getFlashMobNumber() {
