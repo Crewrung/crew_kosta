@@ -13,7 +13,7 @@ public class DeleteBoardService {
         this.boardDAO = new BoardDAO(factory);
     }
 
-    public void execute(long boardNumber, String writerId) {
+    public void execute(int boardNumber, String writerId) {
     	BoardVO vo = new BoardVO();
         vo.setBoardNumber(boardNumber);
         vo.setWriterId(writerId);

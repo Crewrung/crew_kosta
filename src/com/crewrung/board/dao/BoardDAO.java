@@ -12,7 +12,7 @@ public class BoardDAO {
         this.sqlSessionFactory = sqlSessionFactory;
     }
 
-    public int insertComment(BoardCommentVO comment) {
+	public int insertComment(BoardCommentVO comment) {
         try (SqlSession session = sqlSessionFactory.openSession()) {
             int result = session.insert("boardMapper.insertBoardComment", comment);
             session.commit();
@@ -28,7 +28,7 @@ public class BoardDAO {
         }
     }
 
-    public List<BoardCommentListVO> getAllComments() {
+    public List<BoardCommentListVO> getAllComments(int boardNumber) {
         try (SqlSession session = sqlSessionFactory.openSession()) {
             return session.selectList("boardMapper.getAllComments");
         }
@@ -50,7 +50,7 @@ public class BoardDAO {
         }
     }
 
-    public BoardDetailVO getBoardDetail(Long boardNumber) {
+    public BoardDetailVO getBoardDetail(int boardNumber) {
         try (SqlSession session = sqlSessionFactory.openSession()) {
             return session.selectOne("boardMapper.getBoardDetail", boardNumber);
         }
