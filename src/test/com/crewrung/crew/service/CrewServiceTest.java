@@ -33,7 +33,6 @@ public class CrewServiceTest {
 		service = new CrewService(dao);
 	}
 
-
 	@After
 	public void tearDown() throws Exception {
 		if (session != null) {
@@ -100,9 +99,4 @@ public class CrewServiceTest {
 		result = service.checkCrewMembership(5, "sujin898");
 		assertTrue(result);
 	}
-
-
-
-
-
 }

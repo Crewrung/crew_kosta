@@ -192,5 +192,24 @@ public class CrewDAO {
 		con.close();
 		return result;
 	}
+	
+	public boolean isCrewLeader(int crewNumber, String crewLeaderId){
+		Map<String, Object> m = new HashMap<String, Object>();
+		m.put("crewNumber", crewNumber);
+		m.put("crewLeaderId", crewLeaderId);
+		boolean result = false;
+		if(con.selectList("crewMapper.isCrewLeader", m) != null){
+			result = true;
+		}
+		return result;
+	}
+	
+	public boolean isCrewMeetingHost(CrewMeetingVO cm){
+		boolean result = false;
+		if(con.selectList("crewMapper.isCrewMeetingHost", cm) != null){
+			result = true;
+		}
+		return result;
+	}
 	//여기까지 이상혁 작성
 }
