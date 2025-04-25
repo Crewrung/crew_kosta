@@ -24,28 +24,24 @@ public class FlashMobDAO {
 	public List<FlashMobMainViewVO> getAllFlashMobs() {
 		List<FlashMobMainViewVO> result = new ArrayList<>();
 		result = con.selectList("flashMobMapper.getAllFlashMobs");
-		con.close();
 		return result;
 	}
 	
 	public List<FlashMobMainViewVO> getAllFlashMobsByFilter(Map<String, String> filter) {
 		List<FlashMobMainViewVO> result = new ArrayList<>();
 		result = con.selectList("flashMobMapper.getAllFlashMobsByFilter", filter);
-		con.close();
 		return result;
 	}
 	
 	public int addFlashMob(FlashMobVO flashMobVO) {
 		int result = 0;
 		result = con.insert("flashMobMapper.addFlashMob", flashMobVO);
-		con.close();
 		return result;
 	}
 	
 	public FlashMobVO getFlashMobDetail(int flashMobNumber) {
 		FlashMobVO result = null;
 		result = con.selectOne("flashMobMapper.getFlashMobDetail", flashMobNumber);
-		con.close();
 		return result;
 	}
 	
@@ -53,7 +49,6 @@ public class FlashMobDAO {
 	public int addFlashMobParticipant(FlashMobParticipantVO flashMobParticipantVO) {
 		int result = 0;
 		result = con.insert("flashMobMapper.addFlashMobParticipant", flashMobParticipantVO);
-		con.close();
 		return result;
 	}
 	
@@ -61,7 +56,6 @@ public class FlashMobDAO {
 	public UserInfoVO getFlashMobHost(int flashMobNumber) {
 		UserInfoVO result = null;
 		result = con.selectOne("flashMobMapper.getFlashMobHost", flashMobNumber);
-		con.close();
 		return result;
 	}
 	
@@ -69,7 +63,6 @@ public class FlashMobDAO {
 	public List<UserInfoVO> getFlashMobParticipants(int flashMobNumber) {
 		List<UserInfoVO> result = new ArrayList<>();
 		result = con.selectList("flashMobMapper.getFlashMobParticipants", flashMobNumber);
-		con.close();
 		return result;
 	}
 	
@@ -77,14 +70,12 @@ public class FlashMobDAO {
 	public int setFlashMobDetail(FlashMobVO flashMobVO) {
 		int result = 0;
 		result = con.update("flashMobMapper.setFlashMobDetail", flashMobVO);
-		con.close();
 		return result;
 	}
 	//번개 모임 댓글 조회 get
 	public List<FlashMobCommentVO> getAllFlashMobComments(int flashMobNumber) {
 		List<FlashMobCommentVO> result = new ArrayList<>();
 		result = con.selectList("flashMobMapper.getAllFlashMobComments", flashMobNumber);
-		con.close();
 		return result;
 	}
 	
@@ -92,7 +83,6 @@ public class FlashMobDAO {
 	public int addFlashMobComment(FlashMobCommentVO flashMobCommentVO) {
 		int result = 0;
 		result = con.insert("flashMobMapper.addFlashMobComment", flashMobCommentVO);
-		con.close();
 		return result;
 	}
 }
