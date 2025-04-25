@@ -49,6 +49,11 @@ public class AccountDAO {
 		return con.insert("accountMapper.Join", joinVO);
 	}
 	
+	// 구이름 -> 구넘버
+	public int getGuNumberByName(String guName){
+		return con.selectOne("accountMapper.getGuNumberByName", guName);
+	}
+	
 	// 회원탈퇴 O
 	public int removeUser(MypageVO vo){
 		return con.delete("accountMapper.removeUser", vo);
