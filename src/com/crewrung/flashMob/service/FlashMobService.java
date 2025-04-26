@@ -40,6 +40,9 @@ private FlashMobDAO flashMobDAO;
 	
 	//번개모임 신청자인가
 	public boolean isFlashParticipants(String userId, int flashMobNumber) {
+		if (userId == null) {
+			return false;
+		}
 		boolean result = false;
 		List<UserInfoVO> flashMobParticipants = flashMobDAO.getFlashMobParticipants(flashMobNumber);
 		
@@ -55,7 +58,7 @@ private FlashMobDAO flashMobDAO;
 	//번개모임 주최자인가
 	public boolean isFlashMobHost(String userId, int flashMobNumber) {
 		UserInfoVO host = flashMobDAO.getFlashMobHost(flashMobNumber);
-		return userId.equals(host.getUserId());
+		return host.getUserId().equals(userId);
 	}
 	
 	//번개모임 주최자조회(호스트)
