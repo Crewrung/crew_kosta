@@ -15,6 +15,6 @@ public class GetAllCommentsService {
     }
 
     public List<BoardCommentListVO> execute() {
-        return boardDAO.getAllComments();
+        return boardDAO.getAllComments(0);
     }
 }
