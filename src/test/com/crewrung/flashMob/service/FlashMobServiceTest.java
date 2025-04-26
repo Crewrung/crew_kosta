@@ -139,13 +139,13 @@ public class FlashMobServiceTest {
 	// 기능7: 참석자 조회
 	@Test
 	public void successGetFlashMobParticipants() {
-		List<UserInfoVO> participants = service.getFlashMobParticipants("hyunjoo482", 1);
+		List<UserInfoVO> participants = service.getFlashMobParticipants(1);
 		assertTrue(participants != null && participants.size() > 0);
 	}
 
 	@Test
 	public void failGetFlashMobParticipants() {
-		List<UserInfoVO> participants = service.getFlashMobParticipants("hyunjoo482", 999999);
+		List<UserInfoVO> participants = service.getFlashMobParticipants(999999);
 		assertTrue(participants.isEmpty());
 	}
 	

@@ -64,7 +64,7 @@ private FlashMobDAO flashMobDAO;
 	}
 	
 	//번개모임 참석자조회
-	public List<UserInfoVO> getFlashMobParticipants(String userId, int flashMobNumber) {
+	public List<UserInfoVO> getFlashMobParticipants(int flashMobNumber) {
 		return flashMobDAO.getFlashMobParticipants(flashMobNumber);
 	}
 	
