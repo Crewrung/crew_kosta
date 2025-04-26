@@ -1,3 +1,5 @@
+<%@page import="com.crewrung.flashMob.vo.FlashMobMainViewVO"%>
+<%@page import="com.crewrung.crew.vo.AllCrewVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -6,6 +8,14 @@
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="java.text.SimpleDateFormat"%>
 <%@ page import="java.util.Date"%>
+<%@ page import="org.apache.ibatis.session.SqlSession"%>
+<%@ page import="com.crewrung.crew.dao.CrewDAO" %>
+<%@ page import="com.crewrung.crew.service.CrewService" %>
+<%@ page import="com.crewrung.db.DBCP" %>
+<%@ page import="com.crewrung.flashMob.dao.FlashMobDAO" %>
+<%@ page import="com.crewrung.flashMob.service.FlashMobService" %>
+<%@ page import="com.crewrung.flashMob.vo.FlashMobMainViewVO" %>
+<%@ page import="com.crewrung.crew.dao.CrewDAO" %>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -343,9 +353,9 @@ a {
 
 		<nav>
 			<ul>
-				<li><a href="?cmd=flashMobUI">번개 모임</a></li>
-				<li><a href="?cmd=crewUI">크루</a></li>
-				<li><a href="?cmd=boardsUI">자유게시판</a></li>
+				<li><a href="controller?cmd=flashMobUI">번개 모임</a></li>
+				<li><a href="controller?cmd=crewUI">크루</a></li>
+				<li><a href="controller?cmd=boardsUI">자유게시판</a></li>
 			</ul>
 		</nav>
 
@@ -423,22 +433,24 @@ a {
 			<div id="flashMobCarousel" class="carousel slide card-carousel">
 				<div class="carousel-inner">
 					<%
-              // request에서 번개모임 리스트 가져오기
-              List<Object> flashMobList = (List<Object>) request.getAttribute("flashMobList");
-              
-              // 리스트가 null이면 빈 리스트로 초기화
-              if (flashMobList == null) {
-                flashMobList = new ArrayList<>();
-              }
-              
-              // 4개씩 그룹화하여 슬라이드 생성
-              int totalFlashMobSlides = (int) Math.ceil(flashMobList.size() / 4.0);
-              
-              for (int slideIndex = 0; slideIndex < totalFlashMobSlides; slideIndex++) {
-                // 현재 슬라이드에 표시할 카드 인덱스 계산
-                int startIdx = slideIndex * 4;
-                int endIdx = Math.min(startIdx + 4, flashMobList.size());
-            %>
+                    // 직접 서비스 메소드 호출
+                    SqlSession dbSession = DBCP.getSqlSessionFactory().openSession();
+                    FlashMobService flashMobService = new FlashMobService(new FlashMobDAO(dbSession));
+                    List<FlashMobMainViewVO> flashMobList = flashMobService.getAllFlashMobs();
+                    
+                    // 리스트가 null이면 빈 리스트로 초기화
+                    if (flashMobList == null) {
+                      flashMobList = new ArrayList<>();
+                    }
+                    
+                    // 4개씩 그룹화하여 슬라이드 생성
+                    int totalFlashMobSlides = (int) Math.ceil(flashMobList.size() / 4.0);
+                    
+                    for (int slideIndex = 0; slideIndex < totalFlashMobSlides; slideIndex++) {
+                      // 현재 슬라이드에 표시할 카드 인덱스 계산
+                      int startIdx = slideIndex * 4;
+                      int endIdx = Math.min(startIdx + 4, flashMobList.size());
+                    %>
 					<div class="carousel-item <%= slideIndex == 0 ? "active" : "" %>">
 						<div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
 							<% 
@@ -562,22 +574,23 @@ a {
 			<div id="crewCarousel" class="carousel slide card-carousel">
 				<div class="carousel-inner">
 					<%
-          // request에서 크루 리스트 가져오기
-          List<Object> crewList = (List<Object>) request.getAttribute("crewList");
-          
-          // 리스트가 null이면 빈 리스트로 초기화
-          if (crewList == null) {
-            crewList = new ArrayList<>();
-          }
-          
-          // 4개씩 그룹화하여 슬라이드 생성
-          int totalCrewSlides = (int) Math.ceil(crewList.size() / 4.0);
-          
-          for (int slideIndex = 0; slideIndex < totalCrewSlides; slideIndex++) {
-            // 현재 슬라이드에 표시할 카드 인덱스 계산
-            int startIdx = slideIndex * 4;
-            int endIdx = Math.min(startIdx + 4, crewList.size());
-        %>
+                    // 직접 서비스 메소드 호출
+                    CrewService crewService = new CrewService(new CrewDAO(dbSession));
+                    List<AllCrewVO> crewList = crewService.getAllCrews();
+                    
+                    // 리스트가 null이면 빈 리스트로 초기화
+                    if (crewList == null) {
+                      crewList = new ArrayList<>();
+                    }
+                    
+                    // 4개씩 그룹화하여 슬라이드 생성
+                    int totalCrewSlides = (int) Math.ceil(crewList.size() / 4.0);
+                    
+                    for (int slideIndex = 0; slideIndex < totalCrewSlides; slideIndex++) {
+                      // 현재 슬라이드에 표시할 카드 인덱스 계산
+                      int startIdx = slideIndex * 4;
+                      int endIdx = Math.min(startIdx + 4, crewList.size());
+                    %>
 					<div class="carousel-item <%= slideIndex == 0 ? "active" : "" %>">
 						<div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
 							<% 
@@ -736,5 +749,10 @@ a {
       }
     });
   </script>
+
+	<%
+  // 세션 닫기
+  dbSession.close();
+  %>
 </body>
 </html>
