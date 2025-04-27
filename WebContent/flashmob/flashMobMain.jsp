@@ -9,7 +9,7 @@
   <h2>번개 모임 목록</h2>
   <ul>
     <c:forEach var="mob" items="${flashMobList}">
-      <li>${mob.title} - ${mob.content}</li>
+      <li> ${mob.title} - ${mob.content}</li>
     </c:forEach>
   </ul>
 </body>
