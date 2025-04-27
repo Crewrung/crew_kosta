@@ -62,6 +62,12 @@
         FROM users
         WHERE user_id = #{userId}
     </select>
+    
+        <select id="getGuNumberByName" parameterType="String" resultType="int">
+        SELECT gu_number
+        FROM gues
+        WHERE gu_name = #{guName}
+    </select>
 
     
     <select id="isEmailExist" resultType="int">

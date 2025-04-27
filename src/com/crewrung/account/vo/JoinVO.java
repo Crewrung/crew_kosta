@@ -6,11 +6,13 @@ public class JoinVO {
 	
 	private String userId;
 	private String userPw;
+	private String userPwCheck;
 	private String name;
 	private String email;
 	private String phoneNumber;
 	private String nickname;
 	private String gender;
+	private String guName;
 	private int guNumber;
 	private String question;
 	private String answer;
@@ -22,23 +24,19 @@ public class JoinVO {
 	
 	
 	
-	public JoinVO(String userId, String userPw, String name, String email, String phoneNumber, String nickname,
-			String gender, int guNumber, String question, String answer, String birthDate, String introduction,
-			String profileImage) {
-		super();
-		this.userId = userId;
-		this.userPw = userPw;
-		this.name = name;
-		this.email = email;
-		this.phoneNumber = phoneNumber;
-		this.nickname = nickname;
-		this.gender = gender;
-		this.guNumber = guNumber;
-		this.question = question;
-		this.answer = answer;
-		this.birthDate = birthDate;
-		this.introduction = introduction;
-		this.profileImage = profileImage;
+	public String getUserPwCheck() {
+		return userPwCheck;
+	}
+
+	public void setUserPwCheck(String userPwCheck) {
+		this.userPwCheck = userPwCheck;
+	}
+
+	public String getGuName() {
+		return guName;
+	}
+	public void setGuName(String guName) {
+		this.guName = guName;
 	}
 	public String getUserId() {
 		return userId;
@@ -118,14 +116,4 @@ public class JoinVO {
 	public void setProfileImage(String profileImage) {
 		this.profileImage = profileImage;
 	}
-	@Override
-	public String toString() {
-		return "JoinVO [userId=" + userId + ", userPw=" + userPw + ", name=" + name + ", email=" + email
-				+ ", phoneNumber=" + phoneNumber + ", nickname=" + nickname + ", gender=" + gender + ", guNumber="
-				+ guNumber + ", question=" + question + ", answer=" + answer + ", birthDate=" + birthDate
-				+ ", introduction=" + introduction + ", profileImage=" + profileImage + "]";
-	}
-	
-	
-
 }

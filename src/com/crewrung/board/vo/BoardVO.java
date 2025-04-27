@@ -3,22 +3,22 @@ package com.crewrung.board.vo;
 import java.util.Date;
 
 public class BoardVO {
-    private Long boardNumber;
+    private int boardNumber;
     private String writerId;
     private String title;
     private String content;
     private Date writingDate;
-    private Integer viewCount;
+    private int viewCount;
 
     // ����Ʈ, delete ��
-    public BoardVO(long boardNumber, String writerId, String title) {
+    public BoardVO(int boardNumber, String writerId, String title) {
         this.boardNumber = boardNumber;
         this.writerId = writerId;
         this.title = title;
     }
 
     // update ��
-    public BoardVO(long boardNumber, String writerId, String title, String content) {
+    public BoardVO(int boardNumber, String writerId, String title, String content) {
         this.boardNumber = boardNumber;
         this.writerId = writerId;
         this.title = title;
@@ -28,7 +28,7 @@ public class BoardVO {
     public BoardVO() {}
 
     // full ������
-    public BoardVO(Long boardNumber, String writerId, String title, String content, Date writingDate, Integer viewCount) {
+    public BoardVO(int boardNumber, String writerId, String title, String content, Date writingDate, Integer viewCount) {
         this.boardNumber = boardNumber;
         this.writerId = writerId;
         this.title = title;
@@ -38,8 +38,8 @@ public class BoardVO {
     }
 
     // getters/setters
-    public Long getBoardNumber() { return boardNumber; }
-    public void setBoardNumber(Long boardNumber) { this.boardNumber = boardNumber; }
+    public int getBoardNumber() { return boardNumber; }
+    public void setBoardNumber(int boardNumber) { this.boardNumber = boardNumber; }
 
     public String getWriterId() { return writerId; }
     public void setWriterId(String writerId) { this.writerId = writerId; }

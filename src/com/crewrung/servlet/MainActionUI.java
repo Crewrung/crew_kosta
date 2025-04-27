@@ -17,16 +17,6 @@ public class MainActionUI implements Action {
 
 	@Override
 	public String execute(HttpServletRequest request) throws ServletException, IOException {
-		SqlSession session = DBCP.getSqlSessionFactory().openSession();
-		
-        FlashMobService flashMobService = new FlashMobService(new FlashMobDAO(session));
-        CrewService crewService = new CrewService(new CrewDAO(session));
-		
-        request.setAttribute("flashMobList", flashMobService.getAllFlashMobs());
-        request.setAttribute("crewList", crewService.getAllCrews());
-      
-        session.close();
-		
 		return "index.jsp";
 	}
 

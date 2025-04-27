@@ -13,7 +13,7 @@ public class UpdateBoardService {
         this.boardDAO = new BoardDAO(factory);
     }
 
-    public void execute(long boardNumber, String writerId, String title, String content) {
+    public void execute(int boardNumber, String writerId, String title, String content) {
         BoardVO vo = new BoardVO(boardNumber, writerId, title, content);
         int result = boardDAO.updateBoard(vo);
         if (result < 1) {
