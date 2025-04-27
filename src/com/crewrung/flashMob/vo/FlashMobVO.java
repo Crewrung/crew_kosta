@@ -19,7 +19,7 @@ public class FlashMobVO {
     }
     
     public FlashMobVO(String flashMobHostId, String title, String content, String interestCategory,
-			String ageRange, int maxMember, Date meetingDate, String image, int guNumber) {
+			String ageRange, int maxMember, Date meetingDate, int guNumber) {
 		this.flashMobHostId = flashMobHostId;
 		this.title = title;
 		this.content = content;
@@ -27,7 +27,6 @@ public class FlashMobVO {
 		this.ageRange = ageRange;
 		this.maxMember = maxMember;
 		this.meetingDate = meetingDate;
-		this.image = image;
 		this.guNumber = guNumber;
 	}
     
