@@ -1,11 +1,12 @@
 package com.crewrung.servlet;
 
 import com.crewrung.flashMob.action.FlashMobUIAction;
+import com.crewrung.flashMob.action.addFlashMobAction;
 import com.crewrung.flashMob.action.addFlashMobCommentAction;
 import com.crewrung.flashMob.action.addFlashMobUIAction;
 import com.crewrung.flashMob.action.applyFlashMobAction;
 import com.crewrung.flashMob.action.flashMobDetailUIAction;
-import com.crewrung.flashMob.action.flashMobFilterAction;
+import com.crewrung.flashMob.action.flashMobFilterUIAction;
 import com.crewrung.flashMob.action.isFlashMobHostAction;
 import com.crewrung.flashMob.action.isFlashMobParticipantAction;
 import com.crewrung.flashMob.action.updateFlashMobAction;
@@ -27,8 +28,8 @@ public class ActionFactory {
 		case "flashMobDetailUI":
 			action = new flashMobDetailUIAction();
 			break;
-		case "flashMobFilter":
-			action = new flashMobFilterAction();
+		case "flashMobFilterUI":
+			action = new flashMobFilterUIAction();
 			break;
 		case "updateFlashMobUI":
 			action = new updateFlashMobUIAction();
@@ -38,6 +39,9 @@ public class ActionFactory {
 			break;
 		case "addFlashMobUI":
 			action = new addFlashMobUIAction();
+			break;
+		case "addFlashMob":
+			action = new addFlashMobAction();
 			break;
 		case "applyFlashMob":
 			action = new applyFlashMobAction();

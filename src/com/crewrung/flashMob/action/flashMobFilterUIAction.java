@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.crewrung.servlet.Action;
 
-public class flashMobFilterAction implements Action {
+public class flashMobFilterUIAction implements Action {
 
 	@Override
 	public String execute(HttpServletRequest request) throws ServletException, IOException {
