@@ -1,6 +1,7 @@
 package com.crewrung.servlet;
 
 import com.crewrung.flashMob.action.FlashMobUIAction;
+import com.crewrung.flashMob.action.addFlashMobAction;
 import com.crewrung.flashMob.action.addFlashMobCommentAction;
 import com.crewrung.flashMob.action.addFlashMobUIAction;
 import com.crewrung.flashMob.action.applyFlashMobAction;
@@ -38,6 +39,9 @@ public class ActionFactory {
 			break;
 		case "addFlashMobUI":
 			action = new addFlashMobUIAction();
+			break;
+		case "addFlashMob":
+			action = new addFlashMobAction();
 			break;
 		case "applyFlashMob":
 			action = new applyFlashMobAction();
