@@ -37,80 +37,6 @@ body {
 	background-color: #f9f9f9;
 }
 
-/* 헤더 스타일 */
-header {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	padding: 15px 20px;
-	background-color: #fff;
-	position: relative; /* 구분선 위치 설정을 위해 추가 */
-}
-
-/* 헤더 아래 구분선 추가 */
-.header-divider {
-	height: 1px;
-	background-color: #ddd; /* 연한 회색 */
-	width: 100%;
-	position: absolute;
-	bottom: 0;
-	left: 0;
-}
-
-.logo {
-	display: flex;
-	align-items: center;
-}
-
-.logo img {
-	width: 24px;
-	height: 24px;
-	margin-right: 8px;
-}
-
-.logo-text {
-	font-weight: bold;
-	font-size: 18px;
-	color: #000;
-}
-
-/* 네비게이션 간격 더 넓히기 */
-nav ul {
-	display: flex;
-	list-style: none;
-	gap: 200px; /* 간격 더 증가 */
-	margin-bottom: 0;
-}
-
-nav ul li a {
-	text-decoration: none;
-	color: #333;
-}
-
-.user-actions {
-	display: flex;
-	align-items: center;
-}
-
-.user-icon {
-	width: 32px;
-	height: 32px;
-	border-radius: 50%;
-	background-color: #f5f5f5;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	margin-right: 10px;
-}
-
-.login-btn {
-	background-color: #fff;
-	border: 1px solid #ddd;
-	border-radius: 20px;
-	padding: 8px 16px;
-	cursor: pointer;
-}
-
 /* 메인 콘텐츠 영역 - 양 옆 간격 설정 */
 main {
 	max-width: 1200px;
@@ -125,43 +51,6 @@ main {
 	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 	padding: 20px;
 	margin-bottom: 20px;
-}
-
-/* 푸터 스타일 - 두 열 레이아웃 */
-footer {
-	background-color: #f5f5f5;
-	padding: 15px 20px;
-	font-size: 12px;
-	color: #666;
-	line-height: 1.6;
-	border-top: 1px solid #ddd;
-}
-
-.footer-content {
-	max-width: 1200px;
-	margin: 0 auto;
-	display: flex;
-	justify-content: space-between;
-}
-
-.footer-left, .footer-right {
-	display: flex;
-	flex-direction: column;
-	gap: 5px;
-}
-
-.footer-left {
-	text-align: left;
-}
-
-.footer-right {
-	text-align: left;
-	border-left: 1px solid #ddd;
-	padding-left: 20px;
-}
-
-.footer-copyright {
-	margin-top: 5px;
 }
 
 /* 크루 상세 정보 스타일 */
@@ -478,156 +367,112 @@ footer {
 </head>
 <body>
 	<!-- 헤더 -->
-	<header>
-		<div class="logo">
-			<a href="/crew_kosta"> <img src="image/logo.png" alt="크루룽 로고"> <span
-				class="logo-text">크루룽</span>
-			</a>
-		</div>
-
-		<nav>
-			<ul>
-				<li><a href="controller?cmd=flashMobUI">번개 모임</a></li>
-				<li><a href="controller?cmd=crewUI">크루</a></li>
-				<li><a href="controller?cmd=boardsUI">자유게시판</a></li>
-			</ul>
-		</nav>
-
-		<div class="user-actions">
-			<div class="user-icon">
-				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-					viewBox="0 0 24 24" fill="none" stroke="currentColor"
-					stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-          <circle cx="12" cy="7" r="4"></circle>
-        </svg>
-			</div>
-			<button class="login-btn">로그인</button>
-		</div>
-
-		<!-- 헤더 아래 구분선 추가 -->
-		<div class="header-divider"></div>
-	</header>
+	<%@ include file="../header.jsp" %>
 
 	<!-- 메인 콘텐츠 영역 - 크루 상세 정보 -->
-	<main> <!-- 크루 상세 정보 컨테이너 -->
-	<div class="content-container">
-		<!-- 크루 배너 이미지와 업로드 버튼 -->
-		<div class="crew-banner-container">
-			<img src="./image/panel_image2.png" alt="크루 배너 이미지"
-				class="crew-banner">
-			<button class="image-upload-btn">
-				<i class="bi bi-camera-fill upload-icon"></i>
-			</button>
-		</div>
-
-		<!-- 크루 헤더 정보 -->
-		<div class="crew-header">
-			<div class="crew-info">
-				<h1 class="crew-name">${flashmob.title}</h1>
+	<main>
+		<!-- 크루 상세 정보 컨테이너 -->
+		<div class="content-container">
+			<!-- 크루 배너 이미지와 업로드 버튼 -->
+			<div class="crew-banner-container">
+				<img src="./image/panel_image2.png" alt="크루 배너 이미지"
+					class="crew-banner">
+				<button class="image-upload-btn">
+					<i class="bi bi-camera-fill upload-icon"></i>
+				</button>
 			</div>
 
-			<div class="crew-actions">
-				<!-- 수정하기 버튼: 로그인한 사용자가 방장인 경우에만 표시 -->
-				<c:if test="${isHost}">
-					<button class="crew-set-btn btn-light">수정하기</button>
-				</c:if>
-			</div>
-		</div>
+			<!-- 크루 헤더 정보 -->
+			<div class="crew-header">
+				<div class="crew-info">
+					<h1 class="crew-name">${flashmob.title}</h1>
+				</div>
 
-		<!-- 크루 설명 -->
-		<div class="crew-description">
-			<p>${flashmob.content}</p>
-		</div>
-
-		<!-- 신청 버튼: 로그인하지 않았거나, 로그인했지만 방장이 아니고 아직 신청하지 않은 경우에만 표시 -->
-		<c:choose>
-			<c:when test="${empty sessionScope.user}">
-				<!-- 로그인하지 않은 경우 -->
-				<button class="join-crew-btn">신청하기</button>
-			</c:when>
-			<c:when test="${isHost}">
-				<!-- 로그인했고 방장인 경우: 신청하기 버튼 숨김 -->
-			</c:when>
-			<c:when test="${isParticipant}">
-				<!-- 로그인했고 이미 참가한 경우: 신청하기 버튼 숨김 -->
-			</c:when>
-			<c:otherwise>
-				<!-- 로그인했고 아직 참가하지 않은 경우 -->
-				<button class="join-crew-btn">신청하기</button>
-			</c:otherwise>
-		</c:choose>
-
-		<!-- 크루 멤버 섹션 -->
-		<div class="section-title">모임원</div>
-		<div class="crew-members">
-			<!-- 방장 정보 -->
-			<div class="member-card">
-				<img src="./image/placeholder.png" alt="멤버 이미지" class="member-img">
-				<div class="member-rank">모임장</div>
-				<div class="member-name">${leader.nickname}</div>
+				<div class="crew-actions">
+					<!-- 수정하기 버튼: 로그인한 사용자가 방장인 경우에만 표시 -->
+					<c:if test="${isHost}">
+						<button class="crew-set-btn btn-light">수정하기</button>
+					</c:if>
+				</div>
 			</div>
 
-			<!-- 참가자 목록 -->
-			<c:forEach var="participant" items="${participants}">
+			<!-- 크루 설명 -->
+			<div class="crew-description">
+				<p>${flashmob.content}</p>
+			</div>
+
+			<!-- 신청 버튼: 로그인하지 않았거나, 로그인했지만 방장이 아니고 아직 신청하지 않은 경우에만 표시 -->
+			<c:choose>
+				<c:when test="${empty sessionScope.user}">
+					<!-- 로그인하지 않은 경우 -->
+					<button class="join-crew-btn">신청하기</button>
+				</c:when>
+				<c:when test="${isHost}">
+					<!-- 로그인했고 방장인 경우: 신청하기 버튼 숨김 -->
+				</c:when>
+				<c:when test="${isParticipant}">
+					<!-- 로그인했고 이미 참가한 경우: 신청하기 버튼 숨김 -->
+				</c:when>
+				<c:otherwise>
+					<!-- 로그인했고 아직 참가하지 않은 경우 -->
+					<button class="join-crew-btn">신청하기</button>
+				</c:otherwise>
+			</c:choose>
+
+			<!-- 크루 멤버 섹션 -->
+			<div class="section-title">모임원</div>
+			<div class="crew-members">
+				<!-- 방장 정보 -->
 				<div class="member-card">
 					<img src="./image/placeholder.png" alt="멤버 이미지" class="member-img">
-					<div class="member-rank">참석자</div>
-					<div class="member-name">${participant.nickname}</div>
+					<div class="member-rank">모임장</div>
+					<div class="member-name">${leader.nickname}</div>
 				</div>
-			</c:forEach>
-		</div>
-	</div>
 
-	<!-- 댓글 섹션 -->
-	<div class="content-container">
-		<div class="section-title">전체 댓글 ${comments.size()}개</div>
-
-		<!-- 댓글 입력 폼 -->
-		<div class="comment-form">
-			<textarea class="comment-input" placeholder="댓글을 입력하세요..."></textarea>
-			<button class="comment-submit">등록</button>
-		</div>
-
-		<!-- 댓글 목록 -->
-		<div class="comment-list">
-			<c:forEach var="comment" items="${comments}">
-				<div class="comment-item">
-					<div class="comment-header">
-						<c:set var="nickname"
-							value="${userService.getUserNickname(comment.userId)}" />
-						<div class="comment-user">${nickname}</div>
-						<div class="comment-date">${comment.commentDate}</div>
+				<!-- 참가자 목록 -->
+				<c:forEach var="participant" items="${participants}">
+					<div class="member-card">
+						<img src="./image/placeholder.png" alt="멤버 이미지" class="member-img">
+						<div class="member-rank">참석자</div>
+						<div class="member-name">${participant.nickname}</div>
 					</div>
-					<div class="comment-text">${comment.flashMobComment}</div>
-				</div>
-			</c:forEach>
+				</c:forEach>
+			</div>
 		</div>
-	</div>
+
+		<!-- 댓글 섹션 -->
+		<div class="content-container">
+			<div class="section-title">전체 댓글 ${comments != null ? comments.size() : 0}개</div>
+
+			<!-- 댓글 입력 폼 -->
+			<form class="comment-form"
+				action="controller?cmd=addFlashMobComment" method="POST">
+				
+				<!-- 숨겨진 flashmob 번호 -->
+   	 			<input type="hidden" name="flashMobNumbe" value="${flashmob.flashMobNumber}" />
+				<textarea name="comment" class="comment-input"
+					placeholder="댓글을 입력하세요..."></textarea>
+				<button type="submit" class="comment-submit">등록</button>
+			</form>
+
+			<!-- 댓글 목록 -->
+			<div class="comment-list">
+				<c:forEach var="comment" items="${comments}">
+					<div class="comment-item">
+						<div class="comment-header">
+							<c:set var="nickname"
+								value="${userService.getUserNickname(comment.userId)}" />
+							<div class="comment-user">${nickname}</div>
+							<div class="comment-date">${comment.commentDate}</div>
+						</div>
+						<div class="comment-text">${comment.flashMobComment}</div>
+					</div>
+				</c:forEach>
+			</div>
+		</div>
 	</main>
 
 	<!-- 푸터 - 두 열 레이아웃 -->
-	<footer>
-		<div class="footer-content">
-			<!-- 왼쪽 열 - 회사 정보 -->
-			<div class="footer-left">
-				<div>Corporate Name: 주식회사 크루 Owner: 김훈희 Business License:
-					234-18-4251</div>
-				<div>E-commerce Registration: 2022-서울강남-02241 Phone: 1533
-					KR(Kakao only) Contact Mail: Biz.at@gmail.com</div>
-				<div>Address: 서울특별시 강남구 테헤란로 51길(역삼동) AB Personal Information
-					Manager: 김도기 (info@gmail.com)</div>
-				<div class="footer-copyright">© LIGHTNING CO., LTD. ALL RIGHTS
-					RESERVED.</div>
-			</div>
-
-			<!-- 오른쪽 열 - CS Center 정보 -->
-			<div class="footer-right">
-				<div>CS Center: 1588-4321</div>
-				<div>10:00AM - 7:00PM (Lunch 12:30 - 13:30)</div>
-				<div>Sat/Sun/Holiday CLOSED</div>
-			</div>
-		</div>
-	</footer>
+	<%@ include file="../footer.jsp" %>
 </body>
 </html>
