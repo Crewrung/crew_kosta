@@ -16,7 +16,7 @@
 		JOIN gues g ON f.gu_number = g.gu_number
 		JOIN (
 		SELECT
-		f.flashMob_number, COUNT(f.flashMob_number) + 1 AS participant_count
+		f.flashMob_number, COUNT(f.flashMob_number) AS participant_count
 		FROM flashMobs f
 		LEFT JOIN flashMob_participants fp ON
 		f.flashMob_number =
@@ -37,7 +37,7 @@
 		join gues g on f.gu_number = g.gu_number
 		join(
 		select
-		f.flashMob_number, count(f.flashMob_number) + 1 as participant_count
+		f.flashMob_number, count(f.flashMob_number) as participant_count
 		from flashMobs f
 		left join flashMob_participants fp on
 		f.flashMob_number =
