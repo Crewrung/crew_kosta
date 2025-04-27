@@ -56,77 +56,6 @@ body {
 	background-color: #f9f9f9;
 }
 
-/* 헤더 스타일 */
-header {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	padding: 15px 20px;
-	background-color: #fff;
-	position: relative;
-}
-
-.header-divider {
-	height: 1px;
-	background-color: #ddd;
-	width: 100%;
-	position: absolute;
-	bottom: 0;
-	left: 0;
-}
-
-.logo {
-	display: flex;
-	align-items: center;
-}
-
-.logo img {
-	width: 24px;
-	height: 24px;
-	margin-right: 8px;
-}
-
-.logo-text {
-	font-weight: bold;
-	font-size: 18px;
-	color: #000;
-}
-
-nav ul {
-	display: flex;
-	list-style: none;
-	gap: 200px;
-	margin-bottom: 0px;
-}
-
-nav ul li a {
-	text-decoration: none;
-	color: #333;
-}
-
-.user-actions {
-	display: flex;
-	align-items: center;
-}
-
-.user-icon {
-	width: 32px;
-	height: 32px;
-	border-radius: 50%;
-	background-color: #f5f5f5;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	margin-right: 10px;
-}
-
-.login-btn {
-	background-color: #fff;
-	border: 1px solid #ddd;
-	border-radius: 20px;
-	padding: 8px 16px;
-	cursor: pointer;
-}
 
 /* 캐러셀 스타일 */
 .carousel-item {
@@ -259,35 +188,6 @@ nav ul li a {
 	color: #3498db;
 }
 
-/* 푸터 스타일 */
-footer {
-	background-color: #f5f5f5;
-	padding: 15px 20px;
-	font-size: 12px;
-	color: #666;
-	line-height: 1.6;
-	border-top: 1px solid #ddd;
-}
-
-.footer-content {
-	max-width: 1200px;
-	margin: 0 auto;
-	display: flex;
-	justify-content: space-between;
-}
-
-.footer-left, .footer-right {
-	display: flex;
-	flex-direction: column;
-	gap: 5px;
-}
-
-.footer-right {
-	text-align: left;
-	border-left: 1px solid #ddd;
-	padding-left: 20px;
-}
-
 a {
 	text-decoration: none;
 	color: inherit;
@@ -346,36 +246,7 @@ a {
 </head>
 <body>
 	<!-- 헤더 -->
-	<header>
-		<div class="logo">
-			<img src="image/logo.png" alt="크루룽 로고"> <span class="logo-text">크루룽</span>
-		</div>
-
-		<nav>
-			<ul>
-				<li><a href="controller?cmd=flashMobUI">번개 모임</a></li>
-				<li><a href="controller?cmd=crewUI">크루</a></li>
-				<li><a href="controller?cmd=boardsUI">자유게시판</a></li>
-			</ul>
-		</nav>
-
-		<div class="user-actions">
-			<a href="?cmd=mypageUI">
-				<div class="user-icon">
-					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-						viewBox="0 0 24 24" fill="none" stroke="currentColor"
-						stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-            <circle cx="12" cy="7" r="4"></circle>
-          </svg>
-				</div>
-			</a> <a href="?cmd=loginUI">
-				<button class="login-btn">로그인</button>
-			</a>
-		</div>
-
-		<div class="header-divider"></div>
-	</header>
+    <%@ include file="header.jsp" %>
 
 	<!-- 배너 슬라이드쇼 -->
 	<div id="mainCarousel" class="carousel slide" data-bs-ride="carousel">
@@ -476,7 +347,7 @@ a {
                     %>
 							<div class="col">
 								<a
-									href="?cmd=flashMobDetailUI&flashMobNumber=<%= flashMobNumber %>"
+									href="controller?cmd=flashMobDetailUI&flashMobNumber=<%= flashMobNumber %>"
 									class="custom-card">
 									<div class="card-icon">
 										<img src="<%= image != null ? image : "image/flash.png" %>"
@@ -698,28 +569,7 @@ a {
 	</main>
 
 	<!-- 푸터 -->
-	<footer>
-		<div class="footer-content">
-			<!-- 왼쪽 열 - 회사 정보 -->
-			<div class="footer-left">
-				<div>Corporate Name: 주식회사 크루 Owner: 김훈희 Business License:
-					234-18-4251</div>
-				<div>E-commerce Registration: 2022-서울강남-02241 Phone: 1533
-					KR(Kakao only) Contact Mail: Biz.at@gmail.com</div>
-				<div>Address: 서울특별시 강남구 테헤란로 51길(역삼동) AB Personal Information
-					Manager: 김도기 (info@gmail.com)</div>
-				<div class="footer-copyright">© LIGHTNING CO., LTD. ALL RIGHTS
-					RESERVED.</div>
-			</div>
-
-			<!-- 오른쪽 열 - CS Center 정보 -->
-			<div class="footer-right">
-				<div>CS Center: 1588-4321</div>
-				<div>10:00AM - 7:00PM (Lunch 12:30 - 13:30)</div>
-				<div>Sat/Sun/Holiday CLOSED</div>
-			</div>
-		</div>
-	</footer>
+	<%@ include file="footer.jsp" %>
 
 	<!-- 캐러셀 자동 재생 스크립트 -->
 	<script>

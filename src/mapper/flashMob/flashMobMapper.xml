@@ -10,12 +10,13 @@
 		f.flashMob_number, f.title, f.content, f.interest_category,
 		g.gu_name,
 		f_count.participant_count, f.max_member, f.meeting_date, f.image
-		FROM flashMobs
+		FROM
+		flashMobs
 		f
 		JOIN gues g ON f.gu_number = g.gu_number
 		JOIN (
 		SELECT
-		f.flashMob_number, COUNT(f.flashMob_number) + 1 AS participant_count
+		f.flashMob_number, COUNT(f.flashMob_number) AS participant_count
 		FROM flashMobs f
 		LEFT JOIN flashMob_participants fp ON
 		f.flashMob_number =
@@ -36,7 +37,7 @@
 		join gues g on f.gu_number = g.gu_number
 		join(
 		select
-		f.flashMob_number, count(f.flashMob_number) + 1 as participant_count
+		f.flashMob_number, count(f.flashMob_number) as participant_count
 		from flashMobs f
 		left join flashMob_participants fp on
 		f.flashMob_number =
@@ -68,17 +69,20 @@
 		fp.user_id, u.nickname
 		from flashMob_participants fp
 		join users u on fp.USER_ID = u.user_id
+		join flashMobs f on f.FLASHMOB_NUMBER = fp.FLASHMOB_NUMBER
 		where
-		fp.FLASHMOB_NUMBER = #{flashMobNumber}
+		fp.FLASHMOB_NUMBER = #{flashMobNumber} and f.FLASHMOB_HOST_ID != fp.user_id
 
 	</select>
 
 	<select id="getFlashMobHost" parameterType="int"
 		resultType="com.crewrung.account.vo.UserInfoVO">
 		select f.FLASHMOB_HOST_ID as user_id, u.nickname
-		from flashMobs f
+		from
+		flashMobs f
 		join users u on f.FLASHMOB_HOST_ID = u.user_id
-		where f.FLASHMOB_NUMBER = #{flashMobNumber}
+		where
+		f.FLASHMOB_NUMBER = #{flashMobNumber}
 
 	</select>
 
@@ -94,7 +98,8 @@
 		flashMobs_seq.nextval,
 		#{flashMobHostId}, #{title}, #{content},
 		#{interestCategory}, #{ageRange}, #{maxMember},
-		#{meetingDate}, #{image,
+		#{meetingDate},
+		#{image,
 		jdbcType=VARCHAR}, #{guNumber}
 		)
 	</insert>
@@ -142,7 +147,8 @@
 		comment_date, user_id, flashMob_number)
 		VALUES
 		(CREW_COMMENTS_SEQ.nextval, #{flashMobComment}, SYSDATE,
-		#{userId}, #{flashMobNumber})
+		#{userId},
+		#{flashMobNumber})
 	</insert>
-	
+
 </mapper>
