@@ -367,7 +367,7 @@ main {
 </head>
 <body>
 	<!-- 헤더 -->
-	<%@ include file="../header.jsp" %>
+	<%@ include file="../header.jsp"%>
 
 	<!-- 메인 콘텐츠 영역 - 크루 상세 정보 -->
 	<main>
@@ -391,7 +391,11 @@ main {
 				<div class="crew-actions">
 					<!-- 수정하기 버튼: 로그인한 사용자가 방장인 경우에만 표시 -->
 					<c:if test="${isHost}">
-						<button class="crew-set-btn btn-light">수정하기</button>
+						<form action="controller?cmd=updateFlashMobUIAction" method="post">
+							<input type="hidden" name="flashMobNumber"
+								value="${flashmob.flashMobNumber}" />
+							<button type="submit" class="crew-set-btn btn-light">수정하기</button>
+						</form>
 					</c:if>
 				</div>
 			</div>
@@ -405,7 +409,11 @@ main {
 			<c:choose>
 				<c:when test="${empty sessionScope.user}">
 					<!-- 로그인하지 않은 경우 -->
-					<button class="join-crew-btn">신청하기</button>
+					<form action="controller?cmd=applyFlashMobAction" method="post">
+						<input type="hidden" name="flashMobNumber"
+							value="${flashmob.flashMobNumber}" />
+						<button type="submit" class="join-crew-btn">신청하기</button>
+					</form>
 				</c:when>
 				<c:when test="${isHost}">
 					<!-- 로그인했고 방장인 경우: 신청하기 버튼 숨김 -->
@@ -415,9 +423,14 @@ main {
 				</c:when>
 				<c:otherwise>
 					<!-- 로그인했고 아직 참가하지 않은 경우 -->
-					<button class="join-crew-btn">신청하기</button>
+					<form action="controller?cmd=applyFlashMobAction" method="post">
+						<input type="hidden" name="flashMobNumber"
+							value="${flashmob.flashMobNumber}" />
+						<button type="submit" class="join-crew-btn">신청하기</button>
+					</form>
 				</c:otherwise>
 			</c:choose>
+
 
 			<!-- 크루 멤버 섹션 -->
 			<div class="section-title">모임원</div>
@@ -445,11 +458,12 @@ main {
 			<div class="section-title">전체 댓글 ${comments != null ? comments.size() : 0}개</div>
 
 			<!-- 댓글 입력 폼 -->
-			<form class="comment-form"
-				action="controller?cmd=addFlashMobComment" method="POST">
-				
+			<form class="comment-form" action="controller?cmd=addFlashMobComment"
+				method="POST">
+
 				<!-- 숨겨진 flashmob 번호 -->
-   	 			<input type="hidden" name="flashMobNumbe" value="${flashmob.flashMobNumber}" />
+				<input type="hidden" name="flashMobNumber"
+					value="${flashmob.flashMobNumber}" />
 				<textarea name="comment" class="comment-input"
 					placeholder="댓글을 입력하세요..."></textarea>
 				<button type="submit" class="comment-submit">등록</button>
@@ -473,6 +487,6 @@ main {
 	</main>
 
 	<!-- 푸터 - 두 열 레이아웃 -->
-	<%@ include file="../footer.jsp" %>
+	<%@ include file="../footer.jsp"%>
 </body>
 </html>
