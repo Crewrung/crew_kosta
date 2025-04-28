@@ -135,8 +135,8 @@ public class CrewService {
 		return crewDAO.getCrewMeetingsInfo(crewNumber);
 	}
 	
-	public boolean removeCrewApplesService(CrewAppliesVO ca){
-		return crewDAO.removeCrewApplies(ca);
+	public boolean removeCrewApplicantService(CrewAppliesVO ca){
+		return crewDAO.removeCrewApplicant(ca);
 	}
 	
 	public boolean addCrewMemberService(CrewMemberVO cm){
