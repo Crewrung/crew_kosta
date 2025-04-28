@@ -34,10 +34,12 @@ public class FrontController extends HttpServlet {
 		String result = action.execute(request);
 		String trimmed = result.trim();
 
-		if (trimmed.startsWith("{") || trimmed.startsWith("[")) {
+		if (trimmed.startsWith("{") && trimmed.endsWith("}")) {
+		    // JSON 객체로 응답
 		    response.setContentType("application/json; charset=UTF-8");
 		    response.getWriter().write(result);
 		} else {
+		    // 페이지 이동 (jsp)
 		    request.getRequestDispatcher("/" + result).forward(request, response);
 		}
 		
