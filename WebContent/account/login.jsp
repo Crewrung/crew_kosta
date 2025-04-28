@@ -184,7 +184,7 @@
 <main>
   <div class="login-form text-center">
     <h3>로그인</h3>
-    <form method="post" action="/kosta/controller?cmd=loginAction">
+    <form method="post" action="controller?cmd=loginAction">
       <div class="mb-3">
         <input type="text" class="form-control" name="userId" placeholder="아이디" required />
       </div>

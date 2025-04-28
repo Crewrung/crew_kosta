@@ -331,7 +331,7 @@
             <div class="profile-image">
                 <div class="profile-icon">
                     <!-- 프로필 이미지가 비어 있으면 default.png로 대체 -->
-                    <img src="/kosta/image/${empty mypage.profileImage ? 'default.png' : mypage.profileImage}" style="width:150px; height:150px; border-radius:50%;">
+                    <img src="image/${empty mypage.profileImage ? 'default.png' : mypage.profileImage}" style="width:150px; height:150px; border-radius:50%;">
                 </div>
             </div>
             
