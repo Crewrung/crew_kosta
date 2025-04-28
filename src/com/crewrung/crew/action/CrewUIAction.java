@@ -14,8 +14,8 @@ import com.crewrung.crew.vo.AllCrewVO;
 import com.crewrung.db.DBCP;
 import com.crewrung.servlet.Action;
 
-public class CrewUIAction implements Action {
-
+public class CrewUIAction implements Action{
+	
     @Override
     public String execute(HttpServletRequest request) throws ServletException, IOException {
         try (SqlSession session = DBCP.getSqlSessionFactory().openSession(true)) {

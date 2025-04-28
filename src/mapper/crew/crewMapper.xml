@@ -178,7 +178,7 @@
 		TRUNC(MONTHS_BETWEEN(SYSDATE,
 		au.birthdate) / 12) as age, au.gender,
 		SUBSTR(c.city_name,1,2) as
-		city, ca.introduction
+		city, ca.introduction, au.user_id, ca.CREW_APPLY_NUMBER
 		from crew_applies ca
 		join users au on au.USER_ID = ca.USER_ID
 		join gues g on g.GU_NUMBER =
@@ -289,7 +289,7 @@
 		WHERE m.crew_number = #{crewNumber}
 	</select>
 
-	<delete id="removeCrewApplies" parameterType="com.crewrung.crew.vo.CrewAppliesVO">
+	<delete id="removeCrewApplicant" parameterType="com.crewrung.crew.vo.CrewAppliesVO">
 		delete crew_applies
 		where crew_apply_number = #{crewApplyNumber} and crew_number=
 		#{crewNumber}

@@ -8,11 +8,12 @@ public class CrewManagePageVO {
 	private String city;
 	private String introduction;
 	private String memberId;
+	private int crewApplyNumber;
 	
 	public CrewManagePageVO(){}
 
 	public CrewManagePageVO(String profileImage, String nickname, int age, String gender, String city,
-			String introduction, String memberId) {
+			String introduction, String memberId,int crewApplyNumber) {
 		super();
 		this.profileImage = profileImage;
 		this.nickname = nickname;
@@ -21,6 +22,7 @@ public class CrewManagePageVO {
 		this.city = city;
 		this.introduction = introduction;
 		this.memberId = memberId;
+		this.crewApplyNumber = crewApplyNumber;
 	}
 
 	public CrewManagePageVO(String profileImage, String nickname, int age, String gender, String city,
@@ -34,6 +36,14 @@ public class CrewManagePageVO {
 		this.memberId = memberId;
 	}
 
+
+	public int getCrewApplyNumber() {
+		return crewApplyNumber;
+	}
+
+	public void setCrewApplyNumber(int crewApplyNumber) {
+		this.crewApplyNumber = crewApplyNumber;
+	}
 
 	public String getProfileImage() {
 		return profileImage;
@@ -104,13 +114,13 @@ public class CrewManagePageVO {
 		this.memberId = memberId;
 	}
 
-
 	@Override
 	public String toString() {
 		return "CrewManagePageVO [profileImage=" + profileImage + ", nickname=" + nickname + ", age=" + age
 				+ ", gender=" + gender + ", city=" + city + ", introduction=" + introduction + ", memberId=" + memberId
-				+ "]";
+				+ ", crewApplyNumber=" + crewApplyNumber + "]";
 	}
+
 	
 }
 	

@@ -1,5 +1,15 @@
 package com.crewrung.servlet;
 
+import com.crewrung.crew.action.AddCrewMeetingAction;
+import com.crewrung.crew.action.AddCrewMeetingUIAction;
+import com.crewrung.crew.action.AddCrewUIAction;
+import com.crewrung.crew.action.ApplyCrewUIAction;
+import com.crewrung.crew.action.CrewDetailUIAction;
+import com.crewrung.crew.action.CrewMeetingDetailUIAction;
+import com.crewrung.crew.action.CrewUIAction;
+import com.crewrung.crew.action.RejectCrewJoinRequestAction;
+import com.crewrung.crew.action.UpdateCrewAction;
+import com.crewrung.crew.action.UpdateCrewUIAction;
 import com.crewrung.account.action.FindUserIdAction;
 import com.crewrung.account.action.FindUserIdUIAction;
 import com.crewrung.account.action.FindUserPwAction;
@@ -106,7 +116,30 @@ public class ActionFactory {
 		case "isFlashMobParticipant":
 			action = new isFlashMobParticipantAction();
 			break;
-			
+//		case "getCrewByFilter":
+//			action = new GetCrewByFilterAction();
+//			break;
+//		case "applyCrew":
+//			action = new ApplyCrewAction();
+//			break;
+		case "updateCrewUI":
+			action = new UpdateCrewUIAction();
+			break;
+		case "updateCrew":
+			action = new UpdateCrewAction();
+			break;
+		case "crewMeetingDetailUI":
+			action = new CrewMeetingDetailUIAction();
+			break;
+//		case "deleteCrewMember":
+//			action = new DeleteCrewMemberAction();
+//			break;
+		case "rejectCrewJoinRequest":
+			action = new RejectCrewJoinRequestAction();
+			break;
+//		case "approveCrewJoinRequest":
+//			action = new ApproveCrewJoinRequestAction();
+//			break;
 		case "loginUI":
 			action = new LoginUIAction();
 			break;
@@ -152,8 +185,6 @@ public class ActionFactory {
 		case "findUserPwUIAction":
 			action = new FindUserPwUIAction();
 			break;
-
-			// 
 		default:
 			action = new MainActionUI();
 			break;
