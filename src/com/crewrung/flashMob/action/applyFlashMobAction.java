@@ -29,8 +29,7 @@ public class applyFlashMobAction implements Action {
         if (userId == null) {
         	return "account/login.jsp";
         } 
-        
-        System.out.println(userId);
+
         int flashMobNumber =Integer.parseInt(request.getParameter("flashMobNumber"));
         String result = "error.html";
         

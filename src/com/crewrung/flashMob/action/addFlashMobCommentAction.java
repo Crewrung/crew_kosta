@@ -31,8 +31,12 @@ public class addFlashMobCommentAction implements Action {
         	return "login.jsp";
         }
         
-        String comment = request.getParameter("comment");
         int flashMobNumber = Integer.parseInt(request.getParameter("flashMobNumber"));
+        if (!flashMobService.isFlashParticipants(userId, flashMobNumber)){
+        	return "controller?cmd=flashMobDetailUI&flashMobNumber=" + flashMobNumber;
+        }
+        
+        String comment = request.getParameter("comment");
         
         FlashMobCommentVO commentVO = new FlashMobCommentVO();
         commentVO.setUserId(userId);
@@ -42,6 +46,7 @@ public class addFlashMobCommentAction implements Action {
         flashMobService.addFlashMobComment(commentVO);
         
         session.close();
+        
         return "controller?cmd=flashMobDetailUI&flashMobNumber=" + flashMobNumber;
         
 	}
