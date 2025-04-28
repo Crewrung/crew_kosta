@@ -54,19 +54,6 @@ public class JoinAction implements Action{
 		
 		
 		try {
-			System.out.println("아이디: " + vo.getUserId());
-			System.out.println("비밀번호: " + vo.getUserPw());
-			System.out.println("비밀번호 확인: " + vo.getUserPwCheck());
-			System.out.println("이름: " + vo.getName());
-			System.out.println("이메일: " + vo.getEmail());
-			System.out.println("전화번호: " + vo.getPhoneNumber());
-			System.out.println("닉네임: " + vo.getNickname());
-			System.out.println("성별: " + vo.getGender());
-			System.out.println("구 이름: " + vo.getGuName());
-			System.out.println("질문: " + vo.getQuestion());
-			System.out.println("답변: " + vo.getAnswer());
-			System.out.println("생년월일: " + vo.getBirthDate());
-			
 			int result = service.joinUser(vo);
 			System.out.println("회원가입 결과: " + result);  // 디버깅용 로그 출력
 			

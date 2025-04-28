@@ -198,7 +198,7 @@ footer {
 	 <c:if test="${not empty errorMsg}">
         <div class="error">${errorMsg}</div>
     </c:if>
-	<form class="signup-form" action="/crew_kosta/controller?cmd=joinAction" method="post">
+	<form class="signup-form" action="/kosta/controller?cmd=joinAction" method="post">
 		<h2>회원가입</h2>
 		<label for="userId">아이디</label> 
 		<input type="text" id="userId" name="userId" required minlength="4" maxlength="16" placeholder="아이디 입력"> 
@@ -210,7 +210,7 @@ footer {
 		<input type="password" id="userPwCheck" name="userPwCheck" required minlength="6" placeholder="비밀번호 재입력">
 		
 		<label for="name">이름</label> 
-		<input type="text" id="name" name="name" required placeholder="이름 입력"> 
+		<input type="text" id="name" name="name" required maxlength="4" placeholder="이름 입력"> 
 		
 		<label for="email">이메일</label>
 		<input type="email" id="email" name="email" required placeholder="example@email.com"> 
