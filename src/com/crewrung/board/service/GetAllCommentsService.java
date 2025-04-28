@@ -14,7 +14,7 @@ public class GetAllCommentsService {
         this.boardDAO = new BoardDAO(factory);
     }
 
-    public List<BoardCommentListVO> execute() {
+    public List<BoardCommentListVO> execute(int boardNumber) {
         return boardDAO.getAllComments(0);
     }
 }

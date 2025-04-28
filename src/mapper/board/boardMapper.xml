@@ -34,11 +34,11 @@
       (BOARDS_SEQ.nextval, #{writerId}, #{title}, #{content}, SYSDATE, #{viewCount})
   </insert>
 
-  <delete id="deleteBoard" parameterType="com.crewrung.board.vo.BoardVO">
-    DELETE FROM boards
-     WHERE board_number = #{boardNumber}
-       AND writer_id    = #{writerId}
-  </delete>
+<delete id="deleteBoard" parameterType="com.crewrung.board.vo.BoardVO">
+  DELETE FROM boards
+    WHERE board_number = #{boardNumber, jdbcType=INTEGER}
+      AND writer_id    = #{writerId,    jdbcType=VARCHAR}
+</delete>
 
   <select id="getBoardDetail" parameterType="long" resultType="com.crewrung.board.vo.BoardDetailVO">
     SELECT board_number AS boardNumber,
@@ -51,16 +51,16 @@
      WHERE board_number = #{boardNumber}
   </select>
 
-  <select id="getAllBoards" resultType="com.crewrung.board.vo.BoardVO">
-    SELECT board_number AS boardNumber,
-           writer_id    AS writerId,
-           title,
-           content,
-           writing_date AS writingDate,
-           view_count   AS viewCount
-      FROM boards
-     ORDER BY writing_date DESC
-  </select>
+	<select id="getAllBoards" resultType="com.crewrung.board.vo.BoardVO">
+	  SELECT board_number AS boardNumber,
+	         writer_id    AS writerId,
+	         title,
+	         content,
+	         writing_date AS writingDate,
+	         view_count   AS viewCount
+	    FROM boards
+	   ORDER BY board_number DESC
+	</select>
 
   <update id="updateBoard" parameterType="com.crewrung.board.vo.BoardVO">
     UPDATE boards
@@ -76,6 +76,15 @@
 		SET view_count = view_count + 1
 		WHERE board_number = #{boardNumber}
 	</update>
+
+	
+	<select id="countByUserId" parameterType="string" resultType="int">
+	  SELECT COUNT(*) FROM USERS WHERE user_id = #{value}
+	</select>
+	
+	<insert id="insertUser" parameterType="string">
+	  INSERT INTO USERS (user_id) VALUES (#{value})
+	</insert>
 
 
 </mapper>
