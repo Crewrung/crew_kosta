@@ -192,7 +192,7 @@
         alert("${errorMessage}");
     </script>
 	</c:if>
-	<form id="updateForm" class="signup-form" action="/kosta/controller?cmd=userUpdateInfoAction" method="post" novalidate>
+	<form id="updateForm" class="signup-form" action="controller?cmd=userUpdateInfoAction" method="post" novalidate>
 		<h2>개인정보 수정</h2>
     	<label for="userId">아이디</label>
     	<input type="text" id="userId" name="userId" 

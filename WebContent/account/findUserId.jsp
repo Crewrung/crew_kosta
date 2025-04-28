@@ -112,7 +112,7 @@
     <div class="container">
         <h1 class="page-title">아이디 찾기</h1>
         
-        <form action="/kosta/controller?cmd=findUserIdAction" method="post" id="findIdForm">
+        <form action="controller?cmd=findUserIdAction" method="post" id="findIdForm">
             <input type="hidden" name="cmd" value="findIdAction">
             
             <div class="form-group">

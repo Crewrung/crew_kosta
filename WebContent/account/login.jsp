@@ -184,7 +184,7 @@
 <main>
   <div class="login-form text-center">
     <h3>로그인</h3>
-    <form method="post" action="/kosta/controller?cmd=loginAction">
+    <form method="post" action="controller?cmd=loginAction">
       <div class="mb-3">
         <input type="text" class="form-control" name="userId" placeholder="아이디" required />
       </div>
@@ -192,12 +192,12 @@
         <input type="password" class="form-control" name="userPw" placeholder="비밀번호" required />
       </div>
       <div class="text-end text-muted mb-3" style="font-size: 0.85rem;">
-        <a href="/kosta/controller?cmd=findUserIdUIAction" class="text-decoration-none text-muted me-2">아이디 찾기</a> |
+        <a href="controller?cmd=findUserIdUIAction" class="text-decoration-none text-muted me-2">아이디 찾기</a> |
         <a href="비밀번호찾기.html" class="text-decoration-none text-muted ms-2">비밀번호 찾기</a>
       </div>
       <div class="d-grid gap-2">
         <button type="submit" class="btn-custom">로그인</button>
-        <a href="/kosta/controller?cmd=joinUIAction"><button type="button" class="btn-custom">회원가입</button></a>
+        <a href="controller?cmd=joinUIAction"><button type="button" class="btn-custom">회원가입</button></a>
       </div>
     </form>
 
