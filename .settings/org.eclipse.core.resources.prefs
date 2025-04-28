@@ -1,2 +1,10 @@
 eclipse.preferences.version=1
+encoding//WebContent/crew/crewMainex.jsp=UTF-8
 encoding//WebContent/index.jsp=UTF-8
+encoding//src/com/crewrung/crew/action/CrewFilterAction.java=UTF-8
+encoding//src/com/crewrung/crew/dao/CrewDAO.java=UTF-8
+encoding//src/com/crewrung/crew/service/CrewService.java=UTF-8
+encoding//src/com/crewrung/mybatis/MyBatisUtil.java=UTF-8
+encoding//src/com/crewrung/servlet/ActionFactory.java=UTF-8
+encoding//src/config/mybatis-Config.xml=UTF-8
+encoding//src/crewaction/CrewFilterUIAction.java=UTF-8

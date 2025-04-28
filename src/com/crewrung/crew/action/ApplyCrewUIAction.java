@@ -8,10 +8,12 @@ import javax.servlet.http.HttpServletRequest;
 import com.crewrung.servlet.Action;
 
 public class ApplyCrewUIAction implements Action {
-	
-	@Override
-	public String execute(HttpServletRequest request) throws ServletException, IOException {
-		
-		return "crewApplyPage.html";
-	}
+
+    public ApplyCrewUIAction() {} // 기본 생성자
+
+    @Override
+    public String execute(HttpServletRequest request) throws ServletException, IOException {
+        // ✅ 크루 가입 신청 폼으로 이동
+        return "crew/crewApplyPage.html"; 
+    }
 }

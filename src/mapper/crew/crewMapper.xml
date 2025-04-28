@@ -32,12 +32,16 @@
 
 	<select id="getAllCrewByFilter" parameterType="java.util.HashMap"
 		resultType="com.crewrung.crew.vo.AllCrewVO">
-		select c.crew_number,
-		c.crew_name, c.introduction,
-		c.INTEREST_CATEGORY,
-		c.image, g.gu_name,
+		select
+		c.crew_number,
+		c.crew_name,
+		c.introduction,
+		c.interest_category,
+		c.image,
+		g.gu_name,
 		cm_count.crew_members_count
-		from crews c
+		from
+		crews c
 		join gues g
 		on c.gu_number = g.gu_number
 		join (
@@ -47,23 +51,44 @@
 		from
 		crews c
 		left join
-		crew_members cm on c.crew_number = cm.crew_number
+		crew_members cm
+		on c.crew_number = cm.crew_number
 		group by
 		c.crew_number
-		) cm_count on c.crew_number =
-		cm_count.crew_number
-		WHERE
+		) cm_count
+		on c.crew_number = cm_count.crew_number
+		where
 		1=1
-		<if test="interestCategory != null">
+		<if test="interestCategory != null and interestCategory != ''">
 			AND c.interest_category = #{interestCategory}
 		</if>
-		<if test="guName != null">
+		<if test="guName != null and guName != ''">
 			AND g.gu_name = #{guName}
 		</if>
-		<if test="ageRange != null">
+		<if test="ageRange != null and ageRange != ''">
 			AND c.age_range = #{ageRange}
 		</if>
+		group by
+		c.crew_number,
+		c.crew_name,
+		c.introduction,
+		c.interest_category,
+		c.image,
+		g.gu_name,
+		cm_count.crew_members_count
+		<choose>
+			<when test="sortOption == 'recent'">
+				ORDER BY c.crew_number DESC
+			</when>
+			<when test="sortOption == 'popular'">
+				ORDER BY cm_count.crew_members_count DESC
+			</when>
+			<otherwise>
+				ORDER BY c.crew_number DESC
+			</otherwise>
+		</choose>
 	</select>
+
 
 	<select id="getCrewDetail" parameterType="int"
 		resultType="com.crewrung.crew.vo.AllCrewVO">
@@ -195,9 +220,11 @@
 
 	<select id="isMemberOfCrew" parameterType="map" resultType="boolean">
 		SELECT CASE WHEN COUNT(crew_member_number) > 0 THEN 1 ELSE 0 END
-		FROM crew_members
+		FROM
+		crew_members
 		WHERE crew_number = #{crewNumber}
-		AND crew_member_id = #{userId}
+		AND crew_member_id =
+		#{userId}
 
 	</select>
 
@@ -294,17 +321,20 @@
 		where crew_member_number = #{crewMemberNumber} and crew_number =
 		#{crewNumber}
 	</delete>
-	
-	<select id="isCrewLeader"  parameterType="Object" resultType="boolean">
-		select crew_number, CREW_LEADER_ID from crews where crew_number = #{crewNumber} and CREW_LEADER_ID= #{crewLeaderId}
+
+	<select id="isCrewLeader" parameterType="Object" resultType="boolean">
+		select crew_number, CREW_LEADER_ID from crews where crew_number =
+		#{crewNumber} and CREW_LEADER_ID= #{crewLeaderId}
 	</select>
-	
+
 	<select id="isCrewMeetingHost" parameterType="com.crewrung.crew.vo.CrewMeetingVO"
 		resultType="boolean">
-		select crew_meeting_number, crew_number, CREW_MEETING_HOST_NUMBER from CREW_MEETINGS where
-		  CREW_MEETING_NUMBER=#{crewMeetingNumber} and
-		  CREW_NUMBER= #{crewNumber} and 
-		  CREW_MEETING_HOST_NUMBER = #{crewMeetingHostNumber}
+		select crew_meeting_number, crew_number,
+		CREW_MEETING_HOST_NUMBER from CREW_MEETINGS where
+		CREW_MEETING_NUMBER=#{crewMeetingNumber} and
+		CREW_NUMBER= #{crewNumber}
+		and
+		CREW_MEETING_HOST_NUMBER = #{crewMeetingHostNumber}
 	</select>
 	<!-- 여기까지 이상혁 작성 -->
 </mapper>

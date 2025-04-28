@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>크루룽</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
+	crossorigin="anonymous"></script>
+<link rel="stylesheet" as="style" crossorigin
+	href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-dynamic-subset.min.css" />
+<style>
+/* 기본 리셋 */
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	font-family: "Pretendard Variable", Pretendard, -apple-system,
+		BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI",
+		"Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic",
+		"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+	background-color: #f9f9f9;
+}
+
+/* 헤더 스타일 */
+header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 15px 20px;
+	background-color: #fff;
+	position: relative; /* 구분선 위치 설정을 위해 추가 */
+}
+
+/* 헤더 아래 구분선 추가 */
+.header-divider {
+	height: 1px;
+	background-color: #ddd; /* 연한 회색 */
+	width: 100%;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+}
+
+.logo {
+	display: flex;
+	align-items: center;
+}
+
+.logo img {
+	width: 24px;
+	height: 24px;
+	margin-right: 8px;
+}
+
+.logo-text {
+	font-weight: bold;
+	font-size: 18px;
+	color: #000;
+}
+
+/* 네비게이션 간격 더 넓히기 */
+nav ul {
+	display: flex;
+	list-style: none;
+	gap: 200px; /* 간격 더 증가 */
+	margin-bottom: 0;
+}
+
+nav ul li a {
+	text-decoration: none;
+	color: #333;
+}
+
+.user-actions {
+	display: flex;
+	align-items: center;
+}
+
+.user-icon {
+	width: 32px;
+	height: 32px;
+	border-radius: 50%;
+	background-color: #f5f5f5;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-right: 10px;
+}
+
+.login-btn {
+	background-color: #fff;
+	border: 1px solid #ddd;
+	border-radius: 20px;
+	padding: 8px 16px;
+	cursor: pointer;
+}
+
+/* 메인 콘텐츠 영역 - 양 옆 간격 설정 */
+main {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 20px;
+}
+
+/* 메인 콘텐츠 내부 빈 컨테이너 스타일 */
+.content-container {
+	background-color: #fff;
+	border-radius: 8px;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+	padding: 20px;
+	min-height: 400px;
+	margin-bottom: 20px;
+}
+
+/* 푸터 스타일 - 두 열 레이아웃 */
+footer {
+	background-color: #f5f5f5;
+	padding: 15px 20px;
+	font-size: 12px;
+	color: #666;
+	line-height: 1.6;
+	border-top: 1px solid #ddd;
+}
+
+.footer-content {
+	max-width: 1200px;
+	margin: 0 auto;
+	display: flex;
+	justify-content: space-between;
+}
+
+.footer-left, .footer-right {
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+}
+
+.footer-left {
+	text-align: left;
+}
+
+.footer-right {
+	text-align: left;
+	border-left: 1px solid #ddd;
+	padding-left: 20px;
+}
+
+.footer-copyright {
+	margin-top: 5px;
+}
+</style>
+<body>
+	<!-- 헤더 -->
+	<header>
+		<div class="logo">
+			<img src="image/logo.png" alt="크루룽 로고"> <span class="logo-text">크루룽</span>
+		</div>
+
+		<nav>
+			<ul>
+				<li><a href="#">번개 모임</a></li>
+				<li><a href="#">크루</a></li>
+				<li><a href="#">자유게시판</a></li>
+			</ul>
+		</nav>
+		<div class="user-actions">
+			<div class="user-icon">
+				<svg fill="none" height="16" stroke="currentColor"
+					stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+					viewbox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg">
+<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+<circle cx="12" cy="7" r="4"></circle>
+</svg>
+			</div>
+			<button class="login-btn">로그인</button>
+		</div>
+		<!-- 헤더 아래 구분선 추가 -->
+		<div class="header-divider"></div>
+	</header>
+	<!-- 메인 콘텐츠 영역 - 양 옆 간격 설정과 빈 컨테이너 -->
+	<main> <!-- 빈 컨테이너 1 -->
+	<div class="content-container">
+		<!-- 필터 영역 -->
+		<div class="content-container">
+			<div class="row g-3">
+				<!-- 관심사 카테고리 -->
+				<div class="col-md-3">
+					<label class="form-label" for="category">관심사 카테고리</label> <select
+						class="form-select" id="category" name="interestCategory">
+						<option value="">전체</option>
+						<option value="여행">여행</option>
+						<option value="취미">취미</option>
+						<option value="스터디">스터디</option>
+						<option value="운동">운동</option>
+						<option value="봉사">봉사</option>
+						<option value="자기계발">자기계발</option>
+						<option value="게임">게임</option>
+						<option value="독서">독서</option>
+						<option value="요리">요리</option>
+						<option value="음악">음악</option>
+						<option value="영화/드라마">영화/드라마</option>
+						<option value="반려동물">반려동물</option>
+						<option value="사진/영상">사진/영상</option>
+						<option value="비즈니스/창업">비즈니스/창업</option>
+						<option value="언어교환">언어교환</option>
+						<option value="힐링/명상">힐링/명상</option>
+						<option value="문화생활">문화생활</option>
+					</select>
+				</div>
+
+				<!-- 모임지역 -->
+				<div class="col-md-3">
+					<label class="form-label" for="activityArea">모임지역</label> <select
+						class="form-select" id="activityArea" name="guNumber">
+						<option value="">전체</option>
+						<option value="1">서울 강남구</option>
+						<option value="2">서울 강동구</option>
+						<option value="3">서울 강북구</option>
+						<option value="4">서울 강서구</option>
+						<option value="5">서울 관악구</option>
+						<option value="6">서울 광진구</option>
+						<option value="7">서울 구로구</option>
+						<option value="8">서울 금천구</option>
+						<option value="9">서울 노원구</option>
+						<option value="10">서울 도봉구</option>
+						<option value="11">서울 동대문구</option>
+						<option value="12">서울 동작구</option>
+						<option value="13">서울 마포구</option>
+						<option value="14">서울 서대문구</option>
+						<option value="15">서울 서초구</option>
+						<option value="16">서울 성동구</option>
+						<option value="17">서울 성북구</option>
+						<option value="18">서울 송파구</option>
+						<option value="19">서울 양천구</option>
+						<option value="20">서울 영등포구</option>
+						<option value="21">서울 용산구</option>
+						<option value="22">서울 은평구</option>
+						<option value="23">서울 종로구</option>
+						<option value="24">서울 중구</option>
+						<option value="25">서울 중랑구</option>
+						<option value="26">온라인</option>
+					</select>
+				</div>
+
+				<!-- 연령 -->
+				<div class="col-md-3">
+					<label class="form-label" for="age">연령</label> <select
+						class="form-select" id="age" name="ageRange">
+						<option value="">전체</option>
+						<option value="10대">10대</option>
+						<option value="20대">20대</option>
+						<option value="30대">30대</option>
+						<option value="40대 이상">40대 이상</option>
+					</select>
+				</div>
+			</div>
+
+			<!-- 적용된 필터 표시 영역 -->
+			<div class="mt-4">
+				<h6>적용된 필터:</h6>
+				<div class="d-flex flex-wrap gap-2" id="tagsContainer"></div>
+			</div>
+		</div>
+
+		<!-- 필터 JS -->
+		<script>
+  const filters = ["category", "activityArea", "age"];
+  const tagsContainer = document.getElementById("tagsContainer");
+
+  filters.forEach(id => {
+    const select = document.getElementById(id);
+    select.addEventListener("change", updateTags);
+  });
+
+  function updateTags() {
+    tagsContainer.innerHTML = "";
+    filters.forEach(id => {
+      const select = document.getElementById(id);
+      const value = select.value;
+      if (value) {
+        const badge = document.createElement("span");
+        badge.className = "badge bg-primary text-white d-flex align-items-center";
+        badge.innerHTML = `
+          ${select.previousElementSibling.textContent}: ${value}
+          <button type="button" class="btn-close btn-close-white ms-2" aria-label="Remove"></button>
+        `;
+        badge.querySelector("button").addEventListener("click", () => {
+          select.value = "";
+          updateTags();
+        });
+        tagsContainer.appendChild(badge);
+      }
+    });
+  }
+</script>
+
+		<!-- 빈 컨테이너 2 -->
+		<div class="content-container">
+			<!-- 여기에 실제 콘텐츠가 들어갈 예정입니다 -->
+		</div>
+	</main>
+	<!-- 푸터 - 두 열 레이아웃 -->
+	<footer>
+		<div class="footer-content">
+			<!-- 왼쪽 열 - 회사 정보 -->
+			<div class="footer-left">
+				<div>Corporate Name: 주식회사 크루 Owner: 김훈희 Business License:
+					234-18-4251</div>
+				<div>E-commerce Registration: 2022-서울강남-02241 Phone: 1533
+					KR(Kakao only) Contact Mail: Biz.at@gmail.com</div>
+				<div>Address: 서울특별시 강남구 테헤란로 51길(역삼동) AB Personal Information
+					Manager: 김도기 (info@gmail.com)</div>
+				<div class="footer-copyright">© LIGHTNING CO., LTD. ALL RIGHTS
+					RESERVED.</div>
+			</div>
+			<!-- 오른쪽 열 - CS Center 정보 -->
+			<div class="footer-right">
+				<div>CS Center: 1588-4321</div>
+				<div>10:00AM - 7:00PM (Lunch 12:30 - 13:30)</div>
+				<div>Sat/Sun/Holiday CLOSED</div>
+			</div>
+		</div>
+	</footer>
+</body>
+</html>
