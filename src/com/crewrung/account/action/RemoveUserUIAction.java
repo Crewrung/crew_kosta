@@ -1,4 +1,4 @@
-package crewaction;
+package com.crewrung.account.action;
 
 import java.io.IOException;
 
@@ -7,12 +7,11 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.crewrung.servlet.Action;
 
-public class UpdateCrewUIAction implements Action{
-	
+public class RemoveUserUIAction implements Action{
+
 	@Override
 	public String execute(HttpServletRequest request) throws ServletException, IOException {
-		
-		return "updateCrew.jsp";
+		return "/account/deleteAccount.jsp";
 	}
 
 }

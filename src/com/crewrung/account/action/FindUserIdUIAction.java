@@ -11,8 +11,8 @@ public class FindUserIdUIAction implements Action{
 
 	@Override
 	public String execute(HttpServletRequest request) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		return null;
+
+		return "account/findUserId.jsp";
 	}
 
 }

@@ -118,7 +118,7 @@
 	</insert>
 
 	<delete id="removeUser" parameterType="com.crewrung.account.vo.MypageVO">
-		DELETE FROM users WHERE user_id=#{userId}
+		DELETE FROM users WHERE user_id=#{userId} AND user_pw=#{userPw}
 	</delete>
 
 	<update id="setMypage" parameterType="com.crewrung.account.vo.MypageVO">

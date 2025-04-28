@@ -15,8 +15,8 @@ public class UserUpdateInfoVO {
     
     
 	public UserUpdateInfoVO(){}
-	
-	
+
+
 	public String getIntroduction() {
 		return introduction;
 	}

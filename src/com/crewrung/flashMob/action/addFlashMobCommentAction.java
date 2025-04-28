@@ -28,7 +28,7 @@ public class addFlashMobCommentAction implements Action {
         }
         
         if (userId == null) {
-        	return "login.jsp";
+        	return "account/login.jsp";
         }
         
         int flashMobNumber = Integer.parseInt(request.getParameter("flashMobNumber"));

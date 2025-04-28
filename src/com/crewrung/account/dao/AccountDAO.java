@@ -65,7 +65,7 @@ public class AccountDAO {
 	}
 	
 	// 회원탈퇴 O
-	public int removeUser(MypageVO vo){
+	public int removeUser(UserUpdateInfoVO vo){
 		return con.delete("accountMapper.removeUser", vo);
 	}
 	
