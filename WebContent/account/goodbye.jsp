@@ -9,7 +9,7 @@
     <p>언제든 다시 찾아와 주세요!</p>
 
     <div style="margin-top: 20px;">
-        <a href="index.jsp">메인으로 가기</a>
+        <a href="/index.jsp">메인으로 가기</a>
     </div>
 </div>
 

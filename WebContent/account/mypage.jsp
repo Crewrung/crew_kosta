@@ -397,10 +397,10 @@
         
         <div class="buttons">
             <div class="btn">
-                <a href="controller?cmd=removeUserUIAction" style="text-decoration:none; color:inherit;">회원탈퇴</a>
+                <a href="/kosta/controller?cmd=removeUserUIAction" style="text-decoration:none; color:inherit;">회원탈퇴</a>
             </div>
             <div class="btn">
-                <a href="controller?cmd=userUpdateInfoUIAction" style="text-decoration:none; color:inherit;">개인정보 수정</a>
+                <a href="/kosta/controller?cmd=userUpdateInfoUIAction" style="text-decoration:none; color:inherit;">개인정보 수정</a>
             </div>
         </div>
     </div> 

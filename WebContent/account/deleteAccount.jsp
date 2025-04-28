@@ -16,7 +16,7 @@
 <!-- 탈퇴 폼 시작 -->
 <div class="content">
     <h2>회원 탈퇴</h2>
-    <form action="controller?cmd=removeUserAction" method="post" onsubmit="return confirm('정말 탈퇴하시겠습니까?');">
+    <form action="/kosta/controller?cmd=removeUserAction" method="post" onsubmit="return confirm('정말 탈퇴하시겠습니까?');">
         <div>
     	<label for="userId">아이디</label>
     	<input type="text" id="userId" name="userId"  value="<%= userId %>" disabled placeholder="아이디 입력">
