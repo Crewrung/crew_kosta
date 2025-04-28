@@ -20,16 +20,13 @@ import com.crewrung.crew.vo.CrewVO;
 import com.crewrung.crew.vo.PromotionVO;
 
 public class CrewService {
-	
-
-	private CrewDAO crewDAO = new CrewDAO();
+	private CrewDAO crewDAO;
 	
 	public CrewService(CrewDAO crewDAO) {
 		this.crewDAO = crewDAO;
 	}
 
-	public CrewService() {
-	}
+	public CrewService() {}
 
 	public boolean isCrewMember(int crewNumber, String userId) {
 		boolean result = false;
@@ -56,8 +53,8 @@ public class CrewService {
     }
 
     // 필터 적용 크루 리스트
-    public List<AllCrewVO> getCrewsByFilter(HashMap<String, Object> filters) {
-        return crewDAO.getAllCrewByFilter(filters);
+    public List<AllCrewVO> getCrewsByFilter(Map<String, String> filter) {
+        return crewDAO.getAllCrewByFilter(filter);
     }
 
 	//특정 크루 상세 조회
