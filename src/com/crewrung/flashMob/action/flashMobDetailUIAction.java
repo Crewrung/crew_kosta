@@ -21,7 +21,7 @@ public class flashMobDetailUIAction implements Action {
 
 	@Override
 	public String execute(HttpServletRequest request) throws ServletException, IOException {
-		SqlSession session = DBCP.getSqlSessionFactory().openSession();
+		SqlSession session = DBCP.getSqlSessionFactory().openSession(true);
         FlashMobService flashMobService = new FlashMobService(new FlashMobDAO(session));
         
         int flashMobNumber = Integer.parseInt(request.getParameter("flashMobNumber"));
@@ -51,11 +51,16 @@ public class flashMobDetailUIAction implements Action {
         
         request.setAttribute("flashmob", flashmob);
         request.setAttribute("participants", participants);
+        request.setAttribute("userId", userId);
+        
         request.setAttribute("leader", leader);
         request.setAttribute("comments", comments);
         request.setAttribute("isHost", isHost);
         request.setAttribute("isParticipant", isParticipant);
+        System.out.println(isHost);
+        System.out.println(isParticipant);
         
+        session.close();
 		return "flashmob/flashMobDetailPage.jsp";
 	}
 

@@ -38,8 +38,11 @@ public class FrontController extends HttpServlet {
 		    // JSON 객체로 응답
 		    response.setContentType("application/json; charset=UTF-8");
 		    response.getWriter().write(result);
+		} else if (trimmed.startsWith("controller")){
+			// controller로 시작하면 리다이렉트
+	        response.sendRedirect(request.getContextPath() + "/" + result);
 		} else {
-		    // 페이지 이동 (jsp)
+			// 페이지 이동 (jsp)
 		    request.getRequestDispatcher("/" + result).forward(request, response);
 		}
 		

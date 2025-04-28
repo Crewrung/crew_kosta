@@ -21,7 +21,7 @@ public class flashMobFilterAction implements Action {
 
 	@Override
 	public String execute(HttpServletRequest request) throws ServletException, IOException {
-		SqlSession session = DBCP.getSqlSessionFactory().openSession();
+		SqlSession session = DBCP.getSqlSessionFactory().openSession(true);
         FlashMobService flashMobService = new FlashMobService(new FlashMobDAO(session));
         Gson gson = new Gson();
 		
@@ -40,6 +40,7 @@ public class flashMobFilterAction implements Action {
 		filter.put("minMember", minMember);
 		
 		List<FlashMobMainViewVO> flashMobs = flashMobService.getAllFlashMobsByFilter(filter);
+		session.close();
 		
 		return gson.toJson(flashMobs);
 	}

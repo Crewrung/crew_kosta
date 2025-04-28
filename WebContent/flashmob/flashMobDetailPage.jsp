@@ -391,7 +391,7 @@ main {
 				<div class="crew-actions">
 					<!-- 수정하기 버튼: 로그인한 사용자가 방장인 경우에만 표시 -->
 					<c:if test="${isHost}">
-						<form action="controller?cmd=updateFlashMobUIAction" method="post">
+						<form action="controller?cmd=updateFlashMobUI" method="post">
 							<input type="hidden" name="flashMobNumber"
 								value="${flashmob.flashMobNumber}" />
 							<button type="submit" class="crew-set-btn btn-light">수정하기</button>
@@ -407,14 +407,6 @@ main {
 
 			<!-- 신청 버튼: 로그인하지 않았거나, 로그인했지만 방장이 아니고 아직 신청하지 않은 경우에만 표시 -->
 			<c:choose>
-				<c:when test="${empty sessionScope.user}">
-					<!-- 로그인하지 않은 경우 -->
-					<form action="controller?cmd=applyFlashMobAction" method="post">
-						<input type="hidden" name="flashMobNumber"
-							value="${flashmob.flashMobNumber}" />
-						<button type="submit" class="join-crew-btn">신청하기</button>
-					</form>
-				</c:when>
 				<c:when test="${isHost}">
 					<!-- 로그인했고 방장인 경우: 신청하기 버튼 숨김 -->
 				</c:when>
@@ -423,7 +415,7 @@ main {
 				</c:when>
 				<c:otherwise>
 					<!-- 로그인했고 아직 참가하지 않은 경우 -->
-					<form action="controller?cmd=applyFlashMobAction" method="post">
+					<form action="controller?cmd=applyFlashMob" method="post">
 						<input type="hidden" name="flashMobNumber"
 							value="${flashmob.flashMobNumber}" />
 						<button type="submit" class="join-crew-btn">신청하기</button>

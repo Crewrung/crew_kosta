@@ -18,7 +18,7 @@ public class addFlashMobCommentAction implements Action {
 
 	@Override
 	public String execute(HttpServletRequest request) throws ServletException, IOException {
-		SqlSession session = DBCP.getSqlSessionFactory().openSession();
+		SqlSession session = DBCP.getSqlSessionFactory().openSession(true);
         FlashMobService flashMobService = new FlashMobService(new FlashMobDAO(session));
         
         HttpSession ServerSession = request.getSession(false); // 기존 세션만 가져옴 (없으면 null)
@@ -32,7 +32,7 @@ public class addFlashMobCommentAction implements Action {
         }
         
         String comment = request.getParameter("comment");
-        int flashMobNumber = Integer.parseInt(request.getParameter("flashMobNumbe"));
+        int flashMobNumber = Integer.parseInt(request.getParameter("flashMobNumber"));
         
         FlashMobCommentVO commentVO = new FlashMobCommentVO();
         commentVO.setUserId(userId);
@@ -41,7 +41,8 @@ public class addFlashMobCommentAction implements Action {
         
         flashMobService.addFlashMobComment(commentVO);
         
-        return "flashmob/flashMobDetailPage.jsp";
+        session.close();
+        return "controller?cmd=flashMobDetailUI&flashMobNumber=" + flashMobNumber;
         
 	}
 
