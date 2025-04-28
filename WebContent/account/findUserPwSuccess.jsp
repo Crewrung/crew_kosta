@@ -60,7 +60,7 @@
             color: #666;
         }
         
-        .user-id {
+        .user-pw {
             display: inline-block;
             margin: 20px 0;
             padding: 15px 30px;
@@ -128,24 +128,16 @@
         </div>
         
         <p class="result-message">
-            입력하신 정보와 일치하는 아이디를 찾았습니다.
+            입력하신 정보와 일치하는 비밀번호를 찾았습니다.
         </p>
         
-        <div class="user-id">
-            ${userId}
+        <div class="user-pw">
+            ${userPw}
         </div>
-        
-        <p class="note">
-        
-            개인정보 보호를 위해 일부는 *로 표시됩니다.
-        </p>
         
         <div class="buttons">
             <a href="/kosta/controller?cmd=loginUI">
                 <button class="btn primary-btn">로그인하기</button>
-            </a>
-            <a href="/kosta/controller?cmd=findUserPwUIAction">
-                <button class="btn secondary-btn">비밀번호 찾기</button>
             </a>
         </div>
     </div>
