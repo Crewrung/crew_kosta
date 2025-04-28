@@ -1,6 +1,7 @@
 package com.crewrung.crew.service;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -20,11 +21,13 @@ import com.crewrung.crew.vo.PromotionVO;
 
 public class CrewService {
 	private CrewDAO crewDAO;
-
+	
 	public CrewService(CrewDAO crewDAO) {
 		this.crewDAO = crewDAO;
 	}
-	
+
+	public CrewService() {}
+
 	public boolean isCrewMember(int crewNumber, String userId) {
 		boolean result = false;
 		CrewMemberVO cm = new CrewMemberVO();
@@ -33,10 +36,10 @@ public class CrewService {
 		}
 		return result;
 	}
-	
+
 	//크루 멤버인지 확인
 	public boolean checkCrewMembership(int crewNumber, String userId) {
-	    return crewDAO.isMemberOfCrew(crewNumber, userId);
+		return crewDAO.isMemberOfCrew(crewNumber, userId);
 	}
 
 	//홍보 중인 크루 목록 조회
@@ -44,15 +47,15 @@ public class CrewService {
 		return crewDAO.getAllPromotionCrew();
 	}
 
-	//모든 크루 목록 조회
-	public List<AllCrewVO> getAllCrews() {
-		return crewDAO.getAllCrew();
-	}
+	 // 전체 크루 리스트
+    public List<AllCrewVO> getAllCrews() {
+        return crewDAO.getAllCrew();
+    }
 
-	//필터 조건에 따른 크루 조회
-	public List<AllCrewVO> getAllCrewByFilter(Map<String, String> filter) {
-		return crewDAO.getAllCrewByFilter(filter);
-	}
+    // 필터 적용 크루 리스트
+    public List<AllCrewVO> getCrewsByFilter(Map<String, String> filter) {
+        return crewDAO.getAllCrewByFilter(filter);
+    }
 
 	//특정 크루 상세 조회
 	public AllCrewVO getCrewDetail(int crewNumber) {
@@ -98,51 +101,51 @@ public class CrewService {
 	public List<CrewManagePageVO> getCrewMember(int crewNumber) {
 		return crewDAO.getCrewMember(crewNumber);
 	}
-	
+
+
 	public boolean isCrewLeaderService(int crewNumber, String crewLeaderId){
 		return crewDAO.isCrewLeader(crewNumber, crewLeaderId);
 	}
-	
+
 	public boolean isCrewMeetingHostService(CrewMeetingVO cm){
 		return crewDAO.isCrewMeetingHost(cm);
 	}
-	
+
 	public boolean setCrewMeetingService(CrewMeetingVO cm){
 		return crewDAO.addCrewMeeting(cm);
 	}
-	
+
 	public boolean applyCrewMeetingService(ApplyCrewMeetingVO acm){
 		return crewDAO.applyCrewMeeting(acm);
 	}
-	
+
 	public Collection<CrewMeetingParticipantVO> getCrewMeetingParticipantsService(int crewMeetingNumber){
 		return crewDAO.getCrewMeetingParticipants(crewMeetingNumber);
 	}
-	
+
 	public CrewMeetingParticipantVO getCrewMeetingHostService(int crewMeetingNumber){
 		return crewDAO.getCrewMeetingHost(crewMeetingNumber);
 	}
-	
-	public boolean addCrewMeetingService(CrewMeetingVO cm){
-		return crewDAO.addCrewMeeting(cm);
+
+	public boolean addCrewMeetingService(CrewMeetingVO cm) {
+	    return crewDAO.addCrewMeeting(cm);
 	}
 	
 	public CrewMeetingVO getCrewMeetingService(int crewMeetingNumber){
 		return crewDAO.getCrewMeeting(crewMeetingNumber);
 	}
-	
+
 	public Collection<CrewMeetingVO> getCrewMeetingsInfoService(int crewNumber){
 		return crewDAO.getCrewMeetingsInfo(crewNumber);
 	}
-	
 	public boolean removeCrewApplicantService(CrewAppliesVO ca){
 		return crewDAO.removeCrewApplicant(ca);
 	}
-	
+
 	public boolean addCrewMemberService(CrewMemberVO cm){
 		return crewDAO.addCrewMember(cm);
 	}
-	
+
 	public boolean removeCrewMemberService(CrewMemberVO cm){
 		return crewDAO.removeCrewMember(cm);
 	}

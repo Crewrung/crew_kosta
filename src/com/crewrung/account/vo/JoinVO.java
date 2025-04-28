@@ -21,6 +21,7 @@ public class JoinVO {
 	private String profileImage;
 	
 	public JoinVO(){}
+
 	
 	
 	

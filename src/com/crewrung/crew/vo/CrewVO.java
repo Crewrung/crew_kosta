@@ -41,6 +41,8 @@ public class CrewVO {
 		this.guNumber = guNumber;
 	}
 
+	public CrewVO() {}
+
 	public int getCrewNumber() {
 		return crewNumber;
 	}

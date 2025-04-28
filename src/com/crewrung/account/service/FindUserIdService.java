@@ -12,7 +12,8 @@ public class FindUserIdService {
 	}
 	
 	public String getUserId(FindUserIdVO userIdFindVO){
-		
+		String userId = accountDAO.getUserId(userIdFindVO);
+		System.out.println(userId);
 		return accountDAO.getUserId(userIdFindVO);
 	}
 	

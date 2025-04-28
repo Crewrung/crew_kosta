@@ -17,7 +17,7 @@ public class addFlashMobUIAction implements Action {
 
 	@Override
 	public String execute(HttpServletRequest request) throws ServletException, IOException {
-		SqlSession session = DBCP.getSqlSessionFactory().openSession();
+		SqlSession session = DBCP.getSqlSessionFactory().openSession(true);
         FlashMobService flashMobService = new FlashMobService(new FlashMobDAO(session));
         
         HttpSession ServerSession = request.getSession(false); // 기존 세션만 가져옴 (없으면 null)
@@ -27,10 +27,11 @@ public class addFlashMobUIAction implements Action {
         }
         
         if (userId == null) {
-        	return "login.jsp";
+        	return "account/login.jsp";
         }
         
         request.setAttribute("userId", userId);
+        session.close();
           
 		return "flashmob/flashMobAddPage.jsp";
 	}

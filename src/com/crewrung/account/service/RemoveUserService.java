@@ -2,6 +2,7 @@ package com.crewrung.account.service;
 
 import com.crewrung.account.dao.AccountDAO;
 import com.crewrung.account.vo.MypageVO;
+import com.crewrung.account.vo.UserUpdateInfoVO;
 
 public class RemoveUserService {
 	
@@ -11,8 +12,8 @@ public class RemoveUserService {
 		this.accountDAO = accountDAO;
 	}
 	
-	public int removeUser(MypageVO mypageVO){
-		int result = accountDAO.removeUser(mypageVO);
+	public int removeUser(UserUpdateInfoVO userUpdateInfoVO){
+		int result = accountDAO.removeUser(userUpdateInfoVO);
 		return result > 0 ? 1 : 0;
 	}
 }

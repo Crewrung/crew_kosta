@@ -21,6 +21,7 @@ public class JoinAction implements Action{
 		String userId = request.getParameter("userId");
 		String userPw = request.getParameter("userPw");
 		String userPwCheck = request.getParameter("userPwCheck");
+		System.out.println("비밀번호 확인" + userPwCheck);
 		String name = request.getParameter("name");
 		String email = request.getParameter("email");
 		String phoneNumber = request.getParameter("phoneNumber");
@@ -33,7 +34,8 @@ public class JoinAction implements Action{
 		
 		JoinVO vo = new JoinVO();
 		vo.setUserId(userId);
-		vo.setUserPw(userPwCheck);
+		vo.setUserPw(userPw);
+		vo.setUserPwCheck(userPwCheck);
 		vo.setName(name);
 		vo.setEmail(email);
 		vo.setPhoneNumber(phoneNumber);
@@ -44,18 +46,29 @@ public class JoinAction implements Action{
 		vo.setAnswer(answer);
 		vo.setBirthDate(birthDate);
 		
+
+		
 		SqlSession sqlsession = DBCP.getSqlSessionFactory().openSession(false);
 		AccountDAO dao = new AccountDAO(sqlsession);
 		JoinService service = new JoinService(dao);
 		
-		int result = service.joinUser(vo);
-		System.out.println("회원가입 결과: " + result);  // 디버깅용 로그 출력
-		if(result == 1){
-			return "redirect:/login.jsp";
-		}else{
-			request.setAttribute("errorMsg", "회원가입에 실패하였습니다. 정보를 다시 확인해주세요");
-			return "join.jsp";
+		
+		try {
+			int result = service.joinUser(vo);
+			System.out.println("회원가입 결과: " + result);  // 디버깅용 로그 출력
+			
+			if(result == 1){
+				sqlsession.commit();
+				return "/account/login.jsp";
+			}else{
+				request.setAttribute("errorMsg", "회원가입에 실패하였습니다. 정보를 다시 확인해주세요");
+				return "/account/join.jsp";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
+		
+		return "/account/join.jsp";
 	}
 
 }

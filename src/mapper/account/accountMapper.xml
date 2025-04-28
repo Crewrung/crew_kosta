@@ -36,8 +36,7 @@
 		FROM flashMobs f
 		JOIN flashMob_participants fp
 		ON f.flashMob_number = fp.flashMob_number
-		WHERE f.flashMob_host_id =
-		#{userId}
+		WHERE f.flashMob_host_id=#{userId} or fp.USER_ID=#{userId}
 	</select>
 
 	<select id="getUserId" parameterType="com.crewrung.account.vo.FindUserIdVO"
@@ -118,7 +117,7 @@
 	</insert>
 
 	<delete id="removeUser" parameterType="com.crewrung.account.vo.MypageVO">
-		DELETE FROM users WHERE user_id=#{userId}
+		DELETE FROM users WHERE user_id=#{userId} AND user_pw=#{userPw}
 	</delete>
 
 	<update id="setMypage" parameterType="com.crewrung.account.vo.MypageVO">
