@@ -535,7 +535,7 @@ footer {
 		<div class="crew-members">
 			<c:forEach var="member" items="${crewMembers}">
 				<div class="member-card">
-					<img src="${member.image}" alt="멤버 이미지" class="member-img">
+					<img src="${member.profileImage}" alt="멤버 이미지" class="member-img">
 					<div class="member-nickname">${member.nickname}</div>
 				</div>
 			</c:forEach>
@@ -552,7 +552,7 @@ footer {
 					<img src="${meeting.image}" alt="활동 이미지" class="activity-img">
 					<div class="activity-title">${meeting.title}</div>
 					<div class="activity-content">${meeting.content}</div>
-					<div class="activity-date">${meeting.date}</div>
+					<div class="activity-date">${meeting.meetingDate}</div>
 				</div>
 			</c:forEach>
 
@@ -568,7 +568,7 @@ footer {
 		<!-- 댓글 섹션 -->
 		<div class="content-container">
 			<div class="section-title">전체 댓글
-				${crewCommentCount.comment_count}개</div>
+				${comment_count}개</div>
 
 			<!-- 댓글 입력 폼 -->
 			<!-- 크루아이디, 작성자id 갖고오기 -->
@@ -580,12 +580,12 @@ footer {
 			<!-- 댓글 목록 -->
 			<!-- 크루원이 아니면 비공개로 보이게 -->
 			<div class="comment-list">
-				<c:forEach var="meeting" items="${crewComments}">
+				<c:forEach var="comment" items="${crewComments}">
 					<div class="comment-item">
-						<div class="comment-user">${ meeting.nickname }</div>
+						<div class="comment-user">${ comment.nickname }</div>
 						<div class="comment-body">
-							<div class="comment-text">${ meeting.crewComment }</div>
-							<div class="comment-date">${ meeting.commentDate }</div>
+							<div class="comment-text">${ comment.crewComment }</div>
+							<div class="comment-date"><%= new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date()) %></div>
 							<!-- VO에 날짜 필요 + SQL  -->
 						</div>
 					</div>
