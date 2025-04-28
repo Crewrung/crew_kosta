@@ -76,28 +76,31 @@ nav ul li a {
 }
 
 .user-greeting {
-    font-size: 14px;
-    color: #333;
-    margin-right: 10px;
-    margin-bottom: 0px;
-    
+	font-size: 14px;
+	color: #333;
+	margin-right: 10px;
+	margin-bottom: 0px;
 }
-
 </style>
 
 <!-- 헤더 -->
 <header>
 	<div class="logo">
-		<a href="/kosta"> <img src="image/logo.png" alt="크루룽 로고">
-			<span class="logo-text">크루룽</span>
+		<img src="<%= request.getContextPath() %>/image/logo.png" alt="크루룽 로고"> <span
+			class="logo-text">크루룽</span>
 		</a>
 	</div>
 
 	<nav>
 		<ul>
-			<li><a href="controller?cmd=flashMobUI">번개 모임</a></li>
-			<li><a href="controller?cmd=crewUI">크루</a></li>
-			<li><a href="controller?cmd=boardsUI">자유게시판</a></li>
+			<li><a
+				href="<%=request.getContextPath()%>/controller?cmd=flashMobUI">번개
+					모임</a></li>
+			<li><a
+				href="<%=request.getContextPath()%>/controller?cmd=crewUI">크루</a></li>
+			<li><a
+				href="<%=request.getContextPath()%>/controller?cmd=boardsUI">자유게시판</a></li>
+
 		</ul>
 	</nav>
 
@@ -116,12 +119,12 @@ nav ul li a {
 			<c:when test="${not empty sessionScope.userId}">
 				<!-- 로그인 상태일 때 -->
 				<p class="user-greeting">안녕하세요, ${sessionScope.nickname}님!</p>
-				<a href="controller?cmd=logoutAction">로그아웃</a>
+				<a href="<%= request.getContextPath() %>/controller?cmd=logoutAction">로그아웃</a>
 				<!-- 로그아웃 버튼 -->
 			</c:when>
 			<c:otherwise>
 				<!-- 로그아웃 상태일 때 -->
-				<a href="controller?cmd=loginUI">로그인</a>
+				<a href="<%= request.getContextPath() %>/controller?cmd=loginUI">로그인</a>
 				<!-- 로그인 버튼 -->
 			</c:otherwise>
 		</c:choose>
