@@ -331,7 +331,7 @@
             <div class="profile-image">
                 <div class="profile-icon">
                     <!-- 프로필 이미지가 비어 있으면 default.png로 대체 -->
-                    <img src="/crew_kosta/image/${empty mypage.profileImage ? 'default.png' : mypage.profileImage}" alt="프로필 이미지" style="width:100px; height:100px; border-radius:50%;">
+                    <img src="/kosta/image/${empty mypage.profileImage ? 'default.png' : mypage.profileImage}" style="width:150px; height:150px; border-radius:50%;">
                 </div>
             </div>
             
@@ -397,10 +397,10 @@
         
         <div class="buttons">
             <div class="btn">
-                <a href="/account/deleteAccount.jsp" style="text-decoration:none; color:inherit;">회원탈퇴</a>
+                <a href="/kosta/controller?cmd=removeUserUIAction" style="text-decoration:none; color:inherit;">회원탈퇴</a>
             </div>
             <div class="btn">
-                <a href="/crew_kosta/controller?cmd=userUpdateInfoUIAction" style="text-decoration:none; color:inherit;">개인정보 수정</a>
+                <a href="/kosta/controller?cmd=userUpdateInfoUIAction" style="text-decoration:none; color:inherit;">개인정보 수정</a>
             </div>
         </div>
     </div> 
