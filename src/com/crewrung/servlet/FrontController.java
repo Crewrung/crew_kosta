@@ -8,7 +8,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 @WebServlet("/controller")
 public class FrontController extends HttpServlet {
@@ -22,15 +21,17 @@ public class FrontController extends HttpServlet {
 	}
 	
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String cmd = request.getParameter("cmd");
+		request.setCharacterEncoding("UTF-8");
 		
+		String cmd = request.getParameter("cmd");
+		System.out.println("cmd:" + cmd);
 		if(cmd == null) {
 			cmd = "mainUI";
 		}
 		
-		Action a = ActionFactory.getAction(cmd);
+		Action action = ActionFactory.getAction(cmd);
 
-		String url = a.execute(request);
+		String url = action.execute(request);
 		
 		request.getRequestDispatcher("/" + url).forward(request, response);
 		

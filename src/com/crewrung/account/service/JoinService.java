@@ -13,7 +13,12 @@ public class JoinService {
 		this.accountDAO = accountDAO;
 	}
 	
-	public int JoinUser(JoinVO joinVO){
+	public int joinUser(JoinVO joinVO){
+		
+		if(!joinVO.getUserPw().equals(joinVO.getUserPwCheck())){
+			return 0;
+		}
+		
 		int userIdCheck = accountDAO.isUserIdExist(joinVO);
 		if(userIdCheck > 0){
 			return 0;
@@ -28,6 +33,9 @@ public class JoinService {
 		if (nickname > 0){
 			return 0;
 		}
+		
+		int guNumber = accountDAO.getGuNumberByName(joinVO.getGuName());
+		joinVO.setGuNumber(guNumber);
 		
 		int joinUser = accountDAO.join(joinVO);
 		if(joinUser > 0){

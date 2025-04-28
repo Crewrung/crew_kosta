@@ -13,7 +13,7 @@ public class GetBoardDetailService {
         this.boardDAO = new BoardDAO(factory);
     }
 
-    public BoardDetailVO execute(long boardNumber) {
+    public BoardDetailVO execute(int boardNumber) {
         BoardDetailVO detail = boardDAO.getBoardDetail(boardNumber);
         if (detail == null) {
             throw new RuntimeException("해당 게시글을 찾을 수 없습니다.");
