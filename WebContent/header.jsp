@@ -74,6 +74,15 @@ nav ul li a {
 	padding: 8px 16px;
 	cursor: pointer;
 }
+
+.user-greeting {
+    font-size: 14px;
+    color: #333;
+    margin-right: 10px;
+    margin-bottom: 0px;
+    
+}
+
 </style>
 
 <!-- 헤더 -->
@@ -106,7 +115,7 @@ nav ul li a {
 		<c:choose>
 			<c:when test="${not empty sessionScope.userId}">
 				<!-- 로그인 상태일 때 -->
-				<p>안녕하세요, ${sessionScope.nickname}님!</p>
+				<p class="user-greeting">안녕하세요, ${sessionScope.nickname}님!</p>
 				<a href="/crew_kosta/controller?cmd=logoutAction">로그아웃</a>
 				<!-- 로그아웃 버튼 -->
 			</c:when>
