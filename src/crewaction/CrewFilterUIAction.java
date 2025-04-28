@@ -5,12 +5,12 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.crewrung.servlet.Action; // Action 인터페이스
-import com.crewrung.crew.service.CrewService; // CrewService 경로 확인
-import com.crewrung.crew.vo.AllCrewVO; // VO 경로 확인
+import com.crewrung.servlet.Action;
+import com.crewrung.crew.service.CrewService;
+import com.crewrung.crew.vo.AllCrewVO;
 import com.google.gson.Gson;
 
-public class CrewFilterAction implements Action {
+public class CrewFilterUIAction implements Action {
 
     private CrewService crewService = new CrewService();
 
@@ -19,19 +19,17 @@ public class CrewFilterAction implements Action {
         String interestCategory = request.getParameter("interestCategory");
         String guName = request.getParameter("guName");
         String ageRange = request.getParameter("ageRange");
-        String sortOption = request.getParameter("sortOption"); // ✅ sortOption 추가
 
         HashMap<String, Object> filters = new HashMap<>();
         filters.put("interestCategory", interestCategory);
         filters.put("guName", guName);
         filters.put("ageRange", ageRange);
-        filters.put("sortOption", sortOption); // ✅ filters에 추가
 
         List<AllCrewVO> crewList = crewService.getCrewsByFilter(filters);
 
         Gson gson = new Gson();
         String json = gson.toJson(crewList);
 
-        return json; // FrontController가 이 JSON 문자열을 그대로 응답
+        return json; // 이 반환값이 FrontController에서 그대로 response로 전송된다
     }
 }

@@ -20,10 +20,15 @@ import com.crewrung.crew.vo.CrewVO;
 import com.crewrung.crew.vo.PromotionVO;
 
 public class CrewService {
-	private CrewDAO crewDAO;
+	
 
+	private CrewDAO crewDAO = new CrewDAO();
+	
 	public CrewService(CrewDAO crewDAO) {
 		this.crewDAO = crewDAO;
+	}
+
+	public CrewService() {
 	}
 
 	public boolean isCrewMember(int crewNumber, String userId) {

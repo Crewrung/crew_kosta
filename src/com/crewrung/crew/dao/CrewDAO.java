@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
 import org.apache.ibatis.session.SqlSession;
 
 import com.crewrung.crew.vo.AllCrewVO;
@@ -20,15 +21,19 @@ import com.crewrung.crew.vo.CrewMeetingVO;
 import com.crewrung.crew.vo.CrewMemberVO;
 import com.crewrung.crew.vo.CrewVO;
 import com.crewrung.crew.vo.PromotionVO;
+import com.crewrung.mybatis.MyBatisUtil;
 
 public class CrewDAO {
-	SqlSession con;
+    
+    private SqlSession con;
 
-	public CrewDAO(){}
+    public CrewDAO() {
+        this.con = MyBatisUtil.getSqlSession(); // ✅ 기본 생성자에서 con 초기화
+    }
 
-	public CrewDAO(SqlSession sqlSession){
-		this.con = sqlSession;
-	}
+    public CrewDAO(SqlSession sqlSession) {
+        this.con = sqlSession;
+    }
 
 	public List<PromotionVO> getAllPromotionCrew() {
 		List<PromotionVO> result = new ArrayList<>();

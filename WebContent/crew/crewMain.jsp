@@ -199,41 +199,87 @@ footer {
 
 	<!-- 필터 영역 -->
 	<div class="container my-4">
-		<div class="row g-3">
-			<div class="col-md-4">
-				<select class="form-select" id="interestCategory">
-					<option value="">관심사 전체</option>
+		<div class="row mb-4">
+			<div class="col-md-3">
+				<select id="interestCategory" class="form-select">
+					<option value="">전체</option>
 					<option value="여행">여행</option>
 					<option value="취미">취미</option>
 					<option value="스터디">스터디</option>
 					<option value="운동">운동</option>
 					<option value="봉사">봉사</option>
+					<option value="자기계발">자기계발</option>
 					<option value="게임">게임</option>
 					<option value="독서">독서</option>
 					<option value="요리">요리</option>
 					<option value="음악">음악</option>
+					<option value="영화/드라마">영화/드라마</option>
+					<option value="반려동물">반려동물</option>
+					<option value="사진/영상">사진/영상</option>
+					<option value="비즈니스/창업">비즈니스/창업</option>
+					<option value="언어교환">언어교환</option>
+					<option value="힐링/명상">힐링/명상</option>
+					<option value="문화생활">문화생활</option>
 				</select>
 			</div>
-			<div class="col-md-4">
-				<select class="form-select" id="guName">
-					<option value="">지역 전체</option>
-					<option value="서울 강남구">서울 강남구</option>
-					<option value="서울 관악구">서울 관악구</option>
-					<option value="서울 금천구">서울 금천구</option>
-					<option value="온라인">온라인</option>
+
+			<div class="col-md-3">
+				<select id="guName" class="form-select">
+					<option value="">지역 선택</option>
+					<option value="">전체</option>
+					<option value="1">서울 강남구</option>
+					<option value="2">서울 강동구</option>
+					<option value="3">서울 강북구</option>
+					<option value="4">서울 강서구</option>
+					<option value="5">서울 관악구</option>
+					<option value="6">서울 광진구</option>
+					<option value="7">서울 구로구</option>
+					<option value="8">서울 금천구</option>
+					<option value="9">서울 노원구</option>
+					<option value="10">서울 도봉구</option>
+					<option value="11">서울 동대문구</option>
+					<option value="12">서울 동작구</option>
+					<option value="13">서울 마포구</option>
+					<option value="14">서울 서대문구</option>
+					<option value="15">서울 서초구</option>
+					<option value="16">서울 성동구</option>
+					<option value="17">서울 성북구</option>
+					<option value="18">서울 송파구</option>
+					<option value="19">서울 양천구</option>
+					<option value="20">서울 영등포구</option>
+					<option value="21">서울 용산구</option>
+					<option value="22">서울 은평구</option>
+					<option value="23">서울 종로구</option>
+					<option value="24">서울 중구</option>
+					<option value="25">서울 중랑구</option>
+					<option value="26">온라인</option>
 				</select>
 			</div>
-			<div class="col-md-4">
-				<select class="form-select" id="ageRange">
-					<option value="">연령대 전체</option>
+
+			<div class="col-md-2">
+				<select id="ageRange" class="form-select">
+					<option value="">연령대</option> ...
+					<option value="">전체</option>
 					<option value="10대">10대</option>
 					<option value="20대">20대</option>
 					<option value="30대">30대</option>
 					<option value="40대 이상">40대 이상</option>
 				</select>
 			</div>
+
+			<div class="col-md-2">
+				<select id="sortOption" class="form-select">
+					<option value="recent">최신순</option>
+					<option value="popular">인기순</option>
+				</select>
+			</div>
+
+			<div class="col-md-2">
+				<button id="resetFilters" class="btn btn-secondary w-100">초기화</button>
+			</div>
 		</div>
 	</div>
+
 
 	<!-- 크루 카드 리스트 -->
 	<div class="container">
@@ -262,85 +308,85 @@ footer {
 	</footer>
 
 	<!-- JavaScript -->
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
-		crossorigin="anonymous"></script>
-
-	<!-- 크루 동적 로딩 스크립트 -->
 	<script>
-	// JavaScript 부분
-	document.addEventListener('DOMContentLoaded', function() {
-	  const interestCategorySelect = document.getElementById('interestCategory');
-	  const guNameSelect = document.getElementById('guName');
-	  const ageRangeSelect = document.getElementById('ageRange');
+document.addEventListener('DOMContentLoaded', function() {
+  const interestCategorySelect = document.getElementById('interestCategory');
+  const guNameSelect = document.getElementById('guName');
+  const ageRangeSelect = document.getElementById('ageRange');
+  const sortOptionSelect = document.getElementById('sortOption');
 
-	  loadCrewCards();
+  function loadCrewCards() { // ✅ loadCrewCards를 이 안에 선언
+    const interestCategory = interestCategorySelect.value;
+    const guName = guNameSelect.value;
+    const ageRange = ageRangeSelect.value;
+    const sortOption = sortOptionSelect.value; // 여기서는 굳이 다시 document.getElementById 할 필요 없음
 
-	  interestCategorySelect.addEventListener('change', loadCrewCards);
-	  guNameSelect.addEventListener('change', loadCrewCards);
-	  ageRangeSelect.addEventListener('change', loadCrewCards);
+    const params = new URLSearchParams({
+      interestCategory,
+      guName,
+      ageRange,
+      sortOption
+    });
 
-	  function loadCrewCards() {
-	    const interestCategory = interestCategorySelect.value;
-	    const guName = guNameSelect.value;
-	    const ageRange = ageRangeSelect.value;
+    fetch('/kosta/controller?cmd=crewFilter&' + params.toString())
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('네트워크 응답 오류');
+        }
+        return response.json();
+      })
+      .then(data => {
+        const container = document.getElementById('crewCardsContainer');
+        container.innerHTML = '';
 
-	    const params = new URLSearchParams({
-	      interestCategory,
-	      guName,
-	      ageRange
-	    });
+        if (data.length === 0) {
+          container.innerHTML = `<p class="text-center my-5">검색 결과가 없습니다.</p>`;
+          return;
+        }
 
-	    fetch('/kosta/controller?cmd=crewFilterUI&' + params.toString())
-	      .then(response => {
-	        if (!response.ok) {
-	          throw new Error('네트워크 응답 오류');
-	        }
-	        return response.json();
-	      })
-	      .then(data => {
-	        const container = document.getElementById('crewCardsContainer'); // ★★★ 여기 crewCardsContainer!!
-	        container.innerHTML = '';
+        data.forEach(crew => {
+          const cardHtml = `
+            <div class="col-md-6 col-lg-3">
+              <div class="card h-100 border">
+                <div class="card-img-container">
+                  <img src="${crew.image ? '/kosta/' + crew.image : '/kosta/image/placeholder.png'}" alt="${crew.crewName}" class="innerImage">
+                </div>
+                <div class="card-body p-3">
+                  <h5 class="card-title fw-bold mb-2">${crew.crewName}</h5>
+                  <p class="card-text small text-truncate">${crew.introduction || ''}</p>
+                  <div class="d-flex align-items-center mt-3">
+                    <span class="badge rounded-pill bg-light text-dark me-2">${crew.interestCategory || ''}</span>
+                    <span class="text-muted mx-2">|</span>
+                    <span class="small">${crew.guName || ''}</span>
+                    <span class="text-muted mx-2">|</span>
+                    <div class="d-flex align-items-center participant-count">
+                      <i class="bi bi-people-fill me-1"></i>
+                      <span>${crew.crewMembersCount}명</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          `;
+          container.insertAdjacentHTML('beforeend', cardHtml);
+        });
+      })
+      .catch(error => {
+        console.error('크루 목록 불러오기 실패:', error);
+        const container = document.getElementById('crewCardsContainer');
+        container.innerHTML = `<p class="text-center my-5 text-danger">데이터를 불러오지 못했습니다.</p>`;
+      });
+  }
 
-	        if (data.length === 0) {
-	          container.innerHTML = `<p class="text-center my-5">검색 결과가 없습니다.</p>`;
-	          return;
-	        }
+  // ✅ 이벤트 리스너 연결
+  interestCategorySelect.addEventListener('change', loadCrewCards);
+  guNameSelect.addEventListener('change', loadCrewCards);
+  ageRangeSelect.addEventListener('change', loadCrewCards);
+  sortOptionSelect.addEventListener('change', loadCrewCards);
 
-	        data.forEach(crew => {
-	          const cardHtml = `
-	            <div class="col-md-6 col-lg-3">
-	              <div class="card h-100 border">
-	                <div class="card-img-container">
-	                  <img src="${crew.image ? crew.image : '/kosta/image/placeholder.png'}" alt="${crew.crewName}" class="innerImage">
-	                </div>
-	                <div class="card-body p-3">
-	                  <h5 class="card-title fw-bold mb-2">${crew.crewName}</h5>
-	                  <p class="card-text small text-truncate">${crew.introduction || ''}</p>
-	                  <div class="d-flex align-items-center mt-3">
-	                    <span class="badge rounded-pill bg-light text-dark me-2">${crew.interestCategory || ''}</span>
-	                    <span class="text-muted mx-2">|</span>
-	                    <span class="small">${crew.guName || ''}</span>
-	                    <span class="text-muted mx-2">|</span>
-	                    <div class="d-flex align-items-center participant-count">
-	                      <i class="bi bi-people-fill me-1"></i>
-	                      <span>${crew.crewMembersCount || 0}명</span>
-	                    </div>
-	                  </div>
-	                </div>
-	              </div>
-	            </div>
-	          `;
-	          container.insertAdjacentHTML('beforeend', cardHtml);
-	        });
-	      })
-	      .catch(error => {
-	        console.error('크루 목록 불러오기 실패:', error);
-	        const container = document.getElementById('crewCardsContainer');
-	        container.innerHTML = `<p class="text-center my-5 text-danger">데이터를 불러오지 못했습니다.</p>`;
-	      });
-	  }
-	});
-  </script>
+  // ✅ 초기 데이터 불러오기
+  loadCrewCards();
+});
+</script>
 </body>
 </html>
