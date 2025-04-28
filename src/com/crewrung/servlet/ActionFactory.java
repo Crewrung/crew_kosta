@@ -137,6 +137,12 @@ public class ActionFactory {
 		case "removeUserUIAction":
 			action = new RemoveUserAction();
 			break;
+		case "findUserPwAction":
+			action = new FindUserPwAction();
+			break;
+		case "findUserPwUIAction":
+			action = new FindUserPwUIAction();
+			break;
 
 			// 
 		default:
