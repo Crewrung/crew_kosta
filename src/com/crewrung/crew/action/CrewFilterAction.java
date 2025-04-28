@@ -31,17 +31,17 @@ public class CrewFilterAction implements Action {
         String interestCategory = request.getParameter("interestCategory");
         String guName = request.getParameter("guName");
         String ageRange = request.getParameter("ageRange");
-        String sortOption = request.getParameter("sortOption");
 
         // 필터링에 사용할 파라미터들을 Map에 넣기
         Map<String, String> filter = new HashMap<>();
         filter.put("interestCategory", interestCategory);
         filter.put("guName", guName);
         filter.put("ageRange", ageRange);
-        filter.put("sortOption", sortOption); // 추가된 sortOption 파라미터
 
         // 필터를 이용해 크루 목록 조회
         List<AllCrewVO> crewList = crewService.getCrewsByFilter(filter);
+        
+        System.out.println(crewList);
 
         // Gson을 사용하여 List를 JSON 형태로 변환
         Gson gson = new Gson();

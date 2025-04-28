@@ -14,6 +14,15 @@ import com.crewrung.account.action.MypageUIAction;
 import com.crewrung.account.action.RemoveUserAction;
 import com.crewrung.account.action.UserUpdateInfoAction;
 import com.crewrung.account.action.UserUpdateInfoUIAction;
+import com.crewrung.crew.action.AddCrewAction;
+import com.crewrung.crew.action.AddCrewMeetingAction;
+import com.crewrung.crew.action.AddCrewMeetingUIAction;
+import com.crewrung.crew.action.AddCrewUIAction;
+import com.crewrung.crew.action.ApplyCrewAction;
+import com.crewrung.crew.action.ApplyCrewUIAction;
+import com.crewrung.crew.action.CrewDetailUIAction;
+import com.crewrung.crew.action.CrewFilterAction;
+import com.crewrung.crew.action.CrewUIAction;
 import com.crewrung.flashMob.action.FlashMobUIAction;
 import com.crewrung.flashMob.action.addFlashMobAction;
 import com.crewrung.flashMob.action.addFlashMobCommentAction;
@@ -34,34 +43,34 @@ public class ActionFactory {
 		Action action;
 
 		switch (cmd) {
-		// Crew 
-//		case "crewUI":
-//			action = new CrewUIAction();
-//			break;
-//		case "crewFilter":
-//			action = new CrewFilterAction();
-//			break;
-//		case "crewDetailUI":
-//		    action = new CrewDetailUIAction();
-//		    break;
-//		case "addCrewUI":
-//			action = new AddCrewUIAction();
-//			break;
-//		case "addCrew":
-//			action = new AddCrewAction();
-//			break;
-//		case "applyCrewUI":
-//			action = new ApplyCrewUIAction();
-//			break;
-//		case "applyCrew":
-//			action = new ApplyCrewAction();
-//			break;
-//		case "addCrewMeetingUI":
-//			action = new AddCrewMeetingUIAction();
-//			break;
-//		case "addCrewMeeting":
-//			action = new AddCrewMeetingAction();
-//			break;
+		 //Crew 
+		case "crewUI":
+			action = new CrewUIAction();
+			break;
+		case "crewFilter":
+			action = new CrewFilterAction();
+			break;
+		case "crewDetailUI":
+		    action = new CrewDetailUIAction();
+		    break;
+		case "addCrewUI":
+			action = new AddCrewUIAction();
+			break;
+		case "addCrew":
+			action = new AddCrewAction();
+			break;
+		case "applyCrewUI":
+			action = new ApplyCrewUIAction();
+			break;
+		case "applyCrew":
+			action = new ApplyCrewAction();
+			break;
+		case "addCrewMeetingUI":
+			action = new AddCrewMeetingUIAction();
+			break;
+		case "addCrewMeeting":
+			action = new AddCrewMeetingAction();
+			break;
 
 			// FlashMob
 		case "flashMobUI":

@@ -12,11 +12,20 @@
   <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-dynamic-subset.min.css" rel="stylesheet" crossorigin="anonymous">
 
   <style>
-    /* 스타일 정의 (예시) */
+    /* 스타일 정의 */
     body { background-color: #f9f9f9; font-family: 'Pretendard', sans-serif; }
     .card { transition: transform 0.2s; }
     .card:hover { transform: translateY(-5px); box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); }
-    .innerImage { width: 100%; height: 100%; object-fit: cover; }
+    .innerImage { width: 100%; height: 200px; object-fit: cover; }
+    .card-img-container { height: 200px; overflow: hidden; }
+    .card-text { 
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      max-height: 3em;
+    }
   </style>
 </head>
 <body>
@@ -28,9 +37,9 @@
     </div>
     <nav>
       <ul class="d-flex list-unstyled gap-4 mb-0">
-        <li><a href="#">번개 모임</a></li>
-        <li><a href="#">크루</a></li>
-        <li><a href="#">자유게시판</a></li>
+        <li><a href="#" class="text-decoration-none text-dark">번개 모임</a></li>
+        <li><a href="#" class="text-decoration-none text-dark">크루</a></li>
+        <li><a href="#" class="text-decoration-none text-dark">자유게시판</a></li>
       </ul>
     </nav>
     <div class="user-actions d-flex align-items-center">
@@ -56,7 +65,7 @@
       <div class="col-md-3">
         <select id="guName" class="form-select">
           <option value="">지역 선택</option>
-          <option value="1">서울 강남구</option>
+          <option value="마포구">마포구</option>
           <!-- Add more regions -->
         </select>
       </div>
@@ -82,85 +91,105 @@
   </div>
 
   <!-- Footer -->
-  <footer class="bg-light py-4">
+  <footer class="bg-light py-4 mt-5">
     <div class="container text-center">
-      <p>© 2025 LIGHTNING CO., LTD. ALL RIGHTS RESERVED.</p>
+      <p class="mb-0">© 2025 LIGHTNING CO., LTD. ALL RIGHTS RESERVED.</p>
     </div>
   </footer>
 
   <!-- JavaScript -->
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const interestCategorySelect = document.getElementById('interestCategory');
-      const guNameSelect = document.getElementById('guName');
-      const ageRangeSelect = document.getElementById('ageRange');
-      const sortOptionSelect = document.getElementById('sortOption');
+  document.addEventListener('DOMContentLoaded', function() {
+    var interestCategorySelect = document.getElementById('interestCategory');
+    var guNameSelect = document.getElementById('guName');
+    var ageRangeSelect = document.getElementById('ageRange');
+    var sortOptionSelect = document.getElementById('sortOption');
 
-      function loadCrewCards() {
-        const interestCategory = interestCategorySelect.value;
-        const guName = guNameSelect.value;
-        const ageRange = ageRangeSelect.value;
-        const sortOption = sortOptionSelect.value;
+    function loadCrewCards() {
+      var interestCategory = interestCategorySelect.value;
+      var guName = guNameSelect.value;
+      var ageRange = ageRangeSelect.value;
+      var sortOption = sortOptionSelect.value;
 
-        const params = new URLSearchParams({ interestCategory, guName, ageRange, sortOption });
+      var params = new URLSearchParams();
+      params.append("interestCategory", interestCategory);
+      params.append("guName", guName);
+      params.append("ageRange", ageRange);
+      params.append("sortOption", sortOption);
 
-        fetch("<%= request.getContextPath() %>/controller?cmd=crewFilter&" + params.toString())
-          .then(response => {
-            if (!response.ok) throw new Error('네트워크 응답 오류');
-            return response.json();
-          })
-          .then(data => {
-            const container = document.getElementById('crewCardsContainer');
-            container.innerHTML = '';
+      fetch("<%= request.getContextPath() %>/controller?cmd=crewFilter&" + params.toString())
+        .then(function(response) {
+          if (!response.ok) {
+            throw new Error('네트워크 응답 오류');
+          }
+          // 응답이 JSON 형식인지 확인
+          var contentType = response.headers.get('Content-Type');
+          if (!contentType || !contentType.includes('application/json')) {
+            throw new Error('응답이 JSON 형식이 아닙니다.');
+          }
+          return response.json();
+        })
+        .then(function(data) {
+          console.log(data);
+          var container = document.getElementById('crewCardsContainer');
+          container.innerHTML = '';
 
-            if (data.length === 0) {
-              container.innerHTML = `<p class="text-center my-5">검색 결과가 없습니다.</p>`;
-              return;
-            }
+          if (data.length === 0) {
+            container.innerHTML = '<div class="col-12"><p class="text-center my-5">검색 결과가 없습니다.</p></div>';
+            return;
+          }
 
-            data.forEach(crew => {
-              const cardHtml = `
-                <div class="col-md-6 col-lg-3">
-                  <div class="card h-100 border">
-                    <div class="card-img-container">
-                      <img src="${crew.image ? '<%= request.getContextPath() %>/' + crew.image : '<%= request.getContextPath() %>/image/placeholder.png'}" alt="${crew.crewName}" class="innerImage">
-                    </div>
-                    <div class="card-body p-3">
-                      <h5 class="card-title fw-bold mb-2">${crew.crewName}</h5>
-                      <p class="card-text small text-truncate">${crew.introduction || ''}</p>
-                      <div class="d-flex align-items-center mt-3">
-                        <span class="badge rounded-pill bg-light text-dark me-2">${crew.interestCategory || ''}</span>
-                        <span class="text-muted mx-2">|</span>
-                        <span class="small">${crew.guName || ''}</span>
-                        <span class="text-muted mx-2">|</span>
-                        <div class="d-flex align-items-center participant-count">
-                          <i class="bi bi-people-fill me-1"></i>
-                          <span>${crew.crewMembersCount}명</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              `;
-              container.insertAdjacentHTML('beforeend', cardHtml);
-            });
-          })
-          .catch(error => {
-            console.error('크루 목록 불러오기 실패:', error);
-            const container = document.getElementById('crewCardsContainer');
-            container.innerHTML = `<p class="text-center my-5 text-danger">데이터를 불러오지 못했습니다.</p>`;
-          });
-      }
+          for (var i = 0; i < data.length; i++) {
+            var crew = data[i];
+            // 소개글이 없는 경우 빈 문자열로 처리
+            var introduction = crew.introduction || '';
+            var image = crew.image ? crew.image : '<%=request.getContextPath()%>/image/placeholder.png';
+            var crewName = crew.crewName || '';
+            var interestCat = crew.interestCategory || '';
+            var guNameVal = crew.guName || '';
+            var memberCount = crew.crewMembersCount || 0;
+            
+            var cardHtml = '<div class="col-md-6 col-lg-3">' +
+              '<div class="card h-100 border">' +
+                '<div class="card-img-container">' +
+                  '<img src="' + image + '" alt="' + crewName + '" class="innerImage">' +
+                '</div>' +
+                '<div class="card-body p-3">' +
+                  '<h5 class="card-title fw-bold mb-2">' + crewName + '</h5>' +
+                  '<p class="card-text small">' + introduction + '</p>' +
+                  '<div class="d-flex align-items-center mt-3">' +
+                    '<span class="badge rounded-pill bg-light text-dark me-2">' + interestCat + '</span>' +
+                    '<span class="text-muted mx-2">|</span>' +
+                    '<span class="small">' + guNameVal + '</span>' +
+                    '<span class="text-muted mx-2">|</span>' +
+                    '<div class="d-flex align-items-center participant-count">' +
+                      '<i class="bi bi-people-fill me-1"></i>' +
+                      '<span>' + memberCount + '명</span>' +
+                    '</div>' +
+                  '</div>' +
+                '</div>' +
+              '</div>' +
+            '</div>';
+            
+            container.innerHTML += cardHtml;
+          }
+        }, function(error) {
+          // Error handler as second argument to then() instead of using catch()
+          console.error('크루 목록 불러오기 실패:', error);
+          var container = document.getElementById('crewCardsContainer');
+          container.innerHTML = '<div class="col-12"><p class="text-center my-5 text-danger">데이터를 불러오지 못했습니다: ' + error.message + '</p></div>';
+        });
+    }
 
-      // 필터 변경 시 카드 업데이트
-      interestCategorySelect.addEventListener('change', loadCrewCards);
-      guNameSelect.addEventListener('change', loadCrewCards);
-      ageRangeSelect.addEventListener('change', loadCrewCards);
-      sortOptionSelect.addEventListener('change', loadCrewCards);
+    // 이벤트 리스너 연결
+    interestCategorySelect.addEventListener('change', loadCrewCards);
+    guNameSelect.addEventListener('change', loadCrewCards);
+    ageRangeSelect.addEventListener('change', loadCrewCards);
+    sortOptionSelect.addEventListener('change', loadCrewCards);
 
-      // 초기 데이터 로딩
-      loadCrewCards();
-    });
+    // 초기 데이터 로딩
+    loadCrewCards();
+  });
   </script>
 </body>
 </html>
