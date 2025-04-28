@@ -4,17 +4,20 @@ import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.ibatis.session.SqlSession;
+
 import com.crewrung.crew.dao.CrewDAO;
 import com.crewrung.crew.service.CrewService;
 import com.crewrung.crew.vo.CrewVO;
-import com.crewrung.mybatis.MyBatisUtil;
+import com.crewrung.db.DBCP;
 import com.crewrung.servlet.Action;
 
 public class AddCrewAction implements Action {
 
     @Override
     public String execute(HttpServletRequest request) throws ServletException, IOException {
-        CrewService service = new CrewService(new CrewDAO(MyBatisUtil.getSqlSession()));
+        SqlSession session = DBCP.getSqlSessionFactory().openSession(true);
+        CrewService crewService = new CrewService(new CrewDAO(session)); // crewService »ı¼º
 
         CrewVO crewVO = new CrewVO();
         crewVO.setCrewName(request.getParameter("crewName"));
@@ -22,7 +25,7 @@ public class AddCrewAction implements Action {
         crewVO.setIntroduction(request.getParameter("introduction"));
         crewVO.setInterestCategory(request.getParameter("interestCategory"));
         crewVO.setAgeRange(request.getParameter("ageRange"));
-        crewVO.setImage(request.getParameter("image")); // íŒŒì¼ ì´ë¦„ë§Œ ë„˜ì–´ì˜¨ë‹¤ê³  ê°€ì •
+        crewVO.setImage(request.getParameter("image"));
 
         String isPromotionParam = request.getParameter("isPromotion");
         if (isPromotionParam != null && !isPromotionParam.isEmpty()) {
@@ -33,12 +36,12 @@ public class AddCrewAction implements Action {
 
         crewVO.setGuNumber(Integer.parseInt(request.getParameter("guNumber")));
 
-        int result = service.addCrew(crewVO);
+        int result = crewService.addCrew(crewVO); // ¿©±â ¼öÁ¤!
 
         if (result > 0) {
-            return "crew/crewAddResult.jsp?message=í¬ë£¨ê°€ ì„±ê³µì ìœ¼ë¡œ ìƒì„±ë˜ì—ˆìŠµë‹ˆë‹¤.&redirectUrl=/crew/crewMainUI.jsp";
+            return "crew/crewAddResult.jsp?message=Å©·ç°¡ ¼º°øÀûÀ¸·Î »ı¼ºµÇ¾ú½À´Ï´Ù.&redirectUrl=/crew/crewMainUI.jsp";
         } else {
-            return "crew/crewAddResult.jsp?message=í¬ë£¨ ìƒì„±ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.&redirectUrl=/crew/crewAddPage.html";
+            return "crew/crewAddResult.jsp?message=Å©·ç »ı¼º¿¡ ½ÇÆĞÇß½À´Ï´Ù.&redirectUrl=/crew/crewAddPage.html";
         }
     }
 }
