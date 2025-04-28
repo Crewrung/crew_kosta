@@ -6,19 +6,13 @@ public class ActionFactory {
 	public static Action getAction(String cmd){
 		Action action;
 		switch (cmd) {
-		case "A":
-			action = null;
-			break;
-		case "B":
-			action = null;
+		case "getCrewInfoAction":
+			action = new GetCrewInfoAction();
 			break;
 		default:
 			action = null;
 			break;
 		}
-		
 		return action;
-		
 	}
-
 }
