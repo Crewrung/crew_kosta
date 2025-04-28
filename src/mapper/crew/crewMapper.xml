@@ -43,7 +43,8 @@
 		from
 		crews c
 		join gues g
-		on c.gu_number = g.gu_number
+		on
+		c.gu_number = g.gu_number
 		join (
 		select
 		c.crew_number,
@@ -68,25 +69,6 @@
 		<if test="ageRange != null and ageRange != ''">
 			AND c.age_range = #{ageRange}
 		</if>
-		group by
-		c.crew_number,
-		c.crew_name,
-		c.introduction,
-		c.interest_category,
-		c.image,
-		g.gu_name,
-		cm_count.crew_members_count
-		<choose>
-			<when test="sortOption == 'recent'">
-				ORDER BY c.crew_number DESC
-			</when>
-			<when test="sortOption == 'popular'">
-				ORDER BY cm_count.crew_members_count DESC
-			</when>
-			<otherwise>
-				ORDER BY c.crew_number DESC
-			</otherwise>
-		</choose>
 	</select>
 
 
@@ -126,19 +108,24 @@
 
 	<insert id="addCrew" parameterType="com.crewrung.crew.vo.CrewVO">
 		INSERT INTO crews
-		(crew_number, crew_name, crew_leader_id, introduction,
-		interest_category, age_range, image, promotion_message, is_promotion,
-		gu_number)
-		VALUES (
+		(crew_number, crew_name, crew_leader_id, introduction, interest_category,
+		age_range, image, promotion_message, is_promotion, gu_number)
+		VALUES
+		(
 		crews_seq.nextval,
-		#{crewName}, #{crewLeaderId},
-		#{introduction},
-		#{interestCategory}, #{ageRange}, #{image,
-		jdbcType=VARCHAR}, #{promotionMessage},
-		#{isPromotion},
-		#{guNumber}
+		#{crewName, jdbcType=VARCHAR},
+		#{crewLeaderId, jdbcType=VARCHAR},
+		#{introduction, jdbcType=VARCHAR},
+		#{interestCategory, jdbcType=VARCHAR},
+		#{ageRange, jdbcType=VARCHAR},
+		#{image, jdbcType=VARCHAR},
+		#{promotionMessage, jdbcType=VARCHAR},
+		#{isPromotion, jdbcType=CHAR},
+		#{guNumber, jdbcType=INTEGER}
 		)
 	</insert>
+
+
 
 	<update id="updateCrew" parameterType="com.crewrung.crew.vo.CrewVO">
 		UPDATE crews

@@ -1,25 +1,30 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
-<%
-    String message = request.getParameter("message");
-    String redirectUrl = request.getParameter("redirectUrl");
-
-    if (message == null) {
-        message = "처리가 완료되었습니다.";
-    }
-    if (redirectUrl == null) {
-        redirectUrl = "/controller?cmd=crewListUI"; // 기본 이동 경로
-    }
-%>
-<!DOCTYPE html>
-<html lang="ko">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>알림</title>
-    <script type="text/javascript">
-        alert("<%= message %>");
-        window.location.href = "<%= redirectUrl %>";
-    </script>
+    <title>크루 생성 결과</title>
 </head>
 <body>
+
+<%
+String errorMessage = (String) request.getAttribute("errorMessage");
+String successMessage = (String) request.getAttribute("successMessage");
+String redirectUrl = (String) request.getAttribute("redirectUrl");
+if (errorMessage != null) {
+%>
+    <script>
+        alert('<%= errorMessage %>');
+        location.href = '<%= redirectUrl %>';
+    </script>
+<%
+} else if (successMessage != null) {
+%>
+    <script>
+        alert('<%= successMessage %>');
+        location.href = '<%= redirectUrl %>';
+    </script>
+<%
+}
+%>
+
 </body>
 </html>

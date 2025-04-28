@@ -16,32 +16,56 @@ public class AddCrewAction implements Action {
 
     @Override
     public String execute(HttpServletRequest request) throws ServletException, IOException {
-        SqlSession session = DBCP.getSqlSessionFactory().openSession(true);
-        CrewService crewService = new CrewService(new CrewDAO(session)); // crewService »ı¼º
+        try (SqlSession session = DBCP.getSqlSessionFactory().openSession(true)) {
+            CrewService crewService = new CrewService(new CrewDAO(session));
+            CrewVO crewVO = new CrewVO();
 
-        CrewVO crewVO = new CrewVO();
-        crewVO.setCrewName(request.getParameter("crewName"));
-        crewVO.setCrewLeaderId(request.getParameter("crewLeaderId"));
-        crewVO.setIntroduction(request.getParameter("introduction"));
-        crewVO.setInterestCategory(request.getParameter("interestCategory"));
-        crewVO.setAgeRange(request.getParameter("ageRange"));
-        crewVO.setImage(request.getParameter("image"));
+            // í•„ìˆ˜ íŒŒë¼ë¯¸í„° í™•ì¸
+            String crewName = getRequiredParam(request, "crewName");
+            if (crewName == null) return "crew/crewAddResult.jsp";
+            crewVO.setCrewName(crewName);
 
-        String isPromotionParam = request.getParameter("isPromotion");
-        if (isPromotionParam != null && !isPromotionParam.isEmpty()) {
-            crewVO.setIsPromotion(isPromotionParam.charAt(0));
-        } else {
-            crewVO.setIsPromotion('N');
+            String crewLeaderId = getRequiredParam(request, "crewLeaderId");
+            if (crewLeaderId == null) return "crew/crewAddResult.jsp";
+            crewVO.setCrewLeaderId(crewLeaderId);
+
+            crewVO.setIntroduction(request.getParameter("introduction"));
+            crewVO.setInterestCategory(request.getParameter("interestCategory"));
+            crewVO.setAgeRange(request.getParameter("ageRange"));
+            crewVO.setImage(request.getParameter("image"));
+
+            String isPromotionParam = request.getParameter("isPromotion");
+            crewVO.setIsPromotion((isPromotionParam != null && !isPromotionParam.isEmpty()) ? isPromotionParam.charAt(0) : 'N');
+
+            String guNumberParam = request.getParameter("guNumber");
+            if (guNumberParam == null || guNumberParam.isEmpty()) {
+                request.setAttribute("errorMessage", "ëª¨ì„ ì§€ì—­(êµ¬ ë²ˆí˜¸)ì„ ì„ íƒí•´ ì£¼ì„¸ìš”.");
+                request.setAttribute("redirectUrl", request.getContextPath() + "/crew/crewAddPage.html");
+                return "crew/crewAddResult.jsp";
+            }
+            crewVO.setGuNumber(Integer.parseInt(guNumberParam));
+
+            int result = crewService.addCrew(crewVO);
+
+            if (result > 0) {
+                request.setAttribute("successMessage", "í¬ë£¨ê°€ ì •ìƒì ìœ¼ë¡œ ìƒì„±ë˜ì—ˆìŠµë‹ˆë‹¤.");
+                request.setAttribute("redirectUrl", request.getContextPath() + "/controller?cmd=crewUI");
+            } else {
+                request.setAttribute("errorMessage", "í¬ë£¨ ìƒì„±ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.");
+                request.setAttribute("redirectUrl", request.getContextPath() + "/crew/crewAddPage.html");
+            }
+
+            return "crew/crewAddResult.jsp";
         }
+    }
 
-        crewVO.setGuNumber(Integer.parseInt(request.getParameter("guNumber")));
-
-        int result = crewService.addCrew(crewVO); // ¿©±â ¼öÁ¤!
-
-        if (result > 0) {
-            return "crew/crewAddResult.jsp?message=Å©·ç°¡ ¼º°øÀûÀ¸·Î »ı¼ºµÇ¾ú½À´Ï´Ù.&redirectUrl=/crew/crewMainUI.jsp";
-        } else {
-            return "crew/crewAddResult.jsp?message=Å©·ç »ı¼º¿¡ ½ÇÆĞÇß½À´Ï´Ù.&redirectUrl=/crew/crewAddPage.html";
+    private String getRequiredParam(HttpServletRequest request, String paramName) {
+        String value = request.getParameter(paramName);
+        if (value == null || value.trim().isEmpty()) {
+            request.setAttribute("errorMessage", paramName + " íŒŒë¼ë¯¸í„°ê°€ ëˆ„ë½ë˜ì—ˆìŠµë‹ˆë‹¤.");
+            request.setAttribute("redirectUrl", request.getContextPath() + "/crew/crewAddPage.html");
+            return null;
         }
+        return value;
     }
 }
