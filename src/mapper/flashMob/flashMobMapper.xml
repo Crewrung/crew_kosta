@@ -139,6 +139,7 @@
 		FROM
 		flashMob_comments
 		WHERE flashMob_number=#{flashMobNumber}
+		order by comment_date
 	</select>
 
 	<insert id="addFlashMobComment" parameterType="com.crewrung.flashMob.vo.FlashMobCommentVO">
