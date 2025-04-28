@@ -354,11 +354,6 @@
                         <c:forEach var="crew" items="${mypage.crewNames}">
                             <div class="group-item">
                                 <span>${crew}</span>
-                                <span>
-                                    <a href="/crew/crewDetail.jsp?crewName=${crew}">
-                                        <button>크루 페이지</button>
-                                    </a>
-                                </span>
                             </div>
                         </c:forEach>
                     </c:when>
@@ -380,11 +375,6 @@
                         <c:forEach var="mob" items="${mypage.flashMobTitles}">
                             <div class="group-item">
                                 <span>${mob}</span>
-                                <span>
-                                    <a href="/flashmob/flashmobDetail.jsp?title=${mob}">
-                                        <button>모임 페이지</button>
-                                    </a>
-                                </span>
                             </div>
                         </c:forEach>
                     </c:when>

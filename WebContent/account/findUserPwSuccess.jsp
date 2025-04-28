@@ -119,7 +119,7 @@
     <jsp:include page="/header.jsp" />
     
     <div class="container">
-        <h1 class="page-title">아이디 찾기 결과</h1>
+        <h1 class="page-title">비밀번호 찾기 결과</h1>
         
         <div class="success-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
