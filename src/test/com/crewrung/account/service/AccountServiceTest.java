@@ -23,6 +23,7 @@ import com.crewrung.account.vo.JoinVO;
 import com.crewrung.account.vo.LoginVO;
 import com.crewrung.account.vo.MypageVO;
 import com.crewrung.account.vo.UserInfoVO;
+import com.crewrung.account.vo.UserUpdateInfoVO;
 import com.crewrung.db.DBCP;
 
 public class AccountServiceTest {
@@ -215,8 +216,8 @@ public class AccountServiceTest {
 	@Test
 	public void testUserInfoUpdate(){
 		UserInfoUpdateService service = new UserInfoUpdateService(accountDAO);
-		String userId = "jia1294";
-		UserInfoVO vo = new UserInfoVO(userId);
+		UserUpdateInfoVO vo = new UserUpdateInfoVO();
+		vo.setUserId("123assad");
 		vo.setUserPw("tmp1234");
 		vo.setEmail("tmp@email.com");
 		vo.setPhoneNumber("010-1234-1232");

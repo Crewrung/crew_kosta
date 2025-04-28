@@ -178,50 +178,13 @@
 </head>
 <body>
 
-<!-- 헤더 -->
-<header>
-  <div class="logo">
-    <img src="image/logo.png" alt="크루룽 로고">
-    <span class="logo-text">크루룽</span>
-  </div>
-  <nav>
-    <ul>
-      <li><a href="번개모임.html">번개 모임</a></li>
-      <li><a href="크루.html">크루</a></li>
-      <li><a href="자유게시판.html">자유게시판</a></li>
-    </ul>
-  </nav>
-
-  <div class="user-actions">
-    <div class="user-icon">
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-           viewBox="0 0 24 24" fill="none" stroke="currentColor"
-           stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-        <circle cx="12" cy="7" r="4"></circle>
-      </svg>
-    </div>
-
-    <c:choose>
-      <c:when test="${not empty loginUser}">
-        <span style="margin-right:10px;">${loginUser.nickname}님</span>
-        <form action="controller?cmd=logout" method="post" style="display:inline;">
-          <button class="login-btn" type="submit">로그아웃</button>
-        </form>
-      </c:when>
-      <c:otherwise>
-        <a href="로그인.jsp"><button class="login-btn">로그인</button></a>
-      </c:otherwise>
-    </c:choose>
-  </div>
-  <div class="header-divider"></div>
-</header>
+<%@ include file="/header.jsp" %>
 
 <!-- 메인 로그인 폼 -->
 <main>
   <div class="login-form text-center">
     <h3>로그인</h3>
-    <form method="post" action="controller?cmd=login">
+    <form method="post" action="/crew_kosta/controller?cmd=loginAction">
       <div class="mb-3">
         <input type="text" class="form-control" name="userId" placeholder="아이디" required />
       </div>
@@ -234,7 +197,7 @@
       </div>
       <div class="d-grid gap-2">
         <button type="submit" class="btn-custom">로그인</button>
-        <a href="회원가입.jsp"><button type="button" class="btn-custom">회원가입</button></a>
+        <a href="/crew_kosta/controller?cmd=joinUIAction"><button type="button" class="btn-custom">회원가입</button></a>
       </div>
     </form>
 
@@ -246,21 +209,7 @@
 </main>
 
 <!-- 푸터 -->
-<footer>
-  <div class="footer-content">
-    <div class="footer-left">
-      <div>Corporate Name: 주식회사 크루 Owner: 김훈희 Business License: 234-18-4251</div>
-      <div>E-commerce Registration: 2022-서울강남-02241 Phone: 1533 KR(Kakao only) Contact Mail: Biz.at@gmail.com</div>
-      <div>Address: 서울특별시 강남구 테헤란로 51길(역삼동) AB Personal Information Manager: 김도기 (info@gmail.com)</div>
-      <div class="footer-copyright">© LIGHTNING CO., LTD. ALL RIGHTS RESERVED.</div>
-    </div>
-    <div class="footer-right">
-      <div>CS Center: 1588-4321</div>
-      <div>10:00AM - 7:00PM (Lunch 12:30 - 13:30)</div>
-      <div>Sat/Sun/Holiday CLOSED</div>
-    </div>
-  </div>
-</footer>
+<%@ include file="/footer.jsp" %>
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>

@@ -30,13 +30,13 @@ public class LoginAction implements Action{
 		int result = service.Login(vo);
 		
 		if(result == 1){
-			HttpSession session = request.getSession();
+			HttpSession session = request.getSession(true);
 			session.setAttribute("userId", userId);
 			session.setAttribute("nickname", vo.getNickname());
-			return "main.html";
+			return "/index.jsp";
 		}else{
 			request.setAttribute("errorMsg", "로그인 실패");
-			return "login.jsp";
+			return "/account/login.jsp";
 		}
 	}
 }

@@ -1,5 +1,18 @@
 package com.crewrung.account.action;
 
-public class FindUserIdAction {
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+
+import com.crewrung.servlet.Action;
+
+public class FindUserIdAction implements Action{
+
+	@Override
+	public String execute(HttpServletRequest request) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }
