@@ -34,8 +34,7 @@ public class FrontController extends HttpServlet {
 		String result = action.execute(request);
 		String trimmed = result.trim();
 
-		if (trimmed.startsWith("{") && trimmed.endsWith("}")) {
-		    // JSON 객체로 응답
+		if (trimmed.contains("{")) {
 		    response.setContentType("application/json; charset=UTF-8");
 		    response.getWriter().write(result);
 		} else if (trimmed.startsWith("controller")){
