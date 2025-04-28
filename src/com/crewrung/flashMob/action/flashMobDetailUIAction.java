@@ -38,8 +38,7 @@ public class flashMobDetailUIAction implements Action {
         
 
         //댓글
-        List<FlashMobCommentVO> comment = flashMobService.getAllFlashMobComments(flashMobNumber);
-        
+        List<FlashMobCommentVO> comments = flashMobService.getAllFlashMobComments(flashMobNumber);
         HttpSession ServerSession = request.getSession(false); // 기존 세션만 가져옴 (없으면 null)
         String userId = null;
         if (ServerSession != null && ServerSession.getAttribute("userId") != null) {
@@ -53,7 +52,7 @@ public class flashMobDetailUIAction implements Action {
         request.setAttribute("flashmob", flashmob);
         request.setAttribute("participants", participants);
         request.setAttribute("leader", leader);
-        request.setAttribute("comment", comment);
+        request.setAttribute("comments", comments);
         request.setAttribute("isHost", isHost);
         request.setAttribute("isParticipant", isParticipant);
         

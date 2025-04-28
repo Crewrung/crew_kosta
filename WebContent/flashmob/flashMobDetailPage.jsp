@@ -475,7 +475,7 @@ main {
 					<div class="comment-item">
 						<div class="comment-header">
 							<c:set var="nickname"
-								value="${userService.getUserNickname(comment.userId)}" />
+								value="${comment.userId}" />
 							<div class="comment-user">${nickname}</div>
 							<div class="comment-date">${comment.commentDate}</div>
 						</div>
