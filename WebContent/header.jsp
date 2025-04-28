@@ -101,7 +101,17 @@ nav ul li a {
                 <circle cx="12" cy="7" r="4"></circle>
             </svg>
         </div>
-        <a href="controller?cmd=login" class="login-btn">로그인</a>
+            <c:choose>
+        <c:when test="${not empty sessionScope.userId}">
+            <!-- 로그인 상태일 때 -->
+            <p>안녕하세요, ${sessionScope.nickname}님!</p>
+            <a href="/crew_kosta/controller?cmd=logoutAction">로그아웃</a> <!-- 로그아웃 버튼 -->
+        </c:when>
+        <c:otherwise>
+            <!-- 로그아웃 상태일 때 -->
+            <a href="/crew_kosta/controller?cmd=loginUI">로그인</a> <!-- 로그인 버튼 -->
+        </c:otherwise>
+    </c:choose>
     </div>
 
     <!-- 헤더 아래 구분선 추가 -->
