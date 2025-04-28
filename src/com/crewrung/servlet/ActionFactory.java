@@ -26,7 +26,6 @@ import com.crewrung.flashMob.action.isFlashMobParticipantAction;
 import com.crewrung.flashMob.action.updateFlashMobAction;
 import com.crewrung.flashMob.action.updateFlashMobUIAction;
 
-import crewaction.CrewUIAction;
 
 public class ActionFactory {
 	private ActionFactory() {}
@@ -36,33 +35,33 @@ public class ActionFactory {
 
 		switch (cmd) {
 		// Crew 
-		case "crewUI":
-			action = new CrewUIAction();
-			break;
-		case "crewFilter":
-			action = new CrewFilterAction();
-			break;
-		case "crewDetailUI":
-		    action = new CrewDetailUIAction();
-		    break;
-		case "addCrewUI":
-			action = new AddCrewUIAction();
-			break;
-		case "addCrew":
-			action = new AddCrewAction();
-			break;
-		case "applyCrewUI":
-			action = new ApplyCrewUIAction();
-			break;
-		case "applyCrew":
-			action = new ApplyCrewAction();
-			break;
-		case "addCrewMeetingUI":
-			action = new AddCrewMeetingUIAction();
-			break;
-		case "addCrewMeeting":
-			action = new AddCrewMeetingAction();
-			break;
+//		case "crewUI":
+//			action = new CrewUIAction();
+//			break;
+//		case "crewFilter":
+//			action = new CrewFilterAction();
+//			break;
+//		case "crewDetailUI":
+//		    action = new CrewDetailUIAction();
+//		    break;
+//		case "addCrewUI":
+//			action = new AddCrewUIAction();
+//			break;
+//		case "addCrew":
+//			action = new AddCrewAction();
+//			break;
+//		case "applyCrewUI":
+//			action = new ApplyCrewUIAction();
+//			break;
+//		case "applyCrew":
+//			action = new ApplyCrewAction();
+//			break;
+//		case "addCrewMeetingUI":
+//			action = new AddCrewMeetingUIAction();
+//			break;
+//		case "addCrewMeeting":
+//			action = new AddCrewMeetingAction();
+//			break;
 
 			// FlashMob
 		case "flashMobUI":
