@@ -33,10 +33,7 @@ public class MypageAction implements Action{
 		MypageVO vo = service.getMypageInfo(userId);
 		
 		request.setAttribute("mypage", vo);
-		
-		
-		
-		
+
 		return "/account/mypage.jsp";
 	}
 
