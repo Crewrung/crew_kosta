@@ -110,7 +110,7 @@
     
     
     <div class="container">
-        <h1 class="page-title">아이디 찾기</h1>
+        <h1 class="page-title">비밀번호 찾기</h1>
         
         <form action="/kosta/controller?cmd=findUserPwAction" method="post" id="findIdForm">
             <input type="hidden" name="cmd" value="findIdAction">
@@ -128,7 +128,7 @@
             
 
             
-            <button type="submit" class="submit-btn">아이디 찾기</button>
+            <button type="submit" class="submit-btn">비밀번호 찾기</button>
         </form>
     </div>
     
