@@ -17,7 +17,7 @@ import com.crewrung.flashMob.vo.FlashMobMainViewVO;
 import com.crewrung.servlet.Action;
 import com.google.gson.Gson;
 
-public class flashMobFilterUIAction implements Action {
+public class flashMobFilterAction implements Action {
 
 	@Override
 	public String execute(HttpServletRequest request) throws ServletException, IOException {
