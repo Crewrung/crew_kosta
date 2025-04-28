@@ -93,6 +93,7 @@ nav ul li a {
     </nav>
 
     <div class="user-actions">
+    <a href = "/kosta/controller?cmd=mypageUIAction">
         <div class="user-icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                 viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -100,6 +101,7 @@ nav ul li a {
                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                 <circle cx="12" cy="7" r="4"></circle>
             </svg>
+            </a>
         </div>
             <c:choose>
         <c:when test="${not empty sessionScope.userId}">
@@ -109,7 +111,7 @@ nav ul li a {
         </c:when>
         <c:otherwise>
             <!-- 로그아웃 상태일 때 -->
-            <a href="/crew_kosta/controller?cmd=loginUI">로그인</a> <!-- 로그인 버튼 -->
+            <a href="/kosta/controller?cmd=loginUI">로그인</a> <!-- 로그인 버튼 -->
         </c:otherwise>
     </c:choose>
     </div>
