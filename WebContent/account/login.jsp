@@ -193,7 +193,7 @@
       </div>
       <div class="text-end text-muted mb-3" style="font-size: 0.85rem;">
         <a href="/kosta/controller?cmd=findUserIdUIAction" class="text-decoration-none text-muted me-2">아이디 찾기</a> |
-        <a href="비밀번호찾기.html" class="text-decoration-none text-muted ms-2">비밀번호 찾기</a>
+        <a href="/kosta/controller?cmd=findUserPwUIAction" class="text-decoration-none text-muted ms-2">비밀번호 찾기</a>
       </div>
       <div class="d-grid gap-2">
         <button type="submit" class="btn-custom">로그인</button>

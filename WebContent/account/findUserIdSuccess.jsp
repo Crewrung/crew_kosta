@@ -144,7 +144,7 @@
             <a href="/kosta/controller?cmd=loginUI">
                 <button class="btn primary-btn">로그인하기</button>
             </a>
-            <a href="controller?cmd=findPasswordUI">
+            <a href="/kosta/controller?cmd=findUserPwUIAction">
                 <button class="btn secondary-btn">비밀번호 찾기</button>
             </a>
         </div>
