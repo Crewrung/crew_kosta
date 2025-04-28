@@ -100,12 +100,5 @@ public class MypageVO {
 		this.flashMobTitles = flashMobTitles;
 	}
 
-	@Override
-	public String toString() {
-		return "MypageVO [userId=" + userId + ", profileImage=" + profileImage + ", nickname=" + nickname + ", email="
-				+ email + ", phoneNumber=" + phoneNumber + ", introduction=" + introduction + ", crewNames=" + crewNames
-				+ ", flashMobTitles=" + flashMobTitles + "]";
-	}
-
 
 }
