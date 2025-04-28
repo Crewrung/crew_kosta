@@ -4,6 +4,7 @@ import com.crewrung.flashMob.action.FlashMobUIAction;
 import com.crewrung.flashMob.action.addFlashMobAction;
 import com.crewrung.flashMob.action.addFlashMobCommentAction;
 import com.crewrung.flashMob.action.addFlashMobUIAction;
+import com.crewrung.flashMob.action.addFlashMobAction;
 import com.crewrung.flashMob.action.applyFlashMobAction;
 import com.crewrung.flashMob.action.flashMobDetailUIAction;
 import com.crewrung.flashMob.action.flashMobFilterUIAction;
@@ -28,9 +29,9 @@ public class ActionFactory {
 		case "flashMobDetailUI":
 			action = new flashMobDetailUIAction();
 			break;
-		case "flashMobFilterUI":
-			action = new flashMobFilterUIAction();
-			break;
+//		case "flashMobFilterUI":
+//			action = new flashMobFilterUIAction();
+//			break;
 		case "updateFlashMobUI":
 			action = new updateFlashMobUIAction();
 			break;

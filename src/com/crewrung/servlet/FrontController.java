@@ -31,9 +31,15 @@ public class FrontController extends HttpServlet {
 		
 		Action action = ActionFactory.getAction(cmd);
 
-		String url = action.execute(request);
-		
-		request.getRequestDispatcher("/" + url).forward(request, response);
+		String result = action.execute(request);
+		String trimmed = result.trim();
+
+		if (trimmed.startsWith("{") || trimmed.startsWith("[")) {
+		    response.setContentType("application/json; charset=UTF-8");
+		    response.getWriter().write(result);
+		} else {
+		    request.getRequestDispatcher("/" + result).forward(request, response);
+		}
 		
 	}
 	
