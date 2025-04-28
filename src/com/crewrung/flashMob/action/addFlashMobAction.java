@@ -20,7 +20,7 @@ public class addFlashMobAction implements Action {
 
 	@Override
 	public String execute(HttpServletRequest request) throws ServletException, IOException {
-		SqlSession session = DBCP.getSqlSessionFactory().openSession();
+		SqlSession session = DBCP.getSqlSessionFactory().openSession(true);
 		FlashMobService flashMobService = new FlashMobService(new FlashMobDAO(session));
 
 		String title = request.getParameter("title");
@@ -54,7 +54,8 @@ public class addFlashMobAction implements Action {
 		FlashMobVO flashMobVO = new FlashMobVO(hostId, title, content, interestCategory, ageRange, maxMember,
 				meetingDateTime, guNumber);
 		flashMobService.addFlashMob(flashMobVO);
-
+		
+		session.close();
 		return "flashmob/flashMobMain.jsp";
 	}
 

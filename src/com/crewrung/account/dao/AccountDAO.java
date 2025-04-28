@@ -8,9 +8,8 @@ import com.crewrung.account.vo.JoinVO;
 import com.crewrung.account.vo.LoginVO;
 import com.crewrung.account.vo.MypageVO;
 import com.crewrung.account.vo.FindUserIdVO;
-import com.crewrung.account.vo.UserInfoVO;
 import com.crewrung.account.vo.FindUserPwVO;
-import com.crewrung.account.vo.UserSetVO;
+import com.crewrung.account.vo.UserUpdateInfoVO;
 
 public class AccountDAO {
 
@@ -46,12 +45,23 @@ public class AccountDAO {
 	
 	// 회원가입  O
 	public int join(JoinVO joinVO){
-		return con.insert("accountMapper.Join", joinVO);
+		
+		int result =  con.insert("accountMapper.Join", joinVO);
+		System.out.println("회원가입 쿼리 결과" + result);
+		return result;
 	}
 	
 	// 구이름 -> 구넘버
-	public int getGuNumberByName(String guName){
-		return con.selectOne("accountMapper.getGuNumberByName", guName);
+	public int getGuNumberByName(String guName) {
+	    Integer guNumber = con.selectOne("accountMapper.getGuNumberByName", guName);
+	    
+	    if(guNumber == null){
+	    	System.out.println("구 번호가 없습니다." + guName);
+	    	return 0;
+	    }
+	    
+	    System.out.println("구 번호: " + guNumber);
+	    return guNumber;
 	}
 	
 	// 회원탈퇴 O
@@ -70,8 +80,8 @@ public class AccountDAO {
 	}
 	
 	// 개인정보 수정
-	public int setUserInfo(UserInfoVO userInfoVO){
-		return con.update("accountMapper.setUserInfo", userInfoVO);
+	public int setUserInfo(UserUpdateInfoVO UserUpdateInfoVO){
+		return con.update("accountMapper.setUserInfo", UserUpdateInfoVO);
 	}
 	
 	// 아이디 중복 체크 O

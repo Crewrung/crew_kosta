@@ -1,4 +1,4 @@
-package com.crewrung.flashMob.action;
+package com.crewrung.account.action;
 
 import java.io.IOException;
 
@@ -7,12 +7,11 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.crewrung.servlet.Action;
 
-public class flashMobFilterUIAction implements Action {
+public class JoinUIAction implements Action{
 
 	@Override
 	public String execute(HttpServletRequest request) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		return null;
+		return "/account/join.jsp";
 	}
 
 }
