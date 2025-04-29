@@ -65,65 +65,6 @@ public class ActionFactory {
 		Action action;
 
 		switch (cmd) {
-		// Board related actions
-		case "detailBoardUI":
-			action = new detailBoardUIAction();
-			break;
-		case "deleteBoard":
-			action = new deleteBoardAction();
-			break;
-		case "updateBoardUI":
-			action = new updateBoardUIAction();
-			break;
-		case "updateBoard":
-			action = new updateBoardAction();
-			break;
-		case "boardCommentUI":
-			action = new boardCommentUIAction();
-			break;
-		case "boardsUI":
-			action = new boardsUIAction();
-			break;
-		case "postingUI":
-			action = new postingUIAction();
-			break;
-		case "paging":
-			action = new pagingAction();
-			break;
-		case "uploadboard":
-			action = new uploadboardAction();
-			break;
-		case "insertComment":
-			action = new insertCommentAction();
-		 //Crew 
-		case "crewUI":
-			action = new CrewUIAction();
-			break;
-		case "crewFilter":
-			action = new CrewFilterAction();
-			break;
-		case "crewDetailUI":
-		    action = new CrewDetailUIAction();
-		    break;
-		case "addCrewUI":
-			action = new AddCrewUIAction();
-			break;
-		case "addCrew":
-			action = new AddCrewAction();
-			break;
-		case "applyCrewUI":
-			action = new ApplyCrewUIAction();
-			break;
-		case "applyCrew":
-			action = new ApplyCrewAction();
-			break;
-		case "addCrewMeetingUI":
-			action = new AddCrewMeetingUIAction();
-			break;
-		case "addCrewMeeting":
-			action = new AddCrewMeetingAction();
-			break;
-
 			// FlashMob
 		case "flashMobUI":
 			action = new FlashMobUIAction();

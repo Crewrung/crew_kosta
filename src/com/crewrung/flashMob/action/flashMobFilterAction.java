@@ -32,12 +32,6 @@ public class flashMobFilterAction implements Action {
 		String maxMember = request.getParameter("maxMember");
 		String minMember = request.getParameter("minMember");
 		
-		System.out.println(interestCategory);
-		System.out.println(ageRange);
-		System.out.println(guName);
-		System.out.println(maxMember);
-		System.out.println(minMember);
-		
 		Map<String ,String> filter = new HashMap<>();
 		filter.put("interestCategory", interestCategory);
 		filter.put("ageRange", ageRange);
