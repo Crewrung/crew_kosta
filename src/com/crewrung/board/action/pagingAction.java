@@ -7,12 +7,12 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.crewrung.servlet.Action;
 
-public class uploadboard implements Action{
+public class pagingAction implements Action{
 
 	@Override
 	public String execute(HttpServletRequest request) throws ServletException, IOException {
 
-		return UploadpostAction;
+		return "PagingAction.jsp";
 	}
 
 }

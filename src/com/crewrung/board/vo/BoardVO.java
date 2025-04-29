@@ -10,11 +10,12 @@ public class BoardVO {
     private Date writingDate;
     private int viewCount;
 
+    public BoardVO(){}
+    
     // ����Ʈ, delete ��
-    public BoardVO(int boardNumber, String writerId, String title) {
+    public BoardVO(int boardNumber, String writerId) {
         this.boardNumber = boardNumber;
         this.writerId = writerId;
-        this.title = title;
     }
 
     // update ��
@@ -24,8 +25,6 @@ public class BoardVO {
         this.title = title;
         this.content = content;
     }
-
-    public BoardVO() {}
 
     // full ������
     public BoardVO(int boardNumber, String writerId, String title, String content, Date writingDate, Integer viewCount) {
