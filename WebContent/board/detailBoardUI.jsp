@@ -5,6 +5,9 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
+  <!-- 헤더 -->
+	<%@ include file="../header.jsp"%>
+	
   <title>게시글 상세</title>
   <style>
     body {
@@ -169,42 +172,44 @@
     <!-- 뒤로가기 -->
     <a href="<c:url value='/controller'><c:param name='cmd' value='boardsUI'/></c:url>" class="back-link">뒤로가기</a>
 
-    <!-- 수정/삭제 -->
-    <div class="actions">
-      <a href="<c:url value='/controller'>
-                  <c:param name='cmd' value='updateBoardUI'/>
-                  <c:param name='boardNumber' value='${board.boardNumber}'/>
-               </c:url>">
-        수정
-      </a>
-     
 	
-		<!-- 삭제 링크: actionType=delete 파라미터 추가 -->
-		<c:url var="deleteURL" value="/controller">
-		  <c:param name="cmd"         value="detailBoardUI"/>
-		  <c:param name="boardNumber" value="${board.boardNumber}"/>
-		  <c:param name="writerId"    value="${writerId}"/>
-		  <c:param name="actionType"  value="delete"/>
-		</c:url>
-		<a href="${deleteURL}"
-		   class="btn-delete"
-		   onclick="return confirm('정말 삭제하시겠습니까?');">
-		  삭제
-		</a>
-
-    </div>
-  </div>
-
+	<div class="actions">
+	    <c:if test="${sessionScope.userId == board.writerId}">
+	      <!-- 수정 링크 (녹색 배경) -->
+	      <c:url var="editURL" value="/controller">
+	        <c:param name="cmd"         value="updateBoardUI"/>
+	        <c:param name="boardNumber" value="${board.boardNumber}"/>
+	      </c:url>
+	      <a href="${editURL}">
+	      수정
+	      </a>
+	
+	      <!-- 삭제 링크 (빨간 배경) -->
+	      <c:url var="deleteURL" value="/controller">
+	        <c:param name="cmd"         value="deleteBoard"/>
+	        <c:param name="boardNumber" value="${board.boardNumber}"/>
+	        <c:param name="writerId"    value="${sessionScope.userId}"/>
+	      </c:url>
+	      <a href="${deleteURL}" class="btn-delete"
+	         onclick="return confirm('정말 삭제하시겠습니까?');">
+	        삭제
+	      </a>
+	    </c:if>
+	  </div>
+</div>
   <!-- 댓글 섹션 -->
   <div class="comment-section">
 
-    <!-- 댓글 작성 폼 -->
-    <form action="<c:url value='/controller'/>" method="post" class="comment-form">
-      <input type="hidden" name="cmd" value="insertBoardComment"/>
-      <input type="hidden" name="boardNumber" value="${board.boardNumber}"/>
-      <textarea name="boardComment" maxlength="100" placeholder="댓글을 입력하세요 (최대 100자)"></textarea><br/>
-      <button type="submit">댓글 작성</button>
-    </form>
+	<form action="<c:url value='/controller'/>" method="post" class="comment-form">
+	  <input type="hidden" name="cmd"              value="insertComment"/>
+	  <input type="hidden" name="boardNumber"      value="${board.boardNumber}"/>
+	  <input type="hidden" name="boardCommenterId" value="${sessionScope.userId}"/>
+	  <textarea name="boardComment"
+	            maxlength="100"
+	            placeholder="댓글을 입력하세요 (최대 100자)"></textarea><br/>
+	  <button type="submit">댓글 작성</button>
+	</form>
+
 
     <!-- 댓글 목록 -->
     <div class="comments-list">
@@ -259,4 +264,6 @@
   </div>
 
 </body>
+
+
 </html>

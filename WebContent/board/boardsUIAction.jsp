@@ -1,9 +1,13 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+<!-- 헤더 -->
+	<%@ include file="../header.jsp"%>
+	
   <meta charset="UTF-8">
   <title>자유게시판</title>
   <style>
@@ -139,4 +143,7 @@
   </div>
 
 </body>
+
+	<!-- 푸터 - 두 열 레이아웃 -->
+	<%@ include file="../footer.jsp"%>
 </html>

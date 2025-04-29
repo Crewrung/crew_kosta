@@ -18,12 +18,15 @@
        AND board_commenter_id = #{boardCommenterId}
   </delete>
 
-  <select id="getAllComments" resultType="com.crewrung.board.vo.BoardCommentListVO">
+  <select id="getAllComments"
+        parameterType="int"
+        resultType="com.crewrung.board.vo.BoardCommentListVO">
     SELECT board_comment_number AS boardCommentNumber,
            board_comment        AS boardComment,
            comment_date         AS commentDate,
            board_commenter_id   AS commenter
       FROM board_comments
+      WHERE board_number = #{boardNumber}
      ORDER BY comment_date DESC
   </select>
 

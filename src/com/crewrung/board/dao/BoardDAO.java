@@ -32,7 +32,7 @@ public class BoardDAO {
 
     public List<BoardCommentListVO> getAllComments(int boardNumber) {
         try (SqlSession session = sqlSessionFactory.openSession()) {
-            return session.selectList("boardMapper.getAllComments");
+        return session.selectList("boardMapper.getAllComments", boardNumber);
         }
     }
 

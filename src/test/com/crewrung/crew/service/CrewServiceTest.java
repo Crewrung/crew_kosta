@@ -66,7 +66,7 @@ public class CrewServiceTest {
 		filter.put("interestCategory", "운동운동");
 		filter.put("guName", "송파구");
 		filter.put("ageRange", null); //null값의 포함 여부는 선택임
-		result = service.getAllCrewByFilter(filter);
+		result = service.getCrewsByFilter(filter);
 		assertFalse(result.isEmpty());
 		if(result.isEmpty()==false) {
 			System.out.println(result);
@@ -80,7 +80,7 @@ public class CrewServiceTest {
 		filter.put("interestCategory", "운동");
 		filter.put("guName", "송파구");
 		filter.put("ageRange", null);
-		result = service.getAllCrewByFilter(filter);
+		result = service.getCrewsByFilter(filter);
 		if(result.isEmpty()==false) {
 			System.out.println(result);
 		}

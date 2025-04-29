@@ -59,7 +59,7 @@ public class BoardDAOTest {
     // 3) 댓글 목록 조회
     @Test
     public void testGetAllComments() {
-        List<BoardCommentListVO> comments = dao.getAllComments();
+        List<BoardCommentListVO> comments = dao.getAllComments(0);
         assertNotNull(comments);
     }
 
@@ -88,7 +88,7 @@ public class BoardDAOTest {
     // 6) 게시글 삭제
     @Test
     public void testDeleteBoard() {
-        BoardVO vo = new BoardVO(131L, "hyunmin84", "삭제 내용");
+        BoardVO vo = new BoardVO(131, "hyunmin84","삭제 제목", "삭제 내용");
         int result = dao.deleteBoard(vo);
         assertEquals(1, result);
     }
@@ -96,7 +96,7 @@ public class BoardDAOTest {
     // 7) 게시글 상세 조회
     @Test
     public void testGetBoardDetail() {
-        BoardDetailVO detail = dao.getBoardDetail(1L);
+        BoardDetailVO detail = dao.getBoardDetail(1);
         assertNotNull(detail);
     }
 
@@ -110,7 +110,7 @@ public class BoardDAOTest {
     // 10) 게시글 수정
     @Test
     public void testUpdateBoard() {
-        BoardVO vo = new BoardVO(1L, "joosung88", "Updated Title", "Updated Content");
+        BoardVO vo = new BoardVO(1, "joosung88", "Updated Title", "Updated Content");
         int result = dao.updateBoard(vo);
         assertEquals(1, result);
     }

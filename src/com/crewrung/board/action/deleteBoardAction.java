@@ -22,7 +22,7 @@ public class deleteBoardAction implements Action {
         // 1) 삭제 파라미터 읽기
         int boardNumber = Integer.parseInt(request.getParameter("boardNumber"));
         String writerId = request.getParameter("writerId");
-
+        System.out.println("sdad");
         // 2) 삭제 서비스 호출
         new DeleteBoardService().execute(boardNumber, writerId);
 
