@@ -7,6 +7,10 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
 </head>
 <body class="bg-light">
+
+  <!-- 헤더 -->
+	<%@ include file="../header.jsp"%>
+<main>
   <div class="container py-5">
     <div class="card mx-auto" style="max-width:600px;">
       <div class="card-header text-center">
@@ -34,5 +38,10 @@
       </div>
     </div>
   </div>
+  
+  </main>
+
+	<!-- 푸터 - 두 열 레이아웃 -->
+	<%@ include file="../footer.jsp"%>
 </body>
 </html>
