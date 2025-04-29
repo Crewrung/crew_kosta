@@ -19,6 +19,7 @@ public class CrewDetailUIAction implements Action {
 		SqlSession session = DBCP.getSqlSessionFactory().openSession();
 		//crewNumber 갖고옴
 		int crewNumber = Integer.parseInt(request.getParameter("crewNumber"));
+		request.getSession().setAttribute("crewNumber", crewNumber);
 		CrewService service = new CrewService(new CrewDAO(session));
 		//크루에 관한 정보 담기
 		request.setAttribute("crew", service.getCrewDetail(crewNumber));
@@ -30,6 +31,6 @@ public class CrewDetailUIAction implements Action {
 		request.setAttribute("crewCommentCount", service.getCommentCountByCrew(crewNumber));
 		//댓글 정보
 		request.setAttribute("crewComments", service.getCrewCommentDetail(crewNumber));
-		return "crewDetailPage.jsp";
+		return "crew/crewDetailPage.jsp";
 	}
 }

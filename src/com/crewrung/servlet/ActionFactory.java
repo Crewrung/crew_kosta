@@ -4,9 +4,11 @@ import com.crewrung.crew.action.AddCrewMeetingAction;
 import com.crewrung.crew.action.AddCrewMeetingUIAction;
 import com.crewrung.crew.action.AddCrewUIAction;
 import com.crewrung.crew.action.ApplyCrewUIAction;
+import com.crewrung.crew.action.ApproveCrewJoinRequestAction;
 import com.crewrung.crew.action.CrewDetailUIAction;
 import com.crewrung.crew.action.CrewMeetingDetailUIAction;
 import com.crewrung.crew.action.CrewUIAction;
+import com.crewrung.crew.action.DeleteCrewMemberAction;
 import com.crewrung.crew.action.RejectCrewJoinRequestAction;
 import com.crewrung.crew.action.UpdateCrewAction;
 import com.crewrung.crew.action.UpdateCrewUIAction;
@@ -131,15 +133,15 @@ public class ActionFactory {
 		case "crewMeetingDetailUI":
 			action = new CrewMeetingDetailUIAction();
 			break;
-//		case "deleteCrewMember":
-//			action = new DeleteCrewMemberAction();
-//			break;
+		case "deleteCrewMember":
+			action = new DeleteCrewMemberAction();
+			break;
 		case "rejectCrewJoinRequest":
 			action = new RejectCrewJoinRequestAction();
 			break;
-//		case "approveCrewJoinRequest":
-//			action = new ApproveCrewJoinRequestAction();
-//			break;
+		case "approveCrewJoinRequest":
+			action = new ApproveCrewJoinRequestAction();
+			break;
 		case "loginUI":
 			action = new LoginUIAction();
 			break;

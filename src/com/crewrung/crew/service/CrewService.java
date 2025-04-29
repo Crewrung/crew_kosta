@@ -27,7 +27,8 @@ public class CrewService {
 	}
 
 	public CrewService() {}
-
+	
+	
 	public boolean isCrewMember(int crewNumber, String userId) {
 		boolean result = false;
 		CrewMemberVO cm = new CrewMemberVO();
@@ -36,7 +37,9 @@ public class CrewService {
 		}
 		return result;
 	}
-
+	public int getCrewMemberHostNumber(String userId){
+		return crewDAO.getCrewMeetingHostNumber(userId);
+	}
 	//크루 멤버인지 확인
 	public boolean checkCrewMembership(int crewNumber, String userId) {
 		return crewDAO.isMemberOfCrew(crewNumber, userId);
