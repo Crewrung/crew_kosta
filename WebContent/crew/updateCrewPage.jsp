@@ -274,7 +274,7 @@ footer {
 </head>
 <body>
 	<!-- 헤더  -->
-	<c:import url="header.jsp"></c:import>
+	<c:import url="../header.jsp"></c:import>
 
 	<div class="container-fluid p-0">
 
@@ -301,16 +301,22 @@ footer {
 						</div>
 					</div>
 					<div class="action-buttons">
-						<form action="controller?cmd=rejectCrewJoinRequest" method="POST">
+						<form action="controller?cmd=rejectCrewJoinRequest" method="POST" onsubmit="return confirm('정말 가입 신청을 거절하시겠습니까?');">
 							<input type="hidden" name="crewNumber" value="${crewNumber}">
 							<input type="hidden" name="crewApplyNumber"
 								value="${applicant.crewApplyNumber}">
 							<button type="submit" class="btn btn-reject btn-sm">가입
 								거절</button>
 						</form>
-						<button class="btn btn-approve btn-sm">가입 승인</button>
+						<form action="controller?cmd=approveCrewJoinRequest" method="POST" onsubmit="return confirm('정말 가입 승인을 하시겠습니까?');">
+							<input type="hidden" name="crewNumber" value="${crewNumber}">
+							<input type="hidden" name="userId" value="${applicant.userId}">
+							<input type="hidden" name="crewApplyNumber"
+								value="${applicant.crewApplyNumber}">
+							<button class="btn btn-approve btn-sm">가입 승인</button>
+						</form>
 					</div>
-				</div> 
+				</div>
 
 			</c:forEach>
 			<!-- Crew Members -->
@@ -318,7 +324,7 @@ footer {
 
 			<div class="container">
 				<div class="row g-3">
-					<c:forEach var="member" items="${crewMembers}" varStatus="status">
+					<c:forEach var="member" items="${crewMembers}">
 						<!-- 3 개씩 배치하기 위해 col-md-6 사용 -->
 						<div class="col-md-6 col-lg-4">
 							<div class="crew-member-card">
@@ -334,7 +340,11 @@ footer {
 									</div>
 								</div>
 								<div class="action-buttons mt-2">
-									<button class="btn btn-approve btn-sm">추방하기</button>
+									<form action="controller?cmd=deleteCrewMember" method="POST" onsubmit="return confirm('정말 추방 하시겠습니까?');">
+										<input type="hidden" name="crewNumber" value="${crewNumber}">
+										<input type="hidden" name="crewUserId" value="${member.userId}">
+										<button class="btn btn-approve btn-sm">추방하기</button>
+									</form>
 								</div>
 							</div>
 						</div>
@@ -344,28 +354,7 @@ footer {
 		</div>
 
 		<!-- Footer -->
-		<footer>
-			<div class="footer-content">
-				<!-- 왼쪽 열 - 회사 정보 -->
-				<div class="footer-left">
-					<div>Corporate Name: 주식회사 크루 Owner: 김훈희 Business License:
-						234-18-4251</div>
-					<div>E-commerce Registration: 2022-서울강남-02241 Phone: 1533
-						KR(Kakao only) Contact Mail: Biz.at@gmail.com</div>
-					<div>Address: 서울특별시 강남구 테헤란로 51길(역삼동) AB Personal Information
-						Manager: 김도기 (info@gmail.com)</div>
-					<div class="footer-copyright">© LIGHTNING CO., LTD. ALL
-						RIGHTS RESERVED.</div>
-				</div>
-
-				<!-- 오른쪽 열 - CS Center 정보 -->
-				<div class="footer-right">
-					<div>CS Center: 1588-4321</div>
-					<div>10:00AM - 7:00PM (Lunch 12:30 - 13:30)</div>
-					<div>Sat/Sun/Holiday CLOSED</div>
-				</div>
-			</div>
-		</footer>
+		<c:import url="../footer.jsp"></c:import>
 	</div>
 
 	<!-- Bootstrap JS -->
@@ -376,5 +365,6 @@ footer {
 
 </body>
 <script>
+	
 </script>
 </html>

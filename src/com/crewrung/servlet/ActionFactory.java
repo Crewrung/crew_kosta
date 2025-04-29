@@ -4,9 +4,11 @@ import com.crewrung.crew.action.AddCrewMeetingAction;
 import com.crewrung.crew.action.AddCrewMeetingUIAction;
 import com.crewrung.crew.action.AddCrewUIAction;
 import com.crewrung.crew.action.ApplyCrewUIAction;
+import com.crewrung.crew.action.ApproveCrewJoinRequestAction;
 import com.crewrung.crew.action.CrewDetailUIAction;
 import com.crewrung.crew.action.CrewMeetingDetailUIAction;
 import com.crewrung.crew.action.CrewUIAction;
+import com.crewrung.crew.action.DeleteCrewMemberAction;
 import com.crewrung.crew.action.RejectCrewJoinRequestAction;
 import com.crewrung.crew.action.UpdateCrewAction;
 import com.crewrung.crew.action.UpdateCrewUIAction;
@@ -63,6 +65,36 @@ public class ActionFactory {
 		Action action;
 
 		switch (cmd) {
+		// Board related actions
+		case "detailBoardUI":
+			action = new detailBoardUIAction();
+			break;
+		case "deleteBoard":
+			action = new deleteBoardAction();
+			break;
+		case "updateBoardUI":
+			action = new updateBoardUIAction();
+			break;
+		case "updateBoard":
+			action = new updateBoardAction();
+			break;
+		case "boardCommentUI":
+			action = new boardCommentUIAction();
+			break;
+		case "boardsUI":
+			action = new boardsUIAction();
+			break;
+		case "postingUI":
+			action = new postingUIAction();
+			break;
+		case "paging":
+			action = new pagingAction();
+			break;
+		case "uploadboard":
+			action = new uploadboardAction();
+			break;
+		case "insertComment":
+			action = new insertCommentAction();
 		 //Crew 
 		case "crewUI":
 			action = new CrewUIAction();
@@ -141,15 +173,15 @@ public class ActionFactory {
 		case "crewMeetingDetailUI":
 			action = new CrewMeetingDetailUIAction();
 			break;
-//		case "deleteCrewMember":
-//			action = new DeleteCrewMemberAction();
-//			break;
+		case "deleteCrewMember":
+			action = new DeleteCrewMemberAction();
+			break;
 		case "rejectCrewJoinRequest":
 			action = new RejectCrewJoinRequestAction();
 			break;
-//		case "approveCrewJoinRequest":
-//			action = new ApproveCrewJoinRequestAction();
-//			break;
+		case "approveCrewJoinRequest":
+			action = new ApproveCrewJoinRequestAction();
+			break;
 		case "loginUI":
 			action = new LoginUIAction();
 			break;

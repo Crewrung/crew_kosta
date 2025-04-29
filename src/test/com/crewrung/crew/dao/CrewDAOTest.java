@@ -55,20 +55,20 @@ public class CrewDAOTest {
 		}
 	}
 
-//	@Test
-//	public void successSetCrewMeeting() {
-//		assertTrue(dao.setCrewMeeting(new CrewMeetingVO("", "새 제목", "새 내용", "2025-01-11", 6, 1111000000, 2)));
-//	}
-//
-//	@Test
-//	public void failSetCrewMeeting() {
-//		try {
-//			dao.setCrewMeeting(new CrewMeetingVO("", "새 제목", "새 내용", "2025-12-11", 6, 1000000, 2));
-//		} catch (Exception e) {
-//			assertTrue(e.getClass() == PersistenceException.class);
-//		}
-//	}
-//
+	@Test
+	public void successSetCrewMeeting() {
+		assertTrue(dao.setCrewMeeting(new CrewMeetingVO("", "새 제목", "새 내용", "2025-01-11", 6, 1111000000, 2)));
+	}
+
+	@Test
+	public void failSetCrewMeeting() {
+		try {
+			dao.setCrewMeeting(new CrewMeetingVO("", "새 제목", "새 내용", "2025-12-11", 6, 1000000, 2));
+		} catch (Exception e) {
+			assertTrue(e.getClass() == PersistenceException.class);
+		}
+	}
+
 //	@Test
 //	public void successApplyCrewMeeting() {
 //		assertTrue(dao.applyCrewMeeting(new ApplyCrewMeetingVO(11, 31)));
@@ -103,39 +103,39 @@ public class CrewDAOTest {
 //		assertNull(dao.getCrewMeetingHost(23323));
 //	}
 	
-//	@Test
-//	public void successAddCrewMeeting() {
-//		assertTrue(dao.addCrewMeeting(new CrewMeetingVO("축구 경기 보러가실분", "잠실 고고혓", "2025-04-30", 4, 1, 11, 1171000000)));
-//	}
-//	
-//	@Test
-//	public void failAddCrewMeeting() {
-//		try {
-//			dao.addCrewMeeting(new CrewMeetingVO("축구 경기 보러가실분", "잠실 고고혓", "2025-04-30", 4, 1, 11, 232332));
-//		} catch (Exception e) {
-//			assertTrue(e.getClass() == PersistenceException.class);
-//		}
-//	}
+	@Test
+	public void successAddCrewMeeting() {
+		assertTrue(dao.addCrewMeeting(new CrewMeetingVO("축구 경기 보러가실분", "잠실 고고혓", "2025-04-30", 4, 1, 11, 1171000000)));
+	}
 	
-//	@Test
-//	public void successGetCrewMeeting() {
-//		assertNotNull(dao.getCrewMeeting(50));
-//	}
+	@Test
+	public void failAddCrewMeeting() {
+		try {
+			dao.addCrewMeeting(new CrewMeetingVO("축구 경기 보러가실분", "잠실 고고혓", "2025-04-30", 4, 1, 11, 232332));
+		} catch (Exception e) {
+			assertTrue(e.getClass() == PersistenceException.class);
+		}
+	}
 	
-//	@Test
-//	public void failGetCrewMeeting() {
-//		assertNull(dao.getCrewMeeting(3232233));
-//	}
+	@Test
+	public void successGetCrewMeeting() {
+		assertNotNull(dao.getCrewMeeting(50));
+	}
 	
-//	@Test
-//	public void successGetCrewMeetingInfo() {
-//		assertNotNull(dao.getCrewMeetingsInfo(1));
-//	}
+	@Test
+	public void failGetCrewMeeting() {
+		assertNull(dao.getCrewMeeting(3232233));
+	}
 	
-//	@Test
-//	public void failGetCrewMeetingInfo() {
-//		assertEquals(dao.getCrewMeetingsInfo(12234).size(), 0);
-//	}
+	@Test
+	public void successGetCrewMeetingInfo() {
+		assertNotNull(dao.getCrewMeetingsInfo(1));
+	}
+	
+	@Test
+	public void failGetCrewMeetingInfo() {
+		assertEquals(dao.getCrewMeetingsInfo(12234).size(), 0);
+	}
 	
 //	@Test
 //	public void successRemoveCrewApplies() {
@@ -147,30 +147,30 @@ public class CrewDAOTest {
 //		assertFalse(dao.removeCrewApplies(new CrewAppliesVO(301, 3213121)));
 //	}
 	
-//	@Test
-//	public void successAddCrewMember() {
-//		assertTrue(dao.addCrewMember(new CrewMemberVO(1, "gaerin01")));
-//	}
-//	
-//	@Test
-//	public void failAddCrewMember() {
-//		try{
-//			dao.addCrewMember(new CrewMemberVO(1, "gaerin01"));
-//		}catch(Exception e){
-//			assertTrue(e.getClass() == PersistenceException.class);
-//		}
-//		
-//	}
+	@Test
+	public void successAddCrewMember() {
+		assertTrue(dao.addCrewMember(new CrewMemberVO(1, "gaerin01")));
+	}
 	
-//	@Test
-//	public void successRemoveCrewMember() {
-//		assertTrue(dao.removeCrewMember(new CrewMemberVO(1, 3)));
-//	}
-//	
-//	@Test
-//	public void failRemoveCrewMember() {
-//		assertFalse(dao.removeCrewMember(new CrewMemberVO(30231, 3213121)));
-//	}
+	@Test
+	public void failAddCrewMember() {
+		try{
+			dao.addCrewMember(new CrewMemberVO(1, "gaerin01"));
+		}catch(Exception e){
+			assertTrue(e.getClass() == PersistenceException.class);
+		}
+		
+	}
+	
+	@Test
+	public void successRemoveCrewMember() {
+		assertTrue(dao.removeCrewMember(new CrewMemberVO(1, 3)));
+	}
+	
+	@Test
+	public void failRemoveCrewMember() {
+		assertFalse(dao.removeCrewMember(new CrewMemberVO(30231, 3213121)));
+	}
 	
 	@Test //홍보하는 크루정보 조회(기댓값이 옳지 않은 경우)
 	public void 홍보크루정보조회테스트실패() {

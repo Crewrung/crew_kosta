@@ -34,7 +34,10 @@ public class CrewDAO {
 		result = con.selectList("crewMapper.getAllPromotionCrew");
 		return result;
 	}
-	
+	public int getCrewMeetingHostNumber(String userId){
+		int result = con.selectOne("crewMapper.getCrewMeeintgHostNumber",userId);
+		return result;
+	}
 	public List<AllCrewVO> getAllCrew() {
 		List<AllCrewVO> result = new ArrayList<>();
 		result = con.selectList("crewMapper.getAllCrew");

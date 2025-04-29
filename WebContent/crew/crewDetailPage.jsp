@@ -302,6 +302,11 @@ footer {
 	border-bottom: 1px solid #eee;
 }
 
+.meeting {
+	font-size: 18px;
+	font-weight: bold;
+}
+
 .crew-members {
 	display: flex;
 	gap: 20px;
@@ -492,7 +497,7 @@ footer {
 </head>
 <body>
 	<!-- 헤더 -->
-	<c:import url="header.jsp"></c:import>
+	<%@ include file="../header.jsp"%>
 
 	<!-- 메인 콘텐츠 영역 - 크루 상세 정보 -->
 	<main> <!-- 크루 상세 정보 컨테이너 -->
@@ -500,10 +505,7 @@ footer {
 		<!-- 크루 배너 이미지와 업로드 버튼 -->
 		<div class="crew-banner-container" style="position: relative;">
 			<!-- <div id="bannerText" class="banner-text">이미지를 넣어주세요.</div> -->
-
-			<img id="bannerPreview" src= "${ crew.image }"alt="크루 배너 이미지" class="crew-banner"
-				style="display: none;">
-
+			<img src="flash.png" alt="크루 배너 이미지">
 			<!-- <button type="button" class="image-upload-btn"
 				onclick="document.getElementById('bannerUpload').click()">
 				<i class="bi bi-camera-fill upload-icon"></i>
@@ -520,7 +522,7 @@ footer {
 			</div>
 			<div class="crew-actions">
 				<button class="crew-action-btn btn-light"
-					onclick="location.href='controller?cmd=updateCrewUI&crewNumber=1'">크루관리</button>
+					onclick="location.href='controller?cmd=updateCrewUI&crewNumber=${crewNumber}'">크루관리</button>
 			</div>
 			<!-- if모임장일때 필요-->
 		</div>
@@ -531,44 +533,51 @@ footer {
 		</div>
 
 		<!-- 크루 멤버 섹션 -->
-		<div>크루원</div>
+		<div class=section-title>크루원</div>
 		<div class="crew-members">
 			<c:forEach var="member" items="${crewMembers}">
 				<div class="member-card">
-					<img src="${member.profileImage}" alt="멤버 이미지" class="member-img">
+					<img src="https://avatars.dicebear.com/api/adventurer/12345.svg"
+						alt="멤버 이미지" class="img-fluid rounded-circle">
 					<div class="member-nickname">${member.nickname}</div>
 				</div>
 			</c:forEach>
 		</div>
 
 		<!-- 활동 및 모임 섹션 -->
-		<div class="section-title">활동 및 모임 일정</div>
+		<div class="d-flex justify-content-between align-items-center">
+			<div class="meeting">활동 및 모임 일정</div>
+			<div class="add-crew-flashmob">
+				<form action="controller?cmd=addCrewMeetingUI" method="POST">
+					<button class="crew-set-btn btn-light" type="submit">크루모임
+						등록</button>
+				</form>
+			</div>
+		</div>
+		<hr class="w-100">
 		<div class="activity-cards">
 			<c:forEach var="meeting" items="${crewMeetings}">
 				<div class="activity-card"
 					onclick="location.href='controller?cmd=crewMeetingDetailUI&number=${meeting.crewMeetingNumber}'"
 					style="cursor: pointer;">
 					<!-- 크루미팅넘버 가져오게하기  -->
-					<img src="${meeting.image}" alt="활동 이미지" class="activity-img">
+					<%-- <img src="${meeting.image}" alt="활동 이미지" class="activity-img"> --%>
+					<img src="default.png" alt="활동 이미지" class="activity-img">
 					<div class="activity-title">${meeting.title}</div>
 					<div class="activity-content">${meeting.content}</div>
 					<div class="activity-date">${meeting.meetingDate}</div>
 				</div>
 			</c:forEach>
 
-			<div class="add-crew-flashmob">
-				<button class="crew-set-btn btn-light">크루모임 등록</button>
-				<!-- 사용자가 이 크루에 가입되어있는지 -->
-			</div>
 
-			<button class="join-crew-btn">가입하기</button>
-			<!-- 사용자가 이 크루에 가입되어있는지 -->
+
+
 		</div>
-
+		<button class="join-crew-btn" onclick="location.href='controller?cmd=applyCrewUI'">가입하기</button>
+		<!-- 사용자가 이 크루에 가입되어있는지 -->
 		<!-- 댓글 섹션 -->
 		<div class="content-container">
-			<div class="section-title">전체 댓글
-				${comment_count}개</div>
+			<div class="section-title">전체 댓글 ${crewCommentCount}개</div>
 
 			<!-- 댓글 입력 폼 -->
 			<!-- 크루아이디, 작성자id 갖고오기 -->
@@ -585,7 +594,7 @@ footer {
 						<div class="comment-user">${ comment.nickname }</div>
 						<div class="comment-body">
 							<div class="comment-text">${ comment.crewComment }</div>
-							<div class="comment-date"><%= new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date()) %></div>
+							<div class="comment-date"><%=new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date())%></div>
 							<!-- VO에 날짜 필요 + SQL  -->
 						</div>
 					</div>
@@ -596,39 +605,8 @@ footer {
 	</main>
 
 	<!-- 푸터 - 두 열 레이아웃 -->
-	<c:import url="footer.jsp"></c:import>
-
-<!-- 	<script>
-	function handleImageUpload(event) {
-    const file = event.target.files[0];
-    if (!file) return;
-
-    const formData = new FormData();
-    formData.append('bannerImage', file);
-
-    fetch('controller?cmd=uploadBannerImage', {  // 비동기로 controller에 요청
-        method: 'POST',
-        body: formData
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            const bannerPreview = document.getElementById('bannerPreview');
-            bannerPreview.src = data.imageUrl;  // 서버에서 받은 이미지 경로
-            bannerPreview.style.display = 'block';
-            
-            const bannerText = document.getElementById('bannerText');
-            bannerText.style.display = 'none';
-        } else {
-            alert('이미지 업로드 실패: ' + data.message);
-        }
-    })
-    .catch(error => {
-        console.error('업로드 중 오류 발생:', error);
-        alert('업로드 오류 발생');
-    });
-} -->
-</script>
+	<c:import url="../footer.jsp"></c:import>
+	</script>
 </body>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </html>
