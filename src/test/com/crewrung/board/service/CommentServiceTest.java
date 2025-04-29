@@ -32,7 +32,7 @@ public class CommentServiceTest {
         insertCommentService.execute(81, commenter, content);
 
         // 2) 전체 댓글 조회
-        List<BoardCommentListVO> comments = getAllCommentsService.execute();
+        List<BoardCommentListVO> comments = getAllCommentsService.execute(0);
 
         // 3) for-loop로 삽입된 댓글이 있는지 검사
         boolean found = false;
@@ -57,7 +57,7 @@ public class CommentServiceTest {
         insertCommentService.execute(30, commenter, content);
 
         // 2) 삽입된 댓글 번호 찾기
-        List<BoardCommentListVO> afterInsert = getAllCommentsService.execute();
+        List<BoardCommentListVO> afterInsert = getAllCommentsService.execute(0);
         long commentNumber = -1;
         for (BoardCommentListVO c : afterInsert) {
             if (content.equals(c.getComment())
@@ -74,7 +74,7 @@ public class CommentServiceTest {
         deleteCommentService.execute(commentNumber, commenter);
 
         // 4) 삭제 후 다시 조회하여 남아있는지 확인
-        List<BoardCommentListVO> afterDelete = getAllCommentsService.execute();
+        List<BoardCommentListVO> afterDelete = getAllCommentsService.execute(0);
         boolean stillExists = false;
         for (BoardCommentListVO c : afterDelete) {
             if (c.getBoardCommentNumber() == commentNumber) {
@@ -90,7 +90,7 @@ public class CommentServiceTest {
     @Test
     public void testGetAllComments() throws Exception {
         // 조회만 하고 null이 아닌 리스트가 반환되는지 확인
-        List<BoardCommentListVO> comments = getAllCommentsService.execute();
+        List<BoardCommentListVO> comments = getAllCommentsService.execute(0);
         assertNotNull("댓글 목록은 null이 아니어야 한다.", comments);
     }
 }

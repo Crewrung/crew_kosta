@@ -81,7 +81,7 @@ public class BoardServiceTest {
         }
 
         // 3) 상세 조회
-        BoardDetailVO detail = getBoardDetailService.execute(boardNumber);
+        BoardDetailVO detail = getBoardDetailService.execute((int) boardNumber);
 
         // 4) 검증
         assertNotNull("게시글 상세 정보는 null이 아니어야 한다.", detail);
@@ -113,10 +113,10 @@ public class BoardServiceTest {
         // 3) 수정 실행
         String newTitle   = "수정된 제목";
         String newContent = "수정된 내용";
-        updateBoardService.execute(boardNumber, writer, newTitle, newContent);
+        updateBoardService.execute((int) boardNumber, writer, newTitle, newContent);
 
         // 4) 상세 조회 후 검증
-        BoardDetailVO detail = getBoardDetailService.execute(boardNumber);
+        BoardDetailVO detail = getBoardDetailService.execute((int) boardNumber);
         assertEquals("수정된 제목", detail.getTitle());
         assertEquals("수정된 내용", detail.getContent());
     }
@@ -140,14 +140,14 @@ public class BoardServiceTest {
         }
 
         // 3) 비교 전 조회수
-        BoardDetailVO before = getBoardDetailService.execute(boardNumber);
+        BoardDetailVO before = getBoardDetailService.execute((int) boardNumber);
         int beforeCount = before.getViewCount(); // getViewCount()가 Integer라면 auto-unboxing
 
         // 4) 조회수 증가
         incrementViewService.execute((int) boardNumber);
 
         // 5) 다시 조회
-        BoardDetailVO after = getBoardDetailService.execute(boardNumber);
+        BoardDetailVO after = getBoardDetailService.execute((int) boardNumber);
         int afterCount = after.getViewCount();   // auto-unboxing(Integer → int)
 
         // 6) 검증
@@ -178,7 +178,7 @@ public class BoardServiceTest {
         }
 
         // 3) 삭제 실행
-        deleteBoardService.execute(boardNumber, writer);
+        deleteBoardService.execute((int) boardNumber, writer);
 
         // 4) 삭제 후에도 목록 조회하여 남아있는지 확인
         List<BoardVO> afterDelete = getAllBoardsService.execute();

@@ -7,7 +7,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 
 public class UpdateBoardService {
     private final BoardDAO boardDAO;
-
+    private final BoardDAO dao = new BoardDAO(null);
     public UpdateBoardService() {
         SqlSessionFactory factory = DBCP.getSqlSessionFactory();
         this.boardDAO = new BoardDAO(factory);
@@ -19,5 +19,9 @@ public class UpdateBoardService {
         if (result < 1) {
             throw new RuntimeException("게시글 수정에 실패했습니다.");
         }
+    }
+
+    public int execute(BoardVO vo) {
+        return dao.updateBoard(vo);
     }
 }

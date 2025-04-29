@@ -4,12 +4,14 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import com.crewrung.board.vo.*;
+import com.crewrung.db.DBCP;
 
 public class BoardDAO {
     private final SqlSessionFactory sqlSessionFactory;
-
+    private final SqlSessionFactory factory = DBCP.getSqlSessionFactory();
     public BoardDAO(SqlSessionFactory sqlSessionFactory) {
         this.sqlSessionFactory = sqlSessionFactory;
+        
     }
 
 	public int insertComment(BoardCommentVO comment) {
@@ -30,7 +32,7 @@ public class BoardDAO {
 
     public List<BoardCommentListVO> getAllComments(int boardNumber) {
         try (SqlSession session = sqlSessionFactory.openSession()) {
-            return session.selectList("boardMapper.getAllComments");
+        return session.selectList("boardMapper.getAllComments", boardNumber);
         }
     }
 
@@ -63,10 +65,14 @@ public class BoardDAO {
     }
 
     public int updateBoard(BoardVO vo) {
-        try (SqlSession session = sqlSessionFactory.openSession()) {
-            int result = session.update("boardMapper.updateBoard", vo);
+        if (factory == null) {
+            throw new IllegalStateException("SqlSessionFactory가 초기화되지 않았습니다.");
+        }
+        try (SqlSession session = factory.openSession()) {
+            // namespace.updateBoard는 boardMapper.xml의 <update id="updateBoard">를 가리킵니다.
+            int updated = session.update("boardMapper.updateBoard", vo);
             session.commit();
-            return result;
+            return updated;
         }
     }
 
