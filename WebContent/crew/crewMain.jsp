@@ -56,33 +56,44 @@ body {
 </head>
 <body>
 	<!-- Header -->
-	<%@ include file="../header.jsp" %>
+	<%@ include file="../header.jsp"%>
 
-	<!-- 필터 영역 -->
+	<!-- 필터 영역 + 크루 생성하기 버튼 -->
 	<div class="container my-4">
-		<div class="row mb-4">
-			<div class="col-md-3">
-				<select id="interestCategory" class="form-select">
-					<option value="">전체</option>
-					<option value="여행">여행</option>
-					<option value="취미">취미</option>
-					<option value="스터디">스터디</option>
-					<!-- Add more options here -->
-				</select>
+		<div class="row mb-4 align-items-end">
+			<!-- 필터 세트 -->
+			<div class="col-md-9">
+				<div class="row">
+					<div class="col-md-4">
+						<select id="interestCategory" class="form-select">
+							<option value="">전체</option>
+							<option value="여행">여행</option>
+							<option value="취미">취미</option>
+							<option value="스터디">스터디</option>
+							<!-- 필요시 추가 -->
+						</select>
+					</div>
+					<div class="col-md-4">
+						<select id="guName" class="form-select">
+							<option value="">지역 선택</option>
+							<option value="마포구">마포구</option>
+							<!-- 필요시 추가 -->
+						</select>
+					</div>
+					<div class="col-md-4">
+						<select id="ageRange" class="form-select">
+							<option value="">연령대</option>
+							<option value="10대">10대</option>
+							<!-- 필요시 추가 -->
+						</select>
+					</div>
+				</div>
 			</div>
-			<div class="col-md-3">
-				<select id="guName" class="form-select">
-					<option value="">지역 선택</option>
-					<option value="마포구">마포구</option>
-					<!-- Add more regions -->
-				</select>
-			</div>
-			<div class="col-md-3">
-				<select id="ageRange" class="form-select">
-					<option value="">연령대</option>
-					<option value="10대">10대</option>
-					<!-- Add more age ranges -->
-				</select>
+
+			<!-- 크루 생성 버튼 -->
+			<div class="col-md-3 text-end">
+			<!-- 수정된 크루 생성하기 버튼 -->
+<a href="<%= request.getContextPath() %>/controller?cmd=addCrewUI" class="btn btn-dark">크루 생성하기</a>
 			</div>
 		</div>
 	</div>
@@ -94,7 +105,7 @@ body {
 
 	<!-- Footer -->
 	<!-- 푸터 -->
-	<%@ include file="../footer.jsp" %>
+	<%@ include file="../footer.jsp"%>
 
 	<!-- JavaScript -->
 	<script>

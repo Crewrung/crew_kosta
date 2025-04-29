@@ -1,6 +1,7 @@
 package com.crewrung.crew.action;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
@@ -18,54 +19,74 @@ public class AddCrewAction implements Action {
     public String execute(HttpServletRequest request) throws ServletException, IOException {
         try (SqlSession session = DBCP.getSqlSessionFactory().openSession(true)) {
             CrewService crewService = new CrewService(new CrewDAO(session));
-            CrewVO crewVO = new CrewVO();
 
-            // 필수 파라미터 확인
-            String crewName = getRequiredParam(request, "crewName");
-            if (crewName == null) return "crew/crewAddResult.jsp";
-            crewVO.setCrewName(crewName);
-
-            String crewLeaderId = getRequiredParam(request, "crewLeaderId");
-            if (crewLeaderId == null) return "crew/crewAddResult.jsp";
-            crewVO.setCrewLeaderId(crewLeaderId);
-
-            crewVO.setIntroduction(request.getParameter("introduction"));
-            crewVO.setInterestCategory(request.getParameter("interestCategory"));
-            crewVO.setAgeRange(request.getParameter("ageRange"));
-            crewVO.setImage(request.getParameter("image"));
-
-            String isPromotionParam = request.getParameter("isPromotion");
-            crewVO.setIsPromotion((isPromotionParam != null && !isPromotionParam.isEmpty()) ? isPromotionParam.charAt(0) : 'N');
-
-            String guNumberParam = request.getParameter("guNumber");
-            if (guNumberParam == null || guNumberParam.isEmpty()) {
-                request.setAttribute("errorMessage", "모임 지역(구 번호)을 선택해 주세요.");
-                request.setAttribute("redirectUrl", request.getContextPath() + "/crew/crewAddPage.html");
+            CrewVO crewVO = createCrewVOFromRequest(request);
+            if (crewVO == null) {
+                // 필수값 누락 오류가 발생하면 crewAddResult.jsp로 포워딩됨
                 return "crew/crewAddResult.jsp";
             }
-            crewVO.setGuNumber(Integer.parseInt(guNumberParam));
 
             int result = crewService.addCrew(crewVO);
 
             if (result > 0) {
-                request.setAttribute("successMessage", "크루가 정상적으로 생성되었습니다.");
-                request.setAttribute("redirectUrl", request.getContextPath() + "/controller?cmd=crewUI");
+                setSuccessMessage(request, "크루가 정상적으로 생성되었습니다.", request.getContextPath() + "/controller?cmd=crewUI");
             } else {
-                request.setAttribute("errorMessage", "크루 생성에 실패했습니다.");
-                request.setAttribute("redirectUrl", request.getContextPath() + "/crew/crewAddPage.html");
+                setErrorMessage(request, "크루 생성에 실패했습니다.", request.getContextPath() + "/crew/crewAddPage.html");
             }
 
             return "crew/crewAddResult.jsp";
         }
     }
 
+    private CrewVO createCrewVOFromRequest(HttpServletRequest request) {
+        CrewVO crewVO = new CrewVO();
+
+        String crewName = getRequiredParam(request, "crewName");
+        String crewLeaderId = getRequiredParam(request, "crewLeaderId");
+        String guNumberParam = getRequiredParam(request, "guNumber");
+
+        if (crewName == null || crewLeaderId == null || guNumberParam == null) {
+            return null;
+        }
+
+        crewVO.setCrewName(crewName);
+        crewVO.setCrewLeaderId(crewLeaderId);
+        crewVO.setIntroduction(getOptionalParam(request, "introduction"));
+        crewVO.setInterestCategory(getOptionalParam(request, "interestCategory"));
+        crewVO.setAgeRange(getOptionalParam(request, "ageRange"));
+        crewVO.setImage(getOptionalParam(request, "image"));
+        crewVO.setPromotionMessage(getOptionalParam(request, "promotionMessage"));
+        crewVO.setIsPromotion(parsePromotionFlag(request.getParameter("isPromotion")));
+        crewVO.setGuNumber(Integer.parseInt(guNumberParam));
+        System.out.println(crewVO);
+        return crewVO;
+    }
+
     private String getRequiredParam(HttpServletRequest request, String paramName) {
         String value = request.getParameter(paramName);
         if (value == null || value.trim().isEmpty()) {
-            request.setAttribute("errorMessage", paramName + " 파라미터가 누락되었습니다.");
-            request.setAttribute("redirectUrl", request.getContextPath() + "/crew/crewAddPage.html");
+            setErrorMessage(request, paramName + " 파라미터가 누락되었습니다.", request.getContextPath() + "/crew/crewAddPage.html");
             return null;
         }
-        return value;
+        return value.trim();
+    }
+
+    private String getOptionalParam(HttpServletRequest request, String paramName) {
+        String value = request.getParameter(paramName);
+        return (value != null && !value.trim().isEmpty()) ? value.trim() : null;
+    }
+
+    private char parsePromotionFlag(String isPromotionParam) {
+        return (isPromotionParam != null && isPromotionParam.equalsIgnoreCase("Y")) ? 'Y' : 'N';
+    }
+
+    private void setErrorMessage(HttpServletRequest request, String message, String redirectUrl) {
+        request.setAttribute("errorMessage", message);
+        request.setAttribute("redirectUrl", redirectUrl);
+    }
+
+    private void setSuccessMessage(HttpServletRequest request, String message, String redirectUrl) {
+        request.setAttribute("successMessage", message);
+        request.setAttribute("redirectUrl", redirectUrl);
     }
 }

@@ -12,14 +12,13 @@ import com.crewrung.crew.service.CrewService;
 import com.crewrung.db.DBCP;
 import com.crewrung.servlet.Action;
 
-public class AddCrewUIAction implements Action{
+public class AddCrewUIAction implements Action {
 
-	  @Override
-	    public String execute(HttpServletRequest request) throws ServletException, IOException {
-	        SqlSession session = DBCP.getSqlSessionFactory().openSession(true);
-	        CrewService crewService = new CrewService(new CrewDAO(session)); // crewService 생성
-		return "addCrew.jsp";
-	}
+    @Override
+    public String execute(HttpServletRequest request) throws ServletException, IOException {
+        SqlSession session = DBCP.getSqlSessionFactory().openSession(true);
+        CrewService crewService = new CrewService(new CrewDAO(session));
+        
+        return "crew/addCrew.jsp"; // ✅ JSP 경로로 수정
+    }
 }
-
-
