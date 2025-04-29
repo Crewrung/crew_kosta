@@ -9,22 +9,21 @@ import org.apache.ibatis.session.SqlSession;
 
 import com.crewrung.crew.dao.CrewDAO;
 import com.crewrung.crew.service.CrewService;
+import com.crewrung.crew.vo.CrewMemberVO;
 import com.crewrung.db.DBCP;
 import com.crewrung.servlet.Action;
 
-public class UpdateCrewUIAction implements Action {
-
+public class DeleteCrewMemberAction implements Action {
 	@Override
 	public String execute(HttpServletRequest request) throws ServletException, IOException {
 		SqlSession session = DBCP.getSqlSessionFactory().openSession();
-		int crewNumber = Integer.parseInt(request.getParameter("crewNumber"));
-	
 		CrewService service = new CrewService(new CrewDAO(session));
-		// 신청자들 정보
-		request.setAttribute("crewApplicants", service.getCrewApplicants(crewNumber));
-		// 멤버 정보
-		request.setAttribute("crewMembers", service.getCrewMember(crewNumber));
-		return "crew/updateCrewPage.jsp";
+		int crewNumber = Integer.parseInt(request.getParameter("crewNumber"));
+		String crewUserId = request.getParameter("crewUserId");
+		System.out.println(crewNumber + "b");
+		System.out.println(crewUserId + "aa");
+		service.removeCrewMemberService(new CrewMemberVO(crewNumber, crewUserId));
+		return "controller?cmd=updateCrewUI&crewNumber=" + crewNumber;  
 	}
 
 }

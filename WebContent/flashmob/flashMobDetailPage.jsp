@@ -363,6 +363,10 @@ main {
 	border-radius: 4px;
 	cursor: pointer;
 }
+
+.crew-description p {
+    white-space: pre-line;
+}
 </style>
 </head>
 <body>

@@ -32,6 +32,12 @@ public class flashMobFilterAction implements Action {
 		String maxMember = request.getParameter("maxMember");
 		String minMember = request.getParameter("minMember");
 		
+		System.out.println(interestCategory);
+		System.out.println(ageRange);
+		System.out.println(guName);
+		System.out.println(maxMember);
+		System.out.println(minMember);
+		
 		Map<String ,String> filter = new HashMap<>();
 		filter.put("interestCategory", interestCategory);
 		filter.put("ageRange", ageRange);
@@ -40,9 +46,16 @@ public class flashMobFilterAction implements Action {
 		filter.put("minMember", minMember);
 		
 		List<FlashMobMainViewVO> flashMobs = flashMobService.getAllFlashMobsByFilter(filter);
+		System.out.println(flashMobs);
 		session.close();
 		
-		return gson.toJson(flashMobs);
+		// flashMobs의 size가 0이면 빈 값 보내기
+	    if (flashMobs.size() == 0) {
+	        return "{}"; // 빈 값으로 반환
+	    }
+	    
+	    // flashMobs 리스트가 비어있지 않다면 JSON 형태로 반환
+	    return gson.toJson(flashMobs);
 	}
 
 }

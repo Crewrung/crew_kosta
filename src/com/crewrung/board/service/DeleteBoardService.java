@@ -14,9 +14,10 @@ public class DeleteBoardService {
     }
 
     public void execute(int boardNumber, String writerId) {
-    	BoardVO vo = new BoardVO();
+    	BoardVO vo = new BoardVO(boardNumber, writerId);
         vo.setBoardNumber(boardNumber);
         vo.setWriterId(writerId);
+
         int result = boardDAO.deleteBoard(vo);
         if (result < 1) {
             throw new RuntimeException("게시글 삭제에 실패했습니다.");

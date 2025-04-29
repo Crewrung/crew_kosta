@@ -108,8 +108,10 @@
 
 	<insert id="addCrew" parameterType="com.crewrung.crew.vo.CrewVO">
 		INSERT INTO crews
-		(crew_number, crew_name, crew_leader_id, introduction, interest_category,
-		age_range, image, promotion_message, is_promotion, gu_number)
+		(crew_number, crew_name, crew_leader_id, introduction,
+		interest_category,
+		age_range, image, promotion_message, is_promotion,
+		gu_number)
 		VALUES
 		(
 		crews_seq.nextval,
@@ -178,12 +180,15 @@
 		TRUNC(MONTHS_BETWEEN(SYSDATE,
 		au.birthdate) / 12) as age, au.gender,
 		SUBSTR(c.city_name,1,2) as
-		city, ca.introduction, au.user_id, ca.CREW_APPLY_NUMBER
+		city, ca.introduction, au.user_id,
+		ca.CREW_APPLY_NUMBER
 		from crew_applies ca
-		join users au on au.USER_ID = ca.USER_ID
+		join users au on au.USER_ID =
+		ca.USER_ID
 		join gues g on g.GU_NUMBER =
 		au.GU_NUMBER
-		join cities c on c.city_number = g.city_number
+		join cities c on
+		c.city_number = g.city_number
 		where
 		ca.crew_number = #{crewNumber}
 	</select>
@@ -193,16 +198,19 @@
 		select au.profile_image, au.nickname,
 		TRUNC(MONTHS_BETWEEN(SYSDATE,
 		au.birthdate) / 12) as age, au.gender,
-		SUBSTR(c.city_name,1,2) as
-		city
-		from crews c join crew_members cmm on
+		SUBSTR(c.city_name,1,2) as city, cmm.crew_member_id as userId
+		from
+		crews c join crew_members cmm on
 		c.crew_number = cmm.crew_number
-		join users au on au.user_id =
+		join
+		users au on au.user_id =
 		cmm.CREW_MEMBER_ID
-		join gues g on g.GU_NUMBER = au.GU_NUMBER
+		join gues g on g.GU_NUMBER =
+		au.GU_NUMBER
 		join cities
 		c on c.CITY_NUMBER = g.CITY_NUMBER
-		where c.crew_number = #{crewNumber}
+		where
+		c.crew_number = #{crewNumber}
 	</select>
 
 	<select id="isMemberOfCrew" parameterType="map" resultType="boolean">
@@ -257,7 +265,12 @@
 		cmt.crew_meeting_host_number=cmb.crew_member_number and u.user_id =
 		cmb.crew_member_id
 	</select>
-
+	<select id="getCrewMeeintgHostNumber" parameterType="String"
+		resultType="int">
+		select cmm.crew_meeting_host_number from crew_meetings cmm, crew_members cm
+		where cmm.CREW_MEETING_HOST_NUMBER = cm.CREW_MEMBER_NUMBER
+		and cm.CREW_MEMBER_ID=#{crewMemberId}
+	</select>
 	<insert id="addCrewMeeting" parameterType="com.crewrung.crew.vo.CrewMeetingVO">
 		insert into
 		crew_meetings(crew_meeting_number, title, content, meeting_date,
@@ -290,8 +303,10 @@
 	</select>
 
 	<delete id="removeCrewApplicant" parameterType="com.crewrung.crew.vo.CrewAppliesVO">
-		delete crew_applies
-		where crew_apply_number = #{crewApplyNumber} and crew_number=
+		delete
+		crew_applies
+		where crew_apply_number = #{crewApplyNumber} and
+		crew_number=
 		#{crewNumber}
 	</delete>
 
@@ -305,7 +320,7 @@
 
 	<delete id="removeCrewMember" parameterType="com.crewrung.crew.vo.CrewMemberVO">
 		delete crew_members
-		where crew_member_number = #{crewMemberNumber} and crew_number =
+		where crew_member_id = #{crewMemberId} and crew_number =
 		#{crewNumber}
 	</delete>
 

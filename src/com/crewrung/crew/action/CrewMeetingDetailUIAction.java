@@ -18,7 +18,7 @@ public class CrewMeetingDetailUIAction implements Action{
 	    public String execute(HttpServletRequest request) throws ServletException, IOException {
 	        SqlSession session = DBCP.getSqlSessionFactory().openSession(true);
 	        CrewService crewService = new CrewService(new CrewDAO(session)); // crewService 생성
-		return "crewMeetingDetailPage.html";
+		return "crew/crewMeetingDetailPage.html";
 	}
 
 }

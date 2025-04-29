@@ -3,14 +3,14 @@ package com.crewrung.board.vo;
 import java.util.Date;
 
 public class BoardDetailVO {
-    private Long boardNumber;
+    private int boardNumber;
     private String writerId;
     private String title;
     private String content;
     private Date writingDate;
     private Integer viewCount;
 
-    // insert ¿ë
+    // insert ï¿½ï¿½
     public BoardDetailVO(String writerId, String title, String content, Date writingDate, int viewCount) {
         this.writerId = writerId;
         this.title = title;
@@ -21,8 +21,8 @@ public class BoardDetailVO {
 
     public BoardDetailVO() {}
 
-    public Long getBoardNumber() { return boardNumber; }
-    public void setBoardNumber(Long boardNumber) { this.boardNumber = boardNumber; }
+    public int getBoardNumber() { return boardNumber; }
+    public void setBoardNumber(int boardNumber) { this.boardNumber = boardNumber; }
 
     public String getWriterId() { return writerId; }
     public void setWriterId(String writerId) { this.writerId = writerId; }

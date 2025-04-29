@@ -4,9 +4,11 @@ import com.crewrung.crew.action.AddCrewMeetingAction;
 import com.crewrung.crew.action.AddCrewMeetingUIAction;
 import com.crewrung.crew.action.AddCrewUIAction;
 import com.crewrung.crew.action.ApplyCrewUIAction;
+import com.crewrung.crew.action.ApproveCrewJoinRequestAction;
 import com.crewrung.crew.action.CrewDetailUIAction;
 import com.crewrung.crew.action.CrewMeetingDetailUIAction;
 import com.crewrung.crew.action.CrewUIAction;
+import com.crewrung.crew.action.DeleteCrewMemberAction;
 import com.crewrung.crew.action.RejectCrewJoinRequestAction;
 import com.crewrung.crew.action.UpdateCrewAction;
 import com.crewrung.crew.action.UpdateCrewUIAction;
@@ -24,6 +26,16 @@ import com.crewrung.account.action.MypageUIAction;
 import com.crewrung.account.action.RemoveUserAction;
 import com.crewrung.account.action.UserUpdateInfoAction;
 import com.crewrung.account.action.UserUpdateInfoUIAction;
+import com.crewrung.board.action.boardCommentUIAction;
+import com.crewrung.board.action.boardsUIAction;
+import com.crewrung.board.action.deleteBoardAction;
+import com.crewrung.board.action.detailBoardUIAction;
+import com.crewrung.board.action.insertCommentAction;
+import com.crewrung.board.action.pagingAction;
+import com.crewrung.board.action.postingUIAction;
+import com.crewrung.board.action.updateBoardAction;
+import com.crewrung.board.action.updateBoardUIAction;
+import com.crewrung.board.action.uploadboardAction;
 import com.crewrung.crew.action.AddCrewAction;
 import com.crewrung.crew.action.AddCrewMeetingAction;
 import com.crewrung.crew.action.AddCrewMeetingUIAction;
@@ -53,35 +65,6 @@ public class ActionFactory {
 		Action action;
 
 		switch (cmd) {
-		 //Crew 
-		case "crewUI":
-			action = new CrewUIAction();
-			break;
-		case "crewFilter":
-			action = new CrewFilterAction();
-			break;
-		case "crewDetailUI":
-		    action = new CrewDetailUIAction();
-		    break;
-		case "addCrewUI":
-			action = new AddCrewUIAction();
-			break;
-		case "addCrew":
-			action = new AddCrewAction();
-			break;
-		case "applyCrewUI":
-			action = new ApplyCrewUIAction();
-			break;
-		case "applyCrew":
-			action = new ApplyCrewAction();
-			break;
-		case "addCrewMeetingUI":
-			action = new AddCrewMeetingUIAction();
-			break;
-		case "addCrewMeeting":
-			action = new AddCrewMeetingAction();
-			break;
-
 			// FlashMob
 		case "flashMobUI":
 			action = new FlashMobUIAction();
@@ -131,15 +114,15 @@ public class ActionFactory {
 		case "crewMeetingDetailUI":
 			action = new CrewMeetingDetailUIAction();
 			break;
-//		case "deleteCrewMember":
-//			action = new DeleteCrewMemberAction();
-//			break;
+		case "deleteCrewMember":
+			action = new DeleteCrewMemberAction();
+			break;
 		case "rejectCrewJoinRequest":
 			action = new RejectCrewJoinRequestAction();
 			break;
-//		case "approveCrewJoinRequest":
-//			action = new ApproveCrewJoinRequestAction();
-//			break;
+		case "approveCrewJoinRequest":
+			action = new ApproveCrewJoinRequestAction();
+			break;
 		case "loginUI":
 			action = new LoginUIAction();
 			break;
@@ -185,11 +168,44 @@ public class ActionFactory {
 		case "findUserPwUIAction":
 			action = new FindUserPwUIAction();
 			break;
-		default:
-			action = new MainActionUI();
-			break;
-		}
+			
 
-		return action;
+		case "detailBoardUI":
+			action = new detailBoardUIAction();
+			break;
+		case "deleteBoard":
+			action = new deleteBoardAction();
+			break;
+		case "updateBoardUI":
+			action = new updateBoardUIAction();
+			break;
+		case "updateBoard":
+		    action = new updateBoardAction();
+		    break;
+		case "boardCommentUI":
+		    action = new boardCommentUIAction();
+		    break;
+		case "boardsUI":
+			action = new boardsUIAction();
+			break;
+		case "postingUI":
+			action = new postingUIAction();
+			break;
+		case "paging":
+			action = new pagingAction();
+			break;
+		case "uploadboard":
+			action = new uploadboardAction();
+			break;
+		case "insertComment":
+			action = new insertCommentAction();
+			break;
+			// Default action
+			default:
+				action = new MainActionUI();
+				break;
+			}
+
+			return action;
+		}
 	}
-}

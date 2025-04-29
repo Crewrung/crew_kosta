@@ -106,7 +106,7 @@
 
 	<select id="getFlashMobDetail" parameterType="int"
 		resultType="com.crewrung.flashMob.vo.FlashMobVO">
-		SELECT image, title, content
+		SELECT flashmob_number, flashmob_host_id, title, content, interest_category, age_range, max_member, meeting_date, image, gu_number
 		FROM flashMobs
 		WHERE
 		flashMob_number = #{flashMobNumber}
@@ -128,7 +128,6 @@
 		age_range = #{ageRange},
 		max_member = #{maxMember},
 		meeting_date = #{meetingDate},
-		image = #{image},
 		gu_number = #{guNumber}
 		WHERE flashMob_number = #{flashMobNumber}
 	</update>
