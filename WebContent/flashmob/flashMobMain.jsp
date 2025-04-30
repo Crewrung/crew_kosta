@@ -483,6 +483,7 @@ a {
 	                let container = $("#flashMobListContainer");
 	                container.empty();
 	                if ($("#not-flashMobs").length) $("#not-flashMobs").remove();
+	                console.log(response);
 	                
 
 	                if (typeof response === "object" && Object.keys(response).length === 0) {
@@ -500,6 +501,7 @@ a {
 	                        let maxMember = flashMob.maxMember || 0;
 	                        let meetingDate = flashMob.meetingDate || new Date();
 	                        let image = flashMob.image || "image/flash.png";
+	                      
 
 							 // 1. 월, 일, 연도 추출
 							 let regex = /(\d{1,2})월\s+(\d{1,2}),\s*(\d{4})/;

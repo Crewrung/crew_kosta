@@ -51,7 +51,7 @@ public class flashMobFilterAction implements Action {
 		
 		// flashMobs의 size가 0이면 빈 값 보내기
 	    if (flashMobs.size() == 0) {
-	        return "{}"; // 빈 값으로 반환
+	        return "[]"; // 빈 값으로 반환
 	    }
 	    
 	    // flashMobs 리스트가 비어있지 않다면 JSON 형태로 반환
