@@ -47,15 +47,15 @@ import com.crewrung.flashMob.action.isFlashMobParticipantAction;
 import com.crewrung.flashMob.action.updateFlashMobAction;
 import com.crewrung.flashMob.action.updateFlashMobUIAction;
 
-
 public class ActionFactory {
-	private ActionFactory() {}
+	private ActionFactory() {
+	}
 
 	public static Action getAction(String cmd) {
 		Action action;
 
 		switch (cmd) {
-		 //Crew 
+		// Crew
 		case "crewUI":
 			action = new CrewUIAction();
 			break;
@@ -63,8 +63,8 @@ public class ActionFactory {
 			action = new CrewFilterAction();
 			break;
 		case "crewDetailUI":
-		    action = new CrewDetailUIAction();
-		    break;
+			action = new CrewDetailUIAction();
+			break;
 		case "addCrewUI":
 			action = new AddCrewUIAction();
 			break;
@@ -83,8 +83,29 @@ public class ActionFactory {
 		case "addCrewMeeting":
 			action = new AddCrewMeetingAction();
 			break;
+		case "getCrewByFilter":
+			action = new CrewFilterAction();
+			break;
+		case "updateCrewUI":
+			action = new UpdateCrewUIAction();
+			break;
+		case "updateCrew":
+			action = new UpdateCrewAction();
+			break;
+		case "crewMeetingDetailUI":
+			action = new CrewMeetingDetailUIAction();
+			break;
+		case "deleteCrewMember":
+			action = new DeleteCrewMemberAction();
+			break;
+		case "rejectCrewJoinRequest":
+			action = new RejectCrewJoinRequestAction();
+			break;
+		case "approveCrewJoinRequest":
+			action = new ApproveCrewJoinRequestAction();
+			break;
 
-			// FlashMob
+		// FlashMob
 		case "flashMobUI":
 			action = new FlashMobUIAction();
 			break;
@@ -118,30 +139,7 @@ public class ActionFactory {
 		case "isFlashMobParticipant":
 			action = new isFlashMobParticipantAction();
 			break;
-//		case "getCrewByFilter":
-//			action = new GetCrewByFilterAction();
-//			break;
-//		case "applyCrew":
-//			action = new ApplyCrewAction();
-//			break;
-		case "updateCrewUI":
-			action = new UpdateCrewUIAction();
-			break;
-		case "updateCrew":
-			action = new UpdateCrewAction();
-			break;
-		case "crewMeetingDetailUI":
-			action = new CrewMeetingDetailUIAction();
-			break;
-		case "deleteCrewMember":
-			action = new DeleteCrewMemberAction();
-			break;
-		case "rejectCrewJoinRequest":
-			action = new RejectCrewJoinRequestAction();
-			break;
-		case "approveCrewJoinRequest":
-			action = new ApproveCrewJoinRequestAction();
-			break;
+
 		case "loginUI":
 			action = new LoginUIAction();
 			break;
