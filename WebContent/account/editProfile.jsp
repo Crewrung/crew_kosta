@@ -195,8 +195,7 @@
 	<form id="updateForm" class="signup-form" action="/kosta/controller?cmd=userUpdateInfoAction" method="post" novalidate>
 		<h2>개인정보 수정</h2>
     	<label for="userId">아이디</label>
-    	<input type="text" id="userId" name="userId" 
-           value="<%= userId %>" disabled placeholder="아이디 입력">
+    	<input type="text" id="userId" name="userId"  value="<%= userId %>" disabled placeholder="아이디 입력">
 		
 		<label for="userPw">비밀번호</label> 
 		<input type="password" id="userPw" name="userPw" required minlength="6" placeholder="비밀번호 입력"> 

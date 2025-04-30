@@ -81,6 +81,11 @@ nav ul li a {
 	margin-right: 10px;
 	margin-bottom: 0px;
 }
+
+a {
+  text-decoration: none;
+  color: black;
+}
 </style>
 
 <!-- 헤더 -->

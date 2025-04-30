@@ -5,6 +5,17 @@
   <meta charset="UTF-8">
   <title>게시글 등록</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <style type="text/css">
+  .form-control[readonly] {
+	background-color: #f8f9fa;
+	opacity: 1;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+  </style>
 </head>
 <body class="bg-light">
 
@@ -20,7 +31,7 @@
         <form action="controller?cmd=uploadboard" method="post">
           <div class="mb-3">
             <label for="writerId" class="form-label">작성자 ID</label>
-            <input type="text" class="form-control" id="writerId" name="writerId" required />
+            <input type="text" class="form-control" id="writerId" name="writerId" value="${userId}" required readonly />
           </div>
           <div class="mb-3">
             <label for="title" class="form-label">제목</label>
@@ -31,7 +42,7 @@
             <textarea class="form-control" id="content" name="content" rows="8" required></textarea>
           </div>
           <div class="d-flex justify-content-between">
-            <a href="controller?cmd=boardsUI" class="btn btn-link">취소</a>
+            <a href="controller?cmd=boardsUI">취소</a>
             <button type="submit" class="btn btn-dark">등록</button>
           </div>
         </form>

@@ -135,7 +135,9 @@
 		email = COALESCE(#{email, jdbcType=VARCHAR}, email),
 		phone_number = COALESCE(#{phoneNumber, jdbcType=VARCHAR}, phone_number),
 		nickname = COALESCE(#{nickname, jdbcType=VARCHAR}, nickname),
-		gu_number = COALESCE(#{guNumber, jdbcType=INTEGER}, gu_number)  <!-- Integer로 처리 -->
+		gu_number = COALESCE(#{guNumber, jdbcType=INTEGER}, gu_number),
+		birthdate = COALESCE(#{birthDate, jdbcType=String}, birthdate),
+		introduction = COALESCE(#{introduction, jdbcType=String}, introduction)
 		WHERE user_id = #{userId}
 	</update>
 

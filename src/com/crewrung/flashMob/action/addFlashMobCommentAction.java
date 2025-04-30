@@ -32,7 +32,7 @@ public class addFlashMobCommentAction implements Action {
         }
         
         int flashMobNumber = Integer.parseInt(request.getParameter("flashMobNumber"));
-        if (!flashMobService.isFlashParticipants(userId, flashMobNumber)){
+        if (!flashMobService.isFlashParticipants(userId, flashMobNumber) && !flashMobService.isFlashMobHost(userId, flashMobNumber)){
         	return "controller?cmd=flashMobDetailUI&flashMobNumber=" + flashMobNumber;
         }
         

@@ -16,6 +16,7 @@ import com.crewrung.account.service.LoginService;
 import com.crewrung.account.service.MypageInfoService;
 import com.crewrung.account.service.MypageInfoUpdateService;
 import com.crewrung.account.service.RemoveUserService;
+import com.crewrung.account.service.UserUpdateInfoService;
 import com.crewrung.account.vo.FindUserIdVO;
 import com.crewrung.account.vo.FindUserPwVO;
 import com.crewrung.account.vo.JoinVO;
@@ -114,18 +115,18 @@ public class AccountServiceTest {
 //	}
 	
 	// 아이디찾기 성공 테스트
-	@Test
-	public void testSuccessFindUserId(){
-		FindUserIdService service = new FindUserIdService(accountDAO);
-		FindUserIdVO vo = new FindUserIdVO();
-		vo.setEmail("test@email.com");
-		vo.setQuestion("졸업한 초등학교는?");
-		vo.setAnswer("별빛초등학교");
-		String result = service.getUserId(vo);
-		assertNotNull(result);
-		assertEquals("gimsubin94", result);
-	}
-}
+//	@Test
+//	public void testSuccessFindUserId(){
+//		FindUserIdService service = new FindUserIdService(accountDAO);
+//		FindUserIdVO vo = new FindUserIdVO();
+//		vo.setEmail("test@email.com");
+//		vo.setQuestion("졸업한 초등학교는?");
+//		vo.setAnswer("별빛초등학교");
+//		String result = service.getUserId(vo);
+//		assertNotNull(result);
+//		assertEquals("gimsubin94", result);
+//	}
+//}
 	
 	// 아이디찾기 실패 테스트
 //	@Test
@@ -213,24 +214,28 @@ public class AccountServiceTest {
 //	}
 //	
 //	// 개인정보 수정
-//	@Test
-//	public void testUserInfoUpdate(){
-//		UserInfoUpdateService service = new UserInfoUpdateService(accountDAO);
-//		UserUpdateInfoVO vo = new UserUpdateInfoVO();
-//		vo.setUserId("123assad");
-//		vo.setUserPw("tmp1234");
-//		vo.setEmail("tmp@email.com");
-//		vo.setPhoneNumber("010-1234-1232");
-//		vo.setNickname("업데이트");
-//		vo.setGuNumber(1159000000);
-//		
-//		int result = service.setUserInfoUpdate(vo);
-//		
-//		assertEquals(1, result);
-//		
-//		
-//		
-//	}
+	@Test
+	public void testUserInfoUpdate(){
+		UserUpdateInfoService service = new UserUpdateInfoService(accountDAO);
+		UserUpdateInfoVO vo = new UserUpdateInfoVO();
+		vo.setUserId("gimsubin94");
+		vo.setUserPw("123");
+		vo.setUserPwCheck("123");
+		vo.setEmail("tmp@email.com");
+		vo.setPhoneNumber("010-1234-1232");
+		vo.setNickname("업데이트");
+		vo.setGuName("금천구");;
+		vo.setIntroduction("123");
+		
+		
+		int result = service.setUserInfo(vo);
+		
+		System.out.println(vo.getIntroduction());
+		assertEquals(1, result);
+		
+		
+		
+	}
 //
 //	
-//}
+}

@@ -503,19 +503,14 @@ a {
 	                        let image = flashMob.image || "image/flash.png";
 	                      
 
-							 // 1. 월, 일, 연도 추출
-							 let regex = /(\d{1,2})월\s+(\d{1,2}),\s*(\d{4})/;
-							 let match = meetingDate.match(regex);
-							 let formattedDate;
+	                        let date = new Date(meetingDate);
 
-							 if (match) {
-								 let year = match[3].slice(2); // "2025" → "25"
-								 let month = match[1].padStart(2, '0'); // "7" → "07"
-								 let day = match[2].padStart(2, '0');   // "7" → "07"
-								 formattedDate = year + "/" + month + "/" + day;
-							 } else {
-								 console.log("날짜 형식이 올바르지 않습니다.");
-							 }
+	                        let year = String(date.getFullYear()).slice(-2); // 연도 뒤 2자리
+	                        let month = String(date.getMonth() + 1).padStart(2, '0'); // 월(2자리)
+	                        let day = String(date.getDate()).padStart(2, '0'); // 일(2자리)
+
+	                        let formattedDate = year + '/' + month + '/' + day;
+	                        console.log(formattedDate); // 예: 25/07/13
 	                        
 	                        let html = ''
 	                            + '<div class="col">'

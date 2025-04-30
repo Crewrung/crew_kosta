@@ -17,31 +17,15 @@ public class UserUpdateInfoVO {
 	public UserUpdateInfoVO(){}
 
 
-	public String getIntroduction() {
-		return introduction;
-	}
-	public void setIntroduction(String introduction) {
-		this.introduction = introduction;
-	}
 	public String getUserId() {
 		return userId;
 	}
+
+
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	public int getGuNumber() {
-		return guNumber;
-	}
 
-	public void setGuNumber(int guNumber) {
-		this.guNumber = guNumber;
-	}
-	public String getUserPwCheck() {
-		return userPwCheck;
-	}
-	public void setUserPwCheck(String userPwCheck) {
-		this.userPwCheck = userPwCheck;
-	}
 
 	public String getUserPw() {
 		return userPw;
@@ -50,6 +34,16 @@ public class UserUpdateInfoVO {
 
 	public void setUserPw(String userPw) {
 		this.userPw = userPw;
+	}
+
+
+	public String getUserPwCheck() {
+		return userPwCheck;
+	}
+
+
+	public void setUserPwCheck(String userPwCheck) {
+		this.userPwCheck = userPwCheck;
 	}
 
 
@@ -83,6 +77,16 @@ public class UserUpdateInfoVO {
 	}
 
 
+	public int getGuNumber() {
+		return guNumber;
+	}
+
+
+	public void setGuNumber(int guNumber) {
+		this.guNumber = guNumber;
+	}
+
+
 	public String getGuName() {
 		return guName;
 	}
@@ -101,6 +105,21 @@ public class UserUpdateInfoVO {
 	public void setBirthDate(String birthDate) {
 		this.birthDate = birthDate;
 	}
+
+
+	public String getIntroduction() {
+		return introduction;
+	}
+
+
+	public void setIntroduction(String introduction) {
+		this.introduction = introduction;
+	}
+	
+	
+
+
+
 	
 	
 

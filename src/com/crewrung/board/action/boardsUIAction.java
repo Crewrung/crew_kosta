@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import com.crewrung.servlet.Action;
 import com.crewrung.board.service.GetAllBoardsService;
@@ -37,6 +38,12 @@ public class boardsUIAction implements Action {
         request.setAttribute("boards",       pageList);
         request.setAttribute("currentPage",  currentPage);
         request.setAttribute("totalPages",   totalPages);
+        
+        HttpSession ServerSession = request.getSession(false); // 기존 세션만 가져옴 (없으면 null)
+        String userId = null;
+        if (ServerSession != null && ServerSession.getAttribute("userId") != null) {
+        	userId = (String) ServerSession.getAttribute("userId");
+        }
 
         // 6) 뷰 리턴
         return "board/boardsUIAction.jsp";
