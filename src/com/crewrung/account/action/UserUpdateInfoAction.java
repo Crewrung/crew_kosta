@@ -1,6 +1,7 @@
 package com.crewrung.account.action;
 
 import java.io.IOException;
+import java.sql.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -32,7 +33,6 @@ public class UserUpdateInfoAction implements Action{
 		String phoneNumber = request.getParameter("phoneNumber");
 		String nickname = request.getParameter("nickname");
 		String guName = request.getParameter("guName");
-		String birthDate = request.getParameter("birthDate");
 		String introduction = request.getParameter("introduction");
 		
 		if(!userPw.equals(userPwCheck)){
@@ -48,7 +48,6 @@ public class UserUpdateInfoAction implements Action{
 		vo.setPhoneNumber(phoneNumber);
 		vo.setNickname(nickname);
 		vo.setGuName(guName);
-		vo.setBirthDate(birthDate);
 		vo.setIntroduction(introduction);
 		
 		

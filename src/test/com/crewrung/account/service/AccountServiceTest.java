@@ -1,50 +1,51 @@
-//package test.com.crewrung.account.service;
-//
-//import static org.junit.Assert.*;
-//
-//import org.apache.ibatis.annotations.TypeDiscriminator;
-//import org.apache.ibatis.session.SqlSession;
-//import org.junit.After;
-//import org.junit.Before;
-//import org.junit.Test;
-//
-//import com.crewrung.account.dao.AccountDAO;
-//import com.crewrung.account.service.FindUserIdService;
-//import com.crewrung.account.service.FindUserPwService;
-//import com.crewrung.account.service.JoinService;
-//import com.crewrung.account.service.LoginService;
-//import com.crewrung.account.service.MypageInfoService;
-//import com.crewrung.account.service.MypageInfoUpdateService;
-//import com.crewrung.account.service.RemoveUserService;
-//import com.crewrung.account.service.UserUpdateInfoService;
-//import com.crewrung.account.vo.FindUserIdVO;
-//import com.crewrung.account.vo.FindUserPwVO;
-//import com.crewrung.account.vo.JoinVO;
-//import com.crewrung.account.vo.LoginVO;
-//import com.crewrung.account.vo.MypageVO;
-//import com.crewrung.account.vo.UserInfoVO;
-//import com.crewrung.account.vo.UserUpdateInfoVO;
-//import com.crewrung.db.DBCP;
-//
-//public class AccountServiceTest {
-//	
-//	private SqlSession session;
-//	private AccountDAO accountDAO;
-//
-//	@Before
-//	public void setUp() throws Exception {
-//		session = DBCP.getSqlSessionFactory().openSession(false);
-//		accountDAO = new AccountDAO(session);
-//	}
-//
-//
-//	@After
-//	public void tearDown() throws Exception {
-//		if (session != null) {
-//			session.rollback();
-//			session.close();
-//		}
-////	}
+package test.com.crewrung.account.service;
+
+import static org.junit.Assert.*;
+
+import org.apache.ibatis.annotations.TypeDiscriminator;
+import org.apache.ibatis.session.SqlSession;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
+import com.crewrung.account.dao.AccountDAO;
+import com.crewrung.account.service.FindUserIdService;
+import com.crewrung.account.service.FindUserPwService;
+import com.crewrung.account.service.JoinService;
+import com.crewrung.account.service.LoginService;
+import com.crewrung.account.service.MypageInfoService;
+import com.crewrung.account.service.MypageInfoUpdateService;
+import com.crewrung.account.service.RemoveUserService;
+import com.crewrung.account.service.UserUpdateInfoService;
+import com.crewrung.account.vo.FindUserIdVO;
+import com.crewrung.account.vo.FindUserPwVO;
+import com.crewrung.account.vo.JoinVO;
+import com.crewrung.account.vo.LoginVO;
+import com.crewrung.account.vo.MypageVO;
+import com.crewrung.account.vo.UserInfoVO;
+import com.crewrung.account.vo.UserUpdateInfoVO;
+import com.crewrung.db.DBCP;
+
+public class AccountServiceTest {
+	
+	private SqlSession session;
+	private AccountDAO accountDAO;
+
+	@Before
+	public void setUp() throws Exception {
+		session = DBCP.getSqlSessionFactory().openSession(false);
+		accountDAO = new AccountDAO(session);
+	}
+
+
+	@After
+	public void tearDown() throws Exception {
+		if (session != null) {
+			session.rollback();
+			session.close();
+		}
+		
+	}
 ////	
 ////	// 회원가입 성공 테스트
 ////	@Test
@@ -214,26 +215,30 @@
 ////	}
 ////	
 ////	// 개인정보 수정
-////	@Test
-////	public void testUserInfoUpdate(){
-////		UserUpdateInfoService service = new UserUpdateInfoService(accountDAO);
-////		UserUpdateInfoVO vo = new UserUpdateInfoVO();
-////		vo.setUserId("gimsubin94");
-////		vo.setEmail("tmp@email.com");
-////		vo.setPhoneNumber("010-1234-1232");
-////		vo.setNickname("업데이트");
-////		vo.setGuName("금천구");;
-////		vo.setIntroduction("123");
-////		
-////		
-////		int result = service.setUserInfo(vo);
-////		
-////		System.out.println(vo.getIntroduction());
-////		assertEquals(1, result);
-////		
-////		
-////		
-////	}
+	@Test
+	public void testUserInfoUpdate(){
+		UserUpdateInfoService service = new UserUpdateInfoService(accountDAO);
+		UserUpdateInfoVO vo = new UserUpdateInfoVO();
+		vo.setUserId("yunghee02");
+		vo.setUserPw("123123");
+		vo.setUserPwCheck("123123");
+		vo.setEmail("tmp@email.com");
+		vo.setPhoneNumber("010-1234-1232");
+		vo.setNickname("업데이트");
+		vo.setGuName("금천구");;
+		vo.setIntroduction("123");
+		
+		
+		int result = service.setUserInfo(vo);
+		
+		System.out.println(vo.getIntroduction());
+		
+
+		assertEquals(1, result);
+		
+		
+		
+	}
 //////
 //////	
-////}
+}

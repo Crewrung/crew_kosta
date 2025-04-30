@@ -1,5 +1,7 @@
 package com.crewrung.account.vo;
 
+import java.sql.Date;
+
 public class UserUpdateInfoVO {
 	
 	private String userId;
@@ -10,7 +12,6 @@ public class UserUpdateInfoVO {
     private String nickname;
     private int guNumber;
     private String guName;
-    private String birthDate;
     private String introduction;
     
     
@@ -96,15 +97,6 @@ public class UserUpdateInfoVO {
 		this.guName = guName;
 	}
 
-
-	public String getBirthDate() {
-		return birthDate;
-	}
-
-
-	public void setBirthDate(String birthDate) {
-		this.birthDate = birthDate;
-	}
 
 
 	public String getIntroduction() {

@@ -136,7 +136,6 @@
 		phone_number = COALESCE(#{phoneNumber, jdbcType=VARCHAR}, phone_number),
 		nickname = COALESCE(#{nickname, jdbcType=VARCHAR}, nickname),
 		gu_number = COALESCE(#{guNumber, jdbcType=INTEGER}, gu_number),
-		birthdate = COALESCE(#{birthDate, jdbcType=VARCHAR}, birthdate),
 		introduction = COALESCE(#{introduction, jdbcType=VARCHAR}, introduction)
 		WHERE user_id = #{userId}
 	</update>

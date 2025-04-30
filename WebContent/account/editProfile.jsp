@@ -244,7 +244,7 @@
 		</select>
 		
 		<label for="introduction">자기소개</label>
-		<input type="text" id="introduction" name="introduction" required maxlength="12" placeholder="닉네임 입력"> 
+		<input type="text" id="introduction" name="introduction" required maxlength="12" placeholder="자기소개 입력"> 
 
 		<button type="submit">수정</button>
 	</form>
