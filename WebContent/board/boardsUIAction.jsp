@@ -5,85 +5,121 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<!-- 헤더 -->
-	<%@ include file="../header.jsp"%>
-	
   <meta charset="UTF-8">
   <title>자유게시판</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      margin: 40px;
+      margin: 0px;
       background-color: #f9f9f9;
     }
+    
+    /* 전체 콘텐츠 영역에 여백 추가 */
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 60px; /* 상하 40px, 좌우 60px 여백 추가 */
+    }
+    
     h1 {
       font-size: 28px;
       color: #333;
-      margin-bottom: 10px;
+      margin-bottom: 20px; /* 여백 증가 */
       position: relative;
+      padding: 10px 0; /* 상하 패딩 추가 */
     }
+    
     /* 글쓰기 버튼 */
     .button-write {
       position: absolute;
       right: 0;
-      top: 0;
-      padding: 8px 14px;
+      top: 10px; /* 위치 조정 */
+      padding: 10px 16px; /* 패딩 증가 */
       background-color: #3498db;
       color: #fff;
       text-decoration: none;
       border-radius: 4px;
       font-size: 14px;
     }
+    
     .button-write:hover {
       background-color: #2980b9;
     }
+    
     /* 게시판 테이블 */
     table.board-table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 20px;
+      margin-top: 30px; /* 여백 증가 */
       background-color: #fff;
       box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      border-radius: 6px; /* 모서리 둥글게 */
+      overflow: hidden; /* 둥근 모서리 적용을 위해 */
     }
+    
     table.board-table th,
     table.board-table td {
-      padding: 12px 10px;
+      padding: 15px 20px; /* 패딩 증가 */
       text-align: left;
       border-bottom: 1px solid #ececec;
     }
+    
     table.board-table th {
       background-color: #2c3e50;
       color: #fff;
       font-weight: normal;
     }
+    
     table.board-table tr:hover td {
       background-color: #f2f2f2;
     }
+    
+    /* 테이블 내 링크 스타일 */
+    table.board-table a {
+      color: #333;
+      text-decoration: none;
+    }
+    
+    table.board-table a:hover {
+      color: #3498db;
+      text-decoration: underline;
+    }
+    
     /* 페이징 */
     .pagination {
       text-align: center;
-      margin: 20px 0;
+      margin: 30px 0; /* 여백 증가 */
+      padding: 10px 0; /* 패딩 추가 */
     }
+    
     .pagination a,
     .pagination span {
       display: inline-block;
-      margin: 0 6px;
-      padding: 6px 10px;
+      margin: 0 8px; /* 여백 증가 */
+      padding: 8px 12px; /* 패딩 증가 */
       text-decoration: none;
       color: #3498db;
       font-size: 14px;
+      border-radius: 4px; /* 모서리 둥글게 */
     }
+    
     .pagination a:hover {
-      text-decoration: underline;
+      background-color: #f2f2f2;
+      text-decoration: none;
     }
+    
     .pagination .current {
       font-weight: bold;
       color: #000;
+      background-color: #f2f2f2;
     }
   </style>
 </head>
 <body>
+<!-- 헤더 -->
+<%@ include file="../header.jsp"%>
 
+<main>
   <h1>
     자유게시판
     <a href="controller?cmd=postingUI" class="button-write">글쓰기</a>
@@ -141,9 +177,9 @@
       <a href="controller?cmd=boardsUI&amp;page=${currentPage + 1}">▶</a>
     </c:if>
   </div>
+</main>
 
+<!-- 푸터 - 두 열 레이아웃 -->
+<%@ include file="../footer.jsp"%>
 </body>
-
-	<!-- 푸터 - 두 열 레이아웃 -->
-	<%@ include file="../footer.jsp"%>
 </html>

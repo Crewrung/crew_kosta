@@ -5,64 +5,80 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <!-- 헤더 -->
-	<%@ include file="../header.jsp"%>
+
 	
   <title>게시글 상세</title>
   <style>
     body {
       font-family: "Noto Sans KR", sans-serif;
       background: #f5f5f5;
-      margin: 40px;
+      margin: 0px;
     }
+    
+    /* 전체 콘텐츠 영역에 여백 추가 */
+    main {
+      padding: 0 40px; /* 좌우 여백 40px 추가 */
+      max-width: 1200px; /* 최대 너비 설정 */
+      margin: 0 auto; /* 가운데 정렬 */
+    }
+    
     .page-title {
       text-align: center;
       font-size: 24px;
-      margin-bottom: 16px;
+      margin: 30px 0 20px; /* 상단 여백 증가 */
       font-weight: bold;
     }
+    
     .detail-container {
       max-width: 800px;
       margin: 0 auto;
       background: #fff;
       border: 2px solid #ccc;
       border-radius: 6px;
-      padding: 24px;
+      padding: 30px; /* 내부 패딩 증가 */
       position: relative;
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
+    
     .meta {
       display: flex;
       justify-content: space-between;
-      margin-bottom: 20px;
+      margin-bottom: 30px; /* 여백 증가 */
     }
+    
     .meta .meta-item {
       flex: 1;
       text-align: center;
       font-size: 14px;
       color: #555;
     }
+    
     .content {
       font-size: 16px;
       line-height: 1.7;
-      margin-bottom: 60px;
+      margin-bottom: 80px; /* 여백 증가 */
+      padding: 0 10px; /* 내용 좌우 여백 추가 */
     }
+    
     .back-link {
       position: absolute;
-      bottom: 16px;
-      left: 24px;
+      bottom: 20px; /* 위치 조정 */
+      left: 30px; /* 위치 조정 */
       font-size: 14px;
       color: #3498db;
       text-decoration: none;
     }
+    
     .back-link:hover {
       text-decoration: underline;
     }
+    
     .actions {
       position: absolute;
-      bottom: 16px;
-      right: 24px;
+      bottom: 20px; /* 위치 조정 */
+      right: 30px; /* 위치 조정 */
     }
+    
     .actions a {
       margin-left: 8px;
       padding: 6px 12px;
@@ -72,33 +88,40 @@
       border-radius: 4px;
       font-size: 14px;
     }
+    
     .actions a.btn-delete {
       background: #e74c3c;
     }
+    
     .actions a:hover {
       opacity: 0.9;
     }
+    
     .comment-section {
       max-width: 800px;
-      margin: 40px auto 0;
+      margin: 50px auto 40px; /* 상하 여백 증가 */
       text-align: center;
+      padding: 0 10px; /* 좌우 여백 추가 */
     }
+    
     .comment-form {
-      margin-bottom: 20px;
+      margin-bottom: 30px; /* 여백 증가 */
       text-align: left;
     }
+    
     .comment-form textarea {
       width: 100%;
       height: 80px;
-      padding: 8px;
+      padding: 12px; /* 패딩 증가 */
       border: 1px solid #ccc;
       border-radius: 4px;
       font-size: 14px;
       resize: vertical;
     }
+    
     .comment-form button {
-      margin-top: 8px;
-      padding: 6px 14px;
+      margin-top: 12px; /* 여백 증가 */
+      padding: 8px 16px; /* 패딩 증가 */
       background: #333;
       color: #fff;
       border: none;
@@ -106,44 +129,57 @@
       font-size: 14px;
       cursor: pointer;
     }
+    
     .comments-list .comment-item {
-      padding: 12px 0;
+      padding: 15px 10px; /* 패딩 증가 */
       border-bottom: 1px solid #eee;
       text-align: left;
     }
+    
     .comment-header {
       font-size: 13px;
       color: #666;
-      margin-bottom: 6px;
+      margin-bottom: 8px; /* 여백 증가 */
     }
+    
     .comment-body {
       font-size: 15px;
       line-height: 1.6;
+      padding: 0 5px; /* 내용 좌우 여백 추가 */
     }
+    
     .pagination {
-      margin-top: 20px;
+      margin-top: 30px; /* 여백 증가 */
       text-align: center;
     }
+    
     .pagination a, .pagination span {
-      margin: 0 4px;
-      padding: 6px 10px;
+      margin: 0 5px; /* 여백 증가 */
+      padding: 8px 12px; /* 패딩 증가 */
       font-size: 14px;
       color: #3498db;
       text-decoration: none;
     }
+    
     .pagination a:hover {
       text-decoration: underline;
     }
+    
     .pagination .current {
       font-weight: bold;
       color: #000;
     }
   </style>
 </head>
-<body>
 
+<body>
+  <!-- 헤더 -->
+	<%@ include file="../header.jsp"%>
+	
   <!-- 제목 -->
   <div class="page-title">${board.title}</div>
+<main>
+
 
   <!-- 상세 컨테이너 -->
   <div class="detail-container">
@@ -262,7 +298,10 @@
     </div>
 
   </div>
+</main>
 
+	<!-- 푸터 - 두 열 레이아웃 -->
+	<%@ include file="../footer.jsp"%>
 </body>
 
 
